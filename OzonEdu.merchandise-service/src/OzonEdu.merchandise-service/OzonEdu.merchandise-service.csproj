@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <AssemblyName>OzonEdu.merchandise-service</AssemblyName>
+        <RootNamespace>OzonEdu.merchandise-service</RootNamespace>
+        <PackageId>OzonEdu.merchandise-service</PackageId>
+        <Authors>OzonEdu.merchandise-service</Authors>
+        <Company>OzonEdu.merchandise-service</Company>
+        <Product>OzonEdu.merchandise-service</Product>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    </ItemGroup>
+
+</Project>
