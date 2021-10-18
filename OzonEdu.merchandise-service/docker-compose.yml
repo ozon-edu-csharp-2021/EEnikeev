@@ -10,25 +10,28 @@ services:
       
   emailing-service:
     image: 'ghcr.io/ozon-edu-csharp-2021/emailing-service:main'
+    #hostname: emailing-service
     ports:
       - "8081:80"
     #restart: always
     
   stock-api:
     image: 'ghcr.io/ozon-edu-csharp-2021/stock-api:main'
-    hostname: stock-api
+    #hostname: stock-api
     ports:
       - "8082:80"  
     #restart: always
       
   supply-service:
     image: 'ghcr.io/ozon-edu-csharp-2021/supply-service:main'
+    #hostname: supply-service
     ports:
       - "8083:80"
     #restart: always
         
   employees-service:
     image: 'ghcr.io/ozon-edu-csharp-2021/employees-service:main'
+    #hostname: employees-service
     ports:
       - "8084:80"
     #restart: always
