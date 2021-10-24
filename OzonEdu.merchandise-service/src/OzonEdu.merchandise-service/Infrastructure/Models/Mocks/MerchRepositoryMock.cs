@@ -23,7 +23,7 @@ namespace OzonEdu.merchandise_service.Models.Mocks
             merch = new MerchItemMock("Кепка");
             _items.Add(merch.Id, merch);
             
-            merch = new MerchItemMock("Сумка,");
+            merch = new MerchItemMock("Сумка");
             _items.Add(merch.Id, merch);
             
             merch= new MerchItemMock("Ручка");

@@ -40,11 +40,13 @@ namespace OzonEdu.merchandise_service.Controllers
                 return NotFound();
             }
 
-            return new MerchItemResponse()
+            var response = new MerchItemResponse()
             {
                 Id = merchItem.Id,
                 Name = merchItem.Name
             };
+
+            return Ok(response);
 
         }
         
@@ -65,9 +67,7 @@ namespace OzonEdu.merchandise_service.Controllers
                 return NotFound();
             }
 
-            string s = isIssued == false ? "не" : "";
-            return Ok($"Мерч {s} был выдан");
-
+            return Ok(isIssued);
         }
         
         
