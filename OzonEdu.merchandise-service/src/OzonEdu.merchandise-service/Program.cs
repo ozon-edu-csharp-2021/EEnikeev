@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using OzonEdu.merchandise_service.Infrastructure.Extensions;
 
 namespace OzonEdu.merchandise_service
 {
@@ -18,6 +19,10 @@ namespace OzonEdu.merchandise_service
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                }).AddInfrastructure()
+                .AddHttp();
     }
 }

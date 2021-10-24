@@ -13,6 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{17DFC49C-F9E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.merchandise-service", "src\OzonEdu.merchandise-service\OzonEdu.merchandise-service.csproj", "{3BF34573-2790-4221-9EDF-3081C5CB90FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.merchandise_service.HttpModels", "src\OzonEdu.merchandise_service.HttpModels\OzonEdu.merchandise_service.HttpModels.csproj", "{71EC0612-B5AE-49E3-AFE3-E63D8285FC1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.merchandise_service.HttpClients", "src\OzonEdu.merchandise_service.HttpClients\OzonEdu.merchandise_service.HttpClients.csproj", "{0F930F98-9386-4DB4-8457-1254DD31BF5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,11 +24,21 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3BF34573-2790-4221-9EDF-3081C5CB90FC} = {17DFC49C-F9EA-4196-B481-A00E45EF6B56}
+		{71EC0612-B5AE-49E3-AFE3-E63D8285FC1A} = {17DFC49C-F9EA-4196-B481-A00E45EF6B56}
+		{0F930F98-9386-4DB4-8457-1254DD31BF5A} = {17DFC49C-F9EA-4196-B481-A00E45EF6B56}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{3BF34573-2790-4221-9EDF-3081C5CB90FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3BF34573-2790-4221-9EDF-3081C5CB90FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BF34573-2790-4221-9EDF-3081C5CB90FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BF34573-2790-4221-9EDF-3081C5CB90FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71EC0612-B5AE-49E3-AFE3-E63D8285FC1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71EC0612-B5AE-49E3-AFE3-E63D8285FC1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71EC0612-B5AE-49E3-AFE3-E63D8285FC1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71EC0612-B5AE-49E3-AFE3-E63D8285FC1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F930F98-9386-4DB4-8457-1254DD31BF5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F930F98-9386-4DB4-8457-1254DD31BF5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F930F98-9386-4DB4-8457-1254DD31BF5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F930F98-9386-4DB4-8457-1254DD31BF5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
