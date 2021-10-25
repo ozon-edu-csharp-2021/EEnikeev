@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace OzonEdu.merchandise_service.Infrastructure.Middlewares
 {
+    /// <summary> Middleware, отвечающий за логгирование запросов </summary>
     public class RequestLoggingMiddleware
     {
         private readonly RequestDelegate _next;
@@ -23,6 +24,8 @@ namespace OzonEdu.merchandise_service.Infrastructure.Middlewares
             await _next(context);
         }
 
+        /// <summary> Выаолняет логгирование запроса </summary>
+        /// <param name="context"> Http context </param>
         private async Task LogRequest(HttpContext context)
         {
             try

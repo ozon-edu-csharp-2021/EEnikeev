@@ -40,5 +40,32 @@ namespace OzonEdu.merchandise_service.HttpClient
             return Boolean.Parse(body);
         }
         
+        /// <summary> Возвращает информацию о версии </summary>
+        /// <param name="token"> токен отмены </param>
+        /// <returns> версия </returns>
+        public async Task<string> GetVersion(CancellationToken token)
+        {
+            using var response = await _httpClient.GetAsync("/version", token);
+            return await response.Content.ReadAsStringAsync(token);
+        }
+        
+        /// <summary> Возвращает информацию о жизни </summary>
+        /// <param name="token"> токен отмены </param>
+        /// <returns> статус </returns>
+        public async Task<string> GetLive(CancellationToken token)
+        {
+            using var response = await _httpClient.GetAsync("/live", token);
+            return response.StatusCode.ToString();
+        }
+        
+        /// <summary> Возвращает информацию о готовности </summary>
+        /// <param name="token"> токен отмены </param>
+        /// <returns> статус </returns>
+        public async Task<string> GetReady(CancellationToken token)
+        {
+            using var response = await _httpClient.GetAsync("/ready", token);
+            return response.StatusCode.ToString();
+        }
+        
     }
 } 

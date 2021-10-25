@@ -13,7 +13,11 @@ namespace OzonEdu.merchandise_service.HttpClientImitator
             {
                 BaseAddress = new Uri("http://localhost:5000")
             });
-
+            
+            Console.WriteLine("Live: " + client.GetLive(CancellationToken.None).Result);
+            Console.WriteLine("Version: " + client.GetVersion(CancellationToken.None).Result);
+            Console.WriteLine("Ready: " + client.GetReady(CancellationToken.None).Result);
+            Console.WriteLine();
             Console.WriteLine("Merch info: ");
             for (int i = 0; i < 5; i++)
             {

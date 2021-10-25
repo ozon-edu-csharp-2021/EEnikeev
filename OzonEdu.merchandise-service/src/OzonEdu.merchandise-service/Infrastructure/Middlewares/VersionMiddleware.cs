@@ -1,6 +1,7 @@
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using OzonEdu.merchandise_service.Infrastructure.Middlewares.MiddlewareData;
 
 namespace OzonEdu.merchandise_service.Infrastructure.Middlewares
 {
@@ -17,8 +18,10 @@ namespace OzonEdu.merchandise_service.Infrastructure.Middlewares
         {
             var version = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "no version";
             var serviceName = Assembly.GetExecutingAssembly().GetName().Name?.ToString() ?? "Unknown name";
-            
-            await context.Response.WriteAsync($"version: {version}, serviceName: {serviceName}");
+
+            VersionData versionData = new VersionData(serviceName, version);
+
+            await context.Response.WriteAsync(versionData.ToString());
             
             //await _next(context);
         }

@@ -18,5 +18,20 @@ namespace OzonEdu.merchandise_service.HttpClient
         /// <returns> true если мерч выдан </returns>
         Task<bool> GetMerchIsIssuedById(long id, CancellationToken token);
 
+        /// <summary> Возвращает информацию о версии </summary>
+        /// <param name="token"> токен отмены </param>
+        /// <returns> версия </returns>
+        Task<string> GetVersion(CancellationToken token);
+        
+        /// <summary> Возвращает информацию о жизни </summary>
+        /// <param name="token"> токен отмены </param>
+        /// <returns> статус </returns>
+        Task<string> GetLive(CancellationToken token);
+        
+        /// <summary> Возвращает информацию о готовности </summary>
+        /// <param name="token"> токен отмены </param>
+        /// <returns> статус </returns>
+        Task<string> GetReady(CancellationToken token);
+
     }
 }
