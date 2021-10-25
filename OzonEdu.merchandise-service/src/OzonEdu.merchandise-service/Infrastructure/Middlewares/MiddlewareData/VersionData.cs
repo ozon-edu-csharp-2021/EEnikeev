@@ -10,14 +10,14 @@ namespace OzonEdu.merchandise_service.Infrastructure.Middlewares.MiddlewareData
         }
 
         /// <summary> Имя сервиса </summary>
-        public string ServiceName { get; set; }
+        public string ServiceName { get; }
         
         /// <summary> Текущая версия </summary>
-        public string Version { get; set; }
+        public string Version { get; }
 
         public override string ToString()
         {
-            return $"version: {Version}, serviceName: {ServiceName}";
+            return $"{{version: {Version}, serviceName: {ServiceName}}}";
         }
     }
 }

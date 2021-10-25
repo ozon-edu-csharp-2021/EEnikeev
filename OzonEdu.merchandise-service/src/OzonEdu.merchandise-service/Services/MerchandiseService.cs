@@ -15,7 +15,7 @@ namespace OzonEdu.merchandise_service.Services
         /// <param name="itemId"> Id мерча, котоырй необходимо вернуть </param>
         /// <param name="token"> Токен отмены </param>
         /// <returns> Мерч </returns>
-        public Task<MerchItemMock> GetMerchById(long itemId, CancellationToken token)
+        public Task<MerchItemMock?> GetMerchById(long itemId, CancellationToken token)
         {
             var merchItem = _merchRepository.GetMerchById(itemId);
             return Task.FromResult(merchItem);
