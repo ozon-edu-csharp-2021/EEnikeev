@@ -23,6 +23,8 @@ namespace OzonEdu.merchandise_service.Infrastructure.Middlewares
 
         public async Task InvokeAsync(HttpContext context)
         {
+            await _next.Invoke(context);
+            await LogResponse(context);
             
             /*var originalBody = context.Response.Body;
             using var newBody = new MemoryStream();
@@ -50,7 +52,7 @@ namespace OzonEdu.merchandise_service.Infrastructure.Middlewares
         }
         
         /// <summary> Выполняет логгирование ответа </summary>
-        /// <param name="context"> Http context</param>
+        /// <param name="context"> Http context </param>
         private async Task LogResponse(HttpContext context)
         {
             try

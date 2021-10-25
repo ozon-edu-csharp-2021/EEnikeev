@@ -21,11 +21,11 @@ namespace OzonEdu.merchandise_service.Infrastructure.Middlewares.MiddlewareData
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder(200);
-            sb.Append($"Route: {Route}");
-            sb.Append("Headers:");
+            sb.Append($"\nRoute: {Route}\n");
+            sb.Append("Headers:\n");
             foreach (var header in Headers)
             {
-                sb.Append($"{header.Key}:{header.Value}");
+                sb.Append($"{header.Key}:{header.Value}\n");
             }
 
             return sb.ToString();

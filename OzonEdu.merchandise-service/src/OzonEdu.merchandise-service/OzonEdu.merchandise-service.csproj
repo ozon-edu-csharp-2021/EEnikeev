@@ -8,7 +8,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Infrastructure\Interseptors" />
       <Folder Include="Infrastructure\Middlewares\Interfaces" />
     </ItemGroup>
 

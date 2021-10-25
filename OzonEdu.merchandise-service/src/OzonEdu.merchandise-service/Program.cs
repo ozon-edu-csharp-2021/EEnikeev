@@ -22,7 +22,7 @@ namespace OzonEdu.merchandise_service
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                }).AddInfrastructure()
-                .AddHttp();
+                }).AddInfrastructure();
+
     }
 }

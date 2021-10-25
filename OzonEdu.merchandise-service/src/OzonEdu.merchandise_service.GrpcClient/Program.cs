@@ -17,7 +17,7 @@ namespace OzonEdu.merchandise_service.GrpcClient
             try
             {
                 // запрашиваем все товары и информацию о выдаче
-                for (int i = 0; i < 6; i++)
+                for (int i = 0; i < 5; i++)
                 {
                     var item = await client.GetMerchByIdAsync(new GetMerchItemByIdRequest { ItemId = i },
                         cancellationToken: CancellationToken.None);

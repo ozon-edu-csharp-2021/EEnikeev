@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using OzonEdu.merchandise_service.Infrastructure.Filters;
+using OzonEdu.merchandise_service.Infrastructure.Interceptors;
 using OzonEdu.merchandise_service.Infrastructure.StartupFilters;
 using OzonEdu.merchandise_service.Infrastructure.Swagger;
 
@@ -27,17 +28,20 @@ namespace OzonEdu.merchandise_service.Infrastructure.Extensions
                 
                     options.CustomSchemaIds(x => x.FullName);
 
-                    var xmlFileName = Assembly.GetExecutingAssembly().GetName().Name + ".xml";
+                    var xmlFileName = Assembly.GetEntryAssembly().GetName().Name + ".xml";
                     var xmlFilePath = Path.Combine(AppContext.BaseDirectory, xmlFileName);
                     options.IncludeXmlComments(xmlFilePath);
 
                     options.OperationFilter<HeaderOperationFilter>();
                 });
+                
+                services.AddControllers(options => options.Filters.Add<GlobalExceptionFilter>());
+                services.AddGrpc(options => options.Interceptors.Add<LoggingInterceptor>());
             });
             return builder;
         }
         
-        public static IHostBuilder AddHttp(this IHostBuilder builder)
+        /*public static IHostBuilder AddHttp(this IHostBuilder builder)
         {
             builder.ConfigureServices(services =>
             {
@@ -45,6 +49,6 @@ namespace OzonEdu.merchandise_service.Infrastructure.Extensions
             });
             
             return builder;
-        }
+        }*/
     }
 }

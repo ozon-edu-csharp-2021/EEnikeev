@@ -21,7 +21,7 @@ namespace OzonEdu.merchandise_service.HttpClientImitator
                 Console.WriteLine("Ready: " + client.GetReady(CancellationToken.None).Result);
                 Console.WriteLine();
                 Console.WriteLine("Merch info: ");
-                for (int i = 0; i < 6; i++)
+                for (int i = 0; i < 5; i++)
                 {
                     var item = client.GetMerchById(i, CancellationToken.None).Result;
                     var isIssued = client.GetMerchIsIssuedById(i, CancellationToken.None).Result;
