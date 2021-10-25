@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using OzonEdu.merchandise_service.Infrastructure.Middlewares.MiddlewareData;
 
 namespace OzonEdu.merchandise_service.Infrastructure.Middlewares
 {
@@ -24,26 +26,36 @@ namespace OzonEdu.merchandise_service.Infrastructure.Middlewares
             await _next(context);
         }
 
-        /// <summary> Выаолняет логгирование запроса </summary>
+        /// <summary> Выполняет логгирование запроса </summary>
         /// <param name="context"> Http context </param>
         private async Task LogRequest(HttpContext context)
         {
             try
             {
-                if (context.Request.ContentLength > 0)
+                if (context.Request.Headers.Count > 0)
                 {
+                    if(context.Request.Headers["Content-Type"] == "application/grpc")
+                    {
+                        return;
+                    }
                     context.Request.EnableBuffering();
-                    var buffer = new byte[context.Request.ContentLength.Value];
-                    await context.Request.Body.ReadAsync(buffer, 0, buffer.Length);
-                    var bodyAsText = Encoding.UTF8.GetString(buffer);
-                    _logger.LogInformation("Request logged: {bodyAsText}");
-                    //_logger.LogInformation(bodyAsText);
-                    context.Request.Body.Position = 0;
+
+                    string path = context.Request.Path;
+                    Dictionary<string, string> headerDictionary = new Dictionary<string, string>();
+                    foreach (var header in context.Request.Headers)
+                    {
+                        headerDictionary.Add(header.Key, header.Value);
+                    }
+
+                    RouteData routeData = new RouteData(path, headerDictionary);
+
+                    _logger.LogInformation(routeData.ToString());
+
                 }
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Could not log request body");
+                _logger.LogError(e, "Could not log request!");
             }
         }
     }

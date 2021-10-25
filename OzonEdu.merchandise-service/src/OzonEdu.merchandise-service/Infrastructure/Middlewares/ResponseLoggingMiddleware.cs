@@ -1,12 +1,15 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using OzonEdu.merchandise_service.Infrastructure.Middlewares.MiddlewareData;
 
 namespace OzonEdu.merchandise_service.Infrastructure.Middlewares
 {
+    /// <summary> Middleware, отвечающий за логгирование ответов </summary>
     public class ResponseLoggingMiddleware
     {
         private readonly RequestDelegate _next;
@@ -20,7 +23,8 @@ namespace OzonEdu.merchandise_service.Infrastructure.Middlewares
 
         public async Task InvokeAsync(HttpContext context)
         {
-            var originalBody = context.Response.Body;
+            
+            /*var originalBody = context.Response.Body;
             using var newBody = new MemoryStream();
             context.Response.Body = newBody;
 
@@ -42,6 +46,37 @@ namespace OzonEdu.merchandise_service.Infrastructure.Middlewares
             finally
             {
                 
+            }*/
+        }
+        
+        /// <summary> Выполняет логгирование ответа </summary>
+        /// <param name="context"> Http context</param>
+        private async Task LogResponse(HttpContext context)
+        {
+            try
+            {
+                if (context.Response.HasStarted && context.Response.Headers.Count > 0)
+                {
+                    if (context.Request.Headers["Content-Type"] == "application/grpc")
+                    {
+                        return;
+                    }
+
+                    string path = context.Request.Path;
+                    Dictionary<string, string> headerDictionary = new Dictionary<string, string>();
+                    foreach (var header in context.Response.Headers)
+                    {
+                        headerDictionary.Add(header.Key, header.Value);
+                    }
+
+                    RouteData routeData = new RouteData(path, headerDictionary);
+
+                    _logger.LogInformation(routeData.ToString());
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Could not log response!");
             }
         }
 
