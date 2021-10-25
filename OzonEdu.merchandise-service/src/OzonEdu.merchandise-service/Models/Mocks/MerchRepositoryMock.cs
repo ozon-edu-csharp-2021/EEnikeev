@@ -9,6 +9,7 @@ namespace OzonEdu.merchandise_service.Models.Mocks
         /// <summary> Список мерчей </summary>
         private Dictionary<long, MerchItemMock> _items;
 
+        /// <summary> Конструктор типа </summary>
         public MerchRepositoryMock()
         {
             // наполняем список для проверки
@@ -33,7 +34,7 @@ namespace OzonEdu.merchandise_service.Models.Mocks
         /// <summary> Возвращает мерч по id </summary>
         /// <param name="id"> id мерча </param>
         /// <returns> IMerchItem? </returns>
-        public MerchItemMock GetMerchById(long id)
+        public MerchItemMock? GetMerchById(long id)
         {
             if (_items.ContainsKey(id)) return _items[id];
             return null;

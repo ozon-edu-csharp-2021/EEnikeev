@@ -11,6 +11,7 @@ namespace OzonEdu.merchandise_service.GrpcServices
     {
         private readonly IMerchandiseService _merchandiseService;
 
+        /// <summary> Конструктор типа </summary>
         public MerchApiGrpcService(IMerchandiseService merchandiseService)
         {
             _merchandiseService = merchandiseService;

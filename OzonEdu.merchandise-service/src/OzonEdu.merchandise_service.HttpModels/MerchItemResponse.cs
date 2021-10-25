@@ -1,5 +1,6 @@
 namespace OzonEdu.merchandise_service.HttpModels
 {
+    /// <summary> Модель ответа </summary>
     public class MerchItemResponse
     {
         /// <summary> Идентификатор мерча </summary>

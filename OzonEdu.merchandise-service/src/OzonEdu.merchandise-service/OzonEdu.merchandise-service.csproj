@@ -12,10 +12,5 @@
       <ProjectReference Include="..\OzonEdu.merchandise_service.HttpModels\OzonEdu.merchandise_service.HttpModels.csproj" />
       <ProjectReference Include="..\OzonEdu.merchandise_service.Infrastructure\OzonEdu.merchandise_service.Infrastructure.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
-      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-    </ItemGroup>
    
 </Project>
