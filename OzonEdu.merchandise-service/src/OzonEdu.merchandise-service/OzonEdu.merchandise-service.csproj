@@ -8,12 +8,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="GrpcServices" />
       <Folder Include="Infrastructure\Interseptors" />
       <Folder Include="Infrastructure\Middlewares\Interfaces" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\OzonEdu.merchandise_service.Grpc\OzonEdu.merchandise_service.Grpc.csproj" />
       <ProjectReference Include="..\OzonEdu.merchandise_service.HttpModels\OzonEdu.merchandise_service.HttpModels.csproj" />
     </ItemGroup>
 

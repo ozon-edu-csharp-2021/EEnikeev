@@ -12,7 +12,7 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
-        <Protobuf Include="merch-api.proto" GrpServices="Server"/>
+        <Protobuf Include="merch-api.proto" GrpServices="Both"/>
     </ItemGroup>    
 
 </Project>

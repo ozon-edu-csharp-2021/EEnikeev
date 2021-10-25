@@ -17,13 +17,13 @@ namespace OzonEdu.merchandise_service.Models.Mocks
             var merch = new MerchItemMock("Футболка");
             _items.Add(merch.Id, merch);
             
-            merch = new MerchItemMock("Толстовка");
+            merch = new MerchItemMock("Толстовка"){IsIssued = true};
             _items.Add(merch.Id, merch);
             
             merch = new MerchItemMock("Кепка");
             _items.Add(merch.Id, merch);
             
-            merch = new MerchItemMock("Сумка");
+            merch = new MerchItemMock("Сумка"){IsIssued = true};
             _items.Add(merch.Id, merch);
             
             merch= new MerchItemMock("Ручка");

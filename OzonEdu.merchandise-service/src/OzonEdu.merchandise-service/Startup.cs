@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using OzonEdu.merchandise_service.GrpcServices;
 using OzonEdu.merchandise_service.Infrastructure.Middlewares;
 using OzonEdu.merchandise_service.Services;
 using OzonEdu.merchandise_service.Services.Interfaces;
@@ -48,6 +49,7 @@ namespace OzonEdu.merchandise_service
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapGrpcService<MerchApiGrpcService>();
             });
 
         }

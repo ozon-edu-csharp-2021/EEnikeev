@@ -12,8 +12,8 @@ namespace OzonEdu.merchandise_service.Infrastructure.StartupFilters
             return app =>
             {
                 app.Map("/version", builder => builder.UseMiddleware<VersionMiddleware>());
-                app.UseMiddleware<RequestLoggingMiddleware>();
-                app.UseMiddleware<ResponseLoggingMiddleware>();
+                //.UseMiddleware<RequestLoggingMiddleware>();
+                //app.UseMiddleware<ResponseLoggingMiddleware>();
                 // лучше сделать 2 отдельных middleware или два общих?
                 //app.Map("/live", builder => builder.UseMiddleware<LiveMiddleware>());
                 //app.Map("/ready", builder => builder.UseMiddleware<ReadyMiddleware>());
