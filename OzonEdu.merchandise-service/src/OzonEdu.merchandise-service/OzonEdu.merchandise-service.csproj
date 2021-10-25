@@ -8,12 +8,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Infrastructure\Middlewares\Interfaces" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\OzonEdu.merchandise_service.Grpc\OzonEdu.merchandise_service.Grpc.csproj" />
       <ProjectReference Include="..\OzonEdu.merchandise_service.HttpModels\OzonEdu.merchandise_service.HttpModels.csproj" />
+      <ProjectReference Include="..\OzonEdu.merchandise_service.Infrastructure\OzonEdu.merchandise_service.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
