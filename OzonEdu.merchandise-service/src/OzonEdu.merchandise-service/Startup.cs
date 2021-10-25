@@ -33,6 +33,7 @@ namespace OzonEdu.merchandise_service
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IMerchandiseService,MerchandiseService>();
+            services.AddGrpc();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
