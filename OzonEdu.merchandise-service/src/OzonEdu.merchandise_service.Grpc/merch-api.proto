@@ -2,6 +2,8 @@ syntax = "proto3";
 option csharp_namespace = "OzonEdu.merchandise_service.Grpc";
 package MerchService;
 
+import "google/protobuf/wrappers.proto";
+
 service MerchServiceGrpc{
   rpc GetMerchById(GetMerchItemByIdRequest) returns (GetMerchItemByIdResponse);  
   rpc GetMerchIsIssuedById(GetMerchItemByIdRequest) returns (GetMerchIsIssuedResponse);
@@ -13,9 +15,9 @@ message GetMerchItemByIdRequest{
 
 message GetMerchItemByIdResponse{
   int64 item_id = 1;
-  string item_name = 2;
+  google.protobuf.StringValue item_name = 2;
 }
 
 message GetMerchIsIssuedResponse{
-  bool is_issued = 1;
+  google.protobuf.BoolValue is_issued = 1;
 }

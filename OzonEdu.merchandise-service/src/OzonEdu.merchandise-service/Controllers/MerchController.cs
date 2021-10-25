@@ -8,9 +8,7 @@ using OzonEdu.merchandise_service.Services.Interfaces;
 
 namespace OzonEdu.merchandise_service.Controllers
 {
-    /// <summary>
-    /// Rjy
-    /// </summary>
+    /// <summary> Контроллер </summary>
     [ApiController]
     [Route("v1/api/merch")]
     [Produces("application/json")]
@@ -18,6 +16,8 @@ namespace OzonEdu.merchandise_service.Controllers
     {
         private readonly IMerchandiseService _merchService;
 
+        /// <summary> Конструктор класса </summary>
+        /// <param name="merchService"></param>
         public MerchController(IMerchandiseService merchService)
         {
             _merchService = merchService;

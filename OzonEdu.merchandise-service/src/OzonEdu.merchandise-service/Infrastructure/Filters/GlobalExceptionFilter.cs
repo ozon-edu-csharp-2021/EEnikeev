@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace OzonEdu.merchandise_service.Infrastructure.Filters
 {
+    /// <summary> Глобальный фильтр обработки ошибок </summary>
     public class GlobalExceptionFilter: ExceptionFilterAttribute
     {
         public override void OnException(ExceptionContext context)

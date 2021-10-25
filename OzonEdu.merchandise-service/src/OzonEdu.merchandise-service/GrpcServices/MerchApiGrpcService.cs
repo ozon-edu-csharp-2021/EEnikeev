@@ -5,6 +5,7 @@ using OzonEdu.merchandise_service.Services.Interfaces;
 
 namespace OzonEdu.merchandise_service.GrpcServices
 {
+    /// <summary> Grpc мерч сервис </summary>
     public class MerchApiGrpcService : MerchServiceGrpc.MerchServiceGrpcBase
     {
         private readonly IMerchandiseService _merchandiseService;
@@ -27,6 +28,7 @@ namespace OzonEdu.merchandise_service.GrpcServices
             };
         }
         
+        /// <summary> Возвращает информацию о выданном менрче по идентификатору </summary>
         public override async Task<GetMerchIsIssuedResponse> GetMerchIsIssuedById(
             GetMerchItemByIdRequest request,
             ServerCallContext context)
@@ -35,7 +37,7 @@ namespace OzonEdu.merchandise_service.GrpcServices
             
             return new GetMerchIsIssuedResponse()
             {
-                IsIssued = (bool)isIssued
+                IsIssued = isIssued
             };
         }
     }

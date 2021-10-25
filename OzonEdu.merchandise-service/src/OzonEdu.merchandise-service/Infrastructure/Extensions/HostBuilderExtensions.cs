@@ -13,6 +13,7 @@ namespace OzonEdu.merchandise_service.Infrastructure.Extensions
 {
     public static class HostBuilderExtensions
     {
+        /// <summary> Добавляет необходмую инфраструктуру </summary>
         public static IHostBuilder AddInfrastructure(this IHostBuilder builder)
         {
             builder.ConfigureServices(services =>
