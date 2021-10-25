@@ -24,7 +24,7 @@ namespace OzonEdu.merchandise_service.Infrastructure.Extensions
                 services.AddSingleton<IStartupFilter, SwaggerStartupFilter>();
                 services.AddSwaggerGen(options =>
                 {
-                    options.SwaggerDoc("v1", new OpenApiInfo {Title = "OzonEdu.StockApi", Version = "v1"});
+                    options.SwaggerDoc("v1", new OpenApiInfo {Title = "OzonEdu.MerchandiseService", Version = "v1"});
                 
                     options.CustomSchemaIds(x => x.FullName);
 
@@ -32,7 +32,7 @@ namespace OzonEdu.merchandise_service.Infrastructure.Extensions
                     var xmlFilePath = Path.Combine(AppContext.BaseDirectory, xmlFileName);
                     options.IncludeXmlComments(xmlFilePath);
 
-                    options.OperationFilter<HeaderOperationFilter>();
+                    //options.OperationFilter<HeaderOperationFilter>();
                 });
                 
                 services.AddControllers(options => options.Filters.Add<GlobalExceptionFilter>());
