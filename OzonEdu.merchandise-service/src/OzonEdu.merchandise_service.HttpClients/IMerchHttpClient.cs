@@ -18,6 +18,12 @@ namespace OzonEdu.merchandise_service.HttpClient
         /// <returns> true если мерч выдан </returns>
         Task<bool> GetMerchIsIssuedById(long id, CancellationToken token);
 
+        /// <summary> Возвращает статус код по указаннному маршруту </summary>
+        /// <param name="path"> путь </param>
+        /// <param name="token"> токен отмены </param>
+        /// <returns> результат запроса </returns>
+        Task<string> GetStatusCode(string path, CancellationToken token);
+        
         /// <summary> Возвращает информацию о версии </summary>
         /// <param name="token"> токен отмены </param>
         /// <returns> версия </returns>

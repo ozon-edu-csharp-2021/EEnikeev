@@ -40,6 +40,17 @@ namespace OzonEdu.merchandise_service.HttpClient
             return Boolean.Parse(body);
         }
         
+        /// <summary> Делает пустой запрос по указанному маршруту </summary>
+        /// <param name="path"> путь </param>
+        /// <param name="token"> токен отмены </param>
+        /// <returns> код ответа </returns>
+        public async Task<string> GetStatusCode(string path, CancellationToken token)
+        {
+            using var response = await _httpClient.GetAsync(path, token);
+            return response.StatusCode.ToString();
+        }
+        
+
         /// <summary> Возвращает информацию о версии </summary>
         /// <param name="token"> токен отмены </param>
         /// <returns> версия </returns>

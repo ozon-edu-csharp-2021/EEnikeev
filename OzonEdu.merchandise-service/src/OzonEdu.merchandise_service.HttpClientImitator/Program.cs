@@ -17,8 +17,10 @@ namespace OzonEdu.merchandise_service.HttpClientImitator
             try
             {
                 Console.WriteLine("Live: " + client.GetLive(CancellationToken.None).Result);
+                //Console.WriteLine("LiveStatusCode: " + client.GetStatusCode("/live",CancellationToken.None).Result);
                 Console.WriteLine("Version: " + client.GetVersion(CancellationToken.None).Result);
                 Console.WriteLine("Ready: " + client.GetReady(CancellationToken.None).Result);
+                //Console.WriteLine("ReadyStatusCode: " + client.GetStatusCode("/ready",CancellationToken.None).Result);
                 Console.WriteLine();
                 Console.WriteLine("Merch info: ");
                 for (int i = 0; i < 5; i++)
