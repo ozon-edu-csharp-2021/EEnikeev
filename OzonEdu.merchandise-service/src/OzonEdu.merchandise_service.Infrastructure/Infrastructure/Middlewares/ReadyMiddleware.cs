@@ -15,6 +15,7 @@ namespace OzonEdu.merchandise_service.Infrastructure.Middlewares
         public async Task InvokeAsync(HttpContext context)
         {
             await Task.FromResult(context.Response.StatusCode = StatusCodes.Status200OK);
+            await context.Response.WriteAsync("");
             //await _next(context);
         }
     }
