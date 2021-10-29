@@ -1,6 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using OzonEdu.merchandise_service.Infrastructure.Models.Interfaces;
 using OzonEdu.merchandise_service.Models.Mocks;
 
 
@@ -13,7 +14,7 @@ namespace OzonEdu.merchandise_service.Services.Interfaces
         /// <param name="itemId"> Id мерча, который необходимо вернуть </param>
         /// <param name="token"> Токен отмены </param>
         /// <returns> Task&lt;IMerchItem&gt; </returns>
-        Task<MerchItemMock?> GetMerchById(long itemId, CancellationToken token);
+        Task<IMerchItem?> GetMerchById(long itemId, CancellationToken token);
         
         /// <summary> Возвращает информацию о выдаче мерча с указанным Id </summary>
         /// <param name="itemId"> Id мерча </param>

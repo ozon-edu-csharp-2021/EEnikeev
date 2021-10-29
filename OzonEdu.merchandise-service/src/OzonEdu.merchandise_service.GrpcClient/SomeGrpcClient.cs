@@ -7,7 +7,7 @@ using OzonEdu.merchandise_service.Grpc;
 
 namespace OzonEdu.merchandise_service.GrpcClient
 {
-    class Program
+    class SomeGrpcClient
     {
         static async Task Main(string[] args)
         {

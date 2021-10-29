@@ -7,13 +7,13 @@ namespace OzonEdu.merchandise_service.Models.Mocks
     public class MerchRepositoryMock
     {
         /// <summary> Список мерчей </summary>
-        private Dictionary<long, MerchItemMock> _items;
+        private Dictionary<long, IMerchItem> _items;
 
         /// <summary> Конструктор типа </summary>
         public MerchRepositoryMock()
         {
             // наполняем список для проверки
-            _items = new Dictionary<long, MerchItemMock>();
+            _items = new Dictionary<long, IMerchItem>();
 
             var merch = new MerchItemMock("Футболка");
             _items.Add(merch.Id, merch);
@@ -34,7 +34,7 @@ namespace OzonEdu.merchandise_service.Models.Mocks
         /// <summary> Возвращает мерч по id </summary>
         /// <param name="id"> id мерча </param>
         /// <returns> IMerchItem? </returns>
-        public MerchItemMock? GetMerchById(long id)
+        public IMerchItem? GetMerchById(long id)
         {
             if (_items.ContainsKey(id)) return _items[id];
             return null;
