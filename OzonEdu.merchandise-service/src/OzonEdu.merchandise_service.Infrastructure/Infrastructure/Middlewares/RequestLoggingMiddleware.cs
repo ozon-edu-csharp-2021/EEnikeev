@@ -35,8 +35,7 @@ namespace OzonEdu.merchandise_service.Infrastructure.Middlewares
                 if (context.Request.Headers.Count > 0)
                 {
                     
-                    if(context.Request.Headers["Content-Type"].ToString()
-                        .Equals("application/grpc", StringComparison.OrdinalIgnoreCase))
+                    if(string.Equals(context.Request.ContentType ,"application/grpc",StringComparison.OrdinalIgnoreCase))
                     {
                         return;
                     }
