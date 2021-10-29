@@ -8,7 +8,7 @@ using Microsoft.OpenApi.Models;
 using OzonEdu.merchandise_service.Infrastructure.Filters;
 using OzonEdu.merchandise_service.Infrastructure.Interceptors;
 using OzonEdu.merchandise_service.Infrastructure.StartupFilters;
-using OzonEdu.merchandise_service.Infrastructure.Swagger;
+
 
 namespace OzonEdu.merchandise_service.Infrastructure.Extensions
 {
