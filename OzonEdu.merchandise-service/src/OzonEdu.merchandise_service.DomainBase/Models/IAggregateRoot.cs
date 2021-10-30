@@ -1,4 +1,4 @@
-﻿namespace OzonEdu.merchandise_service._DomainBase.Models
+﻿namespace OzonEdu.merchandise_service.DomainBase.Models
 {
 
     public interface IAggregateRoot { }

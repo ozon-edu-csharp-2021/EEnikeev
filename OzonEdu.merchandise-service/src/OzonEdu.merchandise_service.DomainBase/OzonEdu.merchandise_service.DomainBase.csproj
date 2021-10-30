@@ -2,7 +2,6 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <RootNamespace>OzonEdu.merchandise_service._DomainBase</RootNamespace>
     </PropertyGroup>
     
     <ItemGroup>
