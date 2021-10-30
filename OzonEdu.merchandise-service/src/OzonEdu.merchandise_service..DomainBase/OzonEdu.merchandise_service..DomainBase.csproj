@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>OzonEdu.merchandise_service._DomainBase</RootNamespace>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="MediatR" Version="9.0.0"></PackageReference>
+    </ItemGroup>
+
+</Project>
