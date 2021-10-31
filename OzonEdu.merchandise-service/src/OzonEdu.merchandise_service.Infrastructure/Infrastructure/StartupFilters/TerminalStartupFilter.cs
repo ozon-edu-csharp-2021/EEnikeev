@@ -16,11 +16,8 @@ namespace OzonEdu.merchandise_service.Infrastructure.StartupFilters
                 app.UseMiddleware<ResponseLoggingMiddleware>();
                 
                 app.Map("/version", builder => builder.UseMiddleware<VersionMiddleware>());
-                // лучше сделать 2 отдельных middleware или один общий?
-                //app.Map("/live", builder => builder.UseMiddleware<LiveMiddleware>());
-                //app.Map("/ready", builder => builder.UseMiddleware<ReadyMiddleware>());
-                app.Map("/live", builder => builder.UseMiddleware<Ok200Middleware>());
-                app.Map("/ready", builder => builder.UseMiddleware<Ok200Middleware>());
+                app.Map("/live", builder => builder.UseMiddleware<LiveMiddleware>());
+                app.Map("/ready", builder => builder.UseMiddleware<ReadyMiddleware>());
                 next(app);
             };
         }

@@ -22,20 +22,20 @@ namespace OzonEdu.merchandise_service.Infrastructure.Middlewares
 
         public async Task InvokeAsync(HttpContext context)
         {
-            await LogRequest(context);
+            LogRequest(context);
             await _next(context);
         }
 
-        /// <summary> Выполняет логгирование запроса </summary>
-        /// <param name="context"> Http context </param>
-        private async Task LogRequest(HttpContext context)
+        private void LogRequest(HttpContext context)
         {
             try
             {
                 if (context.Request.Headers.Count > 0)
                 {
                     
-                    if(string.Equals(context.Request.ContentType ,"application/grpc",StringComparison.OrdinalIgnoreCase))
+                    if(string.Equals(context.Request.ContentType ,
+                        "application/grpc",
+                        StringComparison.OrdinalIgnoreCase))
                     {
                         return;
                     }
