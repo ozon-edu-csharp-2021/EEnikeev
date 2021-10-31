@@ -25,11 +25,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService.Infrastructure", "src\OzonEdu.MerchandiseService.Infrastructure\OzonEdu.MerchandiseService.Infrastructure.csproj", "{E918CED3-BB8C-4F53-9820-99956DFA730E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.merchandise_service.Domain", "src\OzonEdu.merchandise_service.Domain\OzonEdu.merchandise_service.Domain.csproj", "{C43E1B98-A4F1-453E-BA85-B8D70B46D99B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService.Domain", "src\OzonEdu.MerchandiseService.Domain\OzonEdu.MerchandiseService.Domain.csproj", "{C43E1B98-A4F1-453E-BA85-B8D70B46D99B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.merchandise_service.DomainBase", "src\OzonEdu.merchandise_service.DomainBase\OzonEdu.merchandise_service.DomainBase.csproj", "{307D8814-C7AD-4C33-B66B-A4460169ED56}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.merchandise_service.Domain.Tests", "tests\OzonEdu.merchandise_service.Domain.Tests\OzonEdu.merchandise_service.Domain.Tests.csproj", "{CAE03F92-0DE3-4DA0-B64A-B31BCA190B2B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService.Domain.Tests", "tests\OzonEdu.MerchandiseService.Domain.Tests\OzonEdu.MerchandiseService.Domain.Tests.csproj", "{CAE03F92-0DE3-4DA0-B64A-B31BCA190B2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,7 +43,6 @@ Global
 		{0F9B3754-F690-4833-A7CB-A6E6457C0C30} = {17DFC49C-F9EA-4196-B481-A00E45EF6B56}
 		{E918CED3-BB8C-4F53-9820-99956DFA730E} = {17DFC49C-F9EA-4196-B481-A00E45EF6B56}
 		{C43E1B98-A4F1-453E-BA85-B8D70B46D99B} = {17DFC49C-F9EA-4196-B481-A00E45EF6B56}
-		{307D8814-C7AD-4C33-B66B-A4460169ED56} = {17DFC49C-F9EA-4196-B481-A00E45EF6B56}
 		{CAE03F92-0DE3-4DA0-B64A-B31BCA190B2B} = {E4F44219-CA92-406D-9889-169B01F1D634}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
@@ -81,10 +78,6 @@ Global
 		{C43E1B98-A4F1-453E-BA85-B8D70B46D99B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C43E1B98-A4F1-453E-BA85-B8D70B46D99B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C43E1B98-A4F1-453E-BA85-B8D70B46D99B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{307D8814-C7AD-4C33-B66B-A4460169ED56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{307D8814-C7AD-4C33-B66B-A4460169ED56}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{307D8814-C7AD-4C33-B66B-A4460169ED56}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{307D8814-C7AD-4C33-B66B-A4460169ED56}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CAE03F92-0DE3-4DA0-B64A-B31BCA190B2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CAE03F92-0DE3-4DA0-B64A-B31BCA190B2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAE03F92-0DE3-4DA0-B64A-B31BCA190B2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
