@@ -16,7 +16,6 @@ namespace OzonEdu.merchandise_service.Infrastructure.Middlewares
         {
             await Task.FromResult(context.Response.StatusCode = 200);
             await context.Response.WriteAsync("");
-            //await _next(context);
         }
     }
 }

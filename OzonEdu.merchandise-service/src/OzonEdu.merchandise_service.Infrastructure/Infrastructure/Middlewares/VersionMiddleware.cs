@@ -7,23 +7,17 @@ namespace OzonEdu.merchandise_service.Infrastructure.Middlewares
 {
     public class VersionMiddleware
     {
-        private readonly RequestDelegate _next;
-        
-        public VersionMiddleware(RequestDelegate next)
-        {
-            _next = next;
-        }
+        public VersionMiddleware(RequestDelegate next) { }
         
         public async Task InvokeAsync(HttpContext context)
         {
-            var version = Assembly.GetEntryAssembly().GetName().Version?.ToString() ?? "no version";
-            var serviceName = Assembly.GetEntryAssembly().GetName().Name?.ToString() ?? "Unknown name";
+            var version = Assembly.GetEntryAssembly()?.GetName().Version?.ToString() ?? "no version";
+            var serviceName = Assembly.GetEntryAssembly()?.GetName().Name?.ToString() ?? "Unknown name";
 
             VersionData versionData = new VersionData(serviceName, version);
 
             await context.Response.WriteAsync(versionData.ToString());
             
-            //await _next(context);
         }
     }
 }

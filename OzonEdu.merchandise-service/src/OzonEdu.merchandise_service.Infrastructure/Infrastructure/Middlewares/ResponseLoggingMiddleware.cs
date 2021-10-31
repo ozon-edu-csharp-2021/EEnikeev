@@ -24,42 +24,18 @@ namespace OzonEdu.merchandise_service.Infrastructure.Middlewares
         public async Task InvokeAsync(HttpContext context)
         {
             await _next.Invoke(context);
-            await LogResponse(context);
-            
-            /*var originalBody = context.Response.Body;
-            using var newBody = new MemoryStream();
-            context.Response.Body = newBody;
-
-            try
-            {
-                await _next(context);
-                newBody.Seek(0, SeekOrigin.Begin);
-                var bodyText = await new StreamReader(context.Response.Body).ReadToEndAsync();
-                if (bodyText.Length > 0)
-                    _logger.LogInformation($"Response logged: {bodyText}");
-                //Console.WriteLine($"LoggingMiddleware: {bodyText}");
-                newBody.Seek(0, SeekOrigin.Begin);
-                await newBody.CopyToAsync(originalBody);
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Could not log response body");
-            }
-            finally
-            {
-                
-            }*/
+            LogResponse(context);
         }
         
-        /// <summary> Выполняет логгирование ответа </summary>
-        /// <param name="context"> Http context </param>
-        private async Task LogResponse(HttpContext context)
+        private void LogResponse(HttpContext context)
         {
             try
             {
                 if (context.Response.HasStarted && context.Response.Headers.Count > 0)
                 {
-                    if(string.Equals(context.Request.ContentType ,"application/grpc",StringComparison.OrdinalIgnoreCase))
+                    if(string.Equals(context.Request.ContentType ,
+                        "application/grpc",
+                        StringComparison.OrdinalIgnoreCase))
                     {
                         return;
                     }

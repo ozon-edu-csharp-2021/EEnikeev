@@ -28,11 +28,10 @@ namespace OzonEdu.merchandise_service.Infrastructure.Extensions
                 
                     options.CustomSchemaIds(x => x.FullName);
 
-                    var xmlFileName = Assembly.GetEntryAssembly().GetName().Name + ".xml";
+                    var xmlFileName = Assembly.GetEntryAssembly()?.GetName().Name + ".xml";
                     var xmlFilePath = Path.Combine(AppContext.BaseDirectory, xmlFileName);
                     options.IncludeXmlComments(xmlFilePath);
 
-                    //options.OperationFilter<HeaderOperationFilter>();
                 });
                 
                 services.AddControllers(options => options.Filters.Add<GlobalExceptionFilter>());
@@ -41,14 +40,6 @@ namespace OzonEdu.merchandise_service.Infrastructure.Extensions
             return builder;
         }
         
-        /*public static IHostBuilder AddHttp(this IHostBuilder builder)
-        {
-            builder.ConfigureServices(services =>
-            {
-                services.AddControllers(options => options.Filters.Add<GlobalExceptionFilter>());
-            });
-            
-            return builder;
-        }*/
+        
     }
 }
