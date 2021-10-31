@@ -1,7 +1,9 @@
 using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OzonEdu.MerchandiseService.HttpModels;
+using OzonEdu.MerchandiseService.Infrastructure.Commands.GiveOutMerchItem;
 using OzonEdu.MerchandiseService.Services.Interfaces;
 
 namespace OzonEdu.MerchandiseService.Controllers
@@ -12,10 +14,11 @@ namespace OzonEdu.MerchandiseService.Controllers
     public class MerchController : ControllerBase
     {
         private readonly IMerchandiseService _merchService;
-
-        public MerchController(IMerchandiseService merchService)
+        private readonly IMediator _mediator;
+        public MerchController(IMerchandiseService merchService, IMediator mediator)
         {
             _merchService = merchService;
+            _mediator = mediator;
         }
 
         /// <summary> Возвращает мерч по указанному идентификатору</summary>
@@ -49,12 +52,16 @@ namespace OzonEdu.MerchandiseService.Controllers
         [Route("GetMerchIsIssued/{id:long}")]
         public async Task<ActionResult<MerchItemResponse>> GetMerchIsIssuedById(long id, CancellationToken token)
         {
-            var isIssued = await _merchService.GetMerchIsIssuedById(id, token);
+            var command = new GetMerchIsIssuedCommand((int)id);
+
+            var isIssued = await _mediator.Send(command);
+            
+            /*var isIssued = await _merchService.GetMerchIsIssuedById(id, token);
 
             if (isIssued is null)
             {
                 return NotFound();
-            }
+            }*/
 
             return Ok(isIssued);
         }

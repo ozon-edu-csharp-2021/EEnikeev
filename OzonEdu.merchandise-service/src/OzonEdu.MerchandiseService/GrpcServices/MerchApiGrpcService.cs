@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Grpc.Core;
+using MediatR;
 using OzonEdu.MerchandiseService.Grpc;
 using OzonEdu.MerchandiseService.Services.Interfaces;
 
@@ -8,10 +9,12 @@ namespace OzonEdu.MerchandiseService.GrpcServices
     public class MerchApiGrpcService : MerchServiceGrpc.MerchServiceGrpcBase
     {
         private readonly IMerchandiseService _merchandiseService;
-
-        public MerchApiGrpcService(IMerchandiseService merchandiseService)
+        private readonly IMediator _mediator;
+        
+        public MerchApiGrpcService(IMerchandiseService merchandiseService, IMediator mediator)
         {
             _merchandiseService = merchandiseService;
+            _mediator = mediator;
         }
 
         public override async Task<GetMerchItemByIdResponse> GetMerchById(

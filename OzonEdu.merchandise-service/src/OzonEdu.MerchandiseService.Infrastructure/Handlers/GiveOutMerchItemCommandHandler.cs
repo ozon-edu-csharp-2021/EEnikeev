@@ -15,7 +15,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
         {
             _merchItemRepository = merchItemRepository;
         }
-
+        
         public async Task<Unit> Handle(GiveOutMerchItemCommand request, CancellationToken cancellationToken)
         {
             var merchItem = await _merchItemRepository.FindBySkuAsync(new Sku(request.Sku), cancellationToken);

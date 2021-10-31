@@ -10,5 +10,6 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
         Task<MerchItem> UpdateAsync(MerchItem merchItem, CancellationToken cancellationToken = default);
         Task<MerchItem> FindByIdAsync(Sku sku, CancellationToken cancellationToken = default);
         Task<MerchItem> FindBySkuAsync(Sku sku, CancellationToken cancellationToken = default);
+        
     }
 }
