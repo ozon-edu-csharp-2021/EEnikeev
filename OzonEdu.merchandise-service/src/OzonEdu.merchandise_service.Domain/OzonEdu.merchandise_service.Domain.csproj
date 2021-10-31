@@ -8,4 +8,8 @@
       <ProjectReference Include="..\OzonEdu.merchandise_service.DomainBase\OzonEdu.merchandise_service.DomainBase.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Exceptions\MerchItem" />
+    </ItemGroup>
+
 </Project>
