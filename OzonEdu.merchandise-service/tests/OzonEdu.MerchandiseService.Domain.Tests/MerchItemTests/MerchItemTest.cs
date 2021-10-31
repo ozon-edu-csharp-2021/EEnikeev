@@ -114,7 +114,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
         }
 
         [Fact]
-        public void IncreaseMerchItemQuantity()
+        public void IncreaseMerchItemQuantitySuccess()
         {
             // Arrange
             int quantity = 10;
@@ -203,6 +203,30 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
 
             // Assert
             Assert.Throws<NotEnoughQuantityException>(() => item.GiveOutItems(valueToGiveOut));
+
+        }
+        
+        [Fact]
+        public void GiveOutMerchItemQuantitySuccess()
+        {
+            // Arrange
+            int quantity = 10;
+            
+            var item = new MerchItem(
+                new Sku(100500),
+                new Name("some tshirt"),
+                new ItemEntity(ItemType.TShirt),
+                ClothingSize.L,
+                new Quantity(quantity),
+                new MinimalQuantity(5),
+                new Tag("some tag"));
+            
+            // Act
+            var valueToGiveOut = 5;
+            item.GiveOutItems(valueToGiveOut);
+                
+            // Assert
+            item.Quantity.Value.Should().Be(5, $"because we substract {quantity} and {valueToGiveOut}");
 
         }
         
