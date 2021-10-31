@@ -7,9 +7,5 @@
     <ItemGroup>
         <PackageReference Include="MediatR" Version="9.0.0"></PackageReference>
     </ItemGroup>
-    
-    <ItemGroup>
-      <Folder Include="Exceptions\MerchItem" />
-    </ItemGroup>
 
 </Project>

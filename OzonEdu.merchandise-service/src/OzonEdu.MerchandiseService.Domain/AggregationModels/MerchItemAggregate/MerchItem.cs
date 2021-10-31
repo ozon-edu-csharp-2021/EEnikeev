@@ -1,4 +1,6 @@
 using System;
+using OzonEdu.MerchandiseService.Domain.Events;
+using OzonEdu.MerchandiseService.Domain.Exceptions;
 using OzonEdu.MerchandiseService.Domain.Models;
 
 namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
@@ -39,44 +41,84 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
 
         public void IncreaseQuantity(int valueToIncrease)
         {
-            if (valueToIncrease < 0) throw new ArgumentException("Value to increase cannot be less than zero");
+            if (valueToIncrease < 0) throw new NegativeQuantityException(
+                $"Value to increase cannot be less than zero: {valueToIncrease}");
+            
             Quantity = new Quantity(this.Quantity.Value + valueToIncrease);
         }
+
+        public void GiveOutItems(int quantityToGiveOut)
+        {
+            if (quantityToGiveOut < 0) throw new NegativeQuantityException(
+                $"Items to give out cannot be less than zero: {quantityToGiveOut}");
+            if (Quantity.Value < quantityToGiveOut) throw new NotEnoughQuantityException(
+                "Not enough items to give out");
+            
+            Quantity = new Quantity(this.Quantity.Value - quantityToGiveOut);
+
+            if (MinimalQuantity != null && Quantity.Value <= MinimalQuantity.Value)
+                AddReachedMinimumQuantityDomainEvent(Sku);
+        }
+
+        void AddReachedMinimumQuantityDomainEvent(Sku sku)
+        {
+            var orderStartedDomainEvent = new ReachedMinimumMerchItemQuantityDomainEvent(sku);
+            this.AddDomainEvent(orderStartedDomainEvent);
+        }
         
+        
+
+        #region Validations
+
         Sku ValidateSku(Sku sku)
         {
-            if (sku == null) throw new ArgumentNullException("Sku cannot be null");
+            if (sku == null) throw new ArgumentNullException(
+                "Sku cannot be null");
             return sku;
         }
 
         Name ValidateName(Name name)
         {
-            if (name == null) throw new ArgumentNullException("Name cannot be null");
-            if (name.Value == "") throw new ArgumentException("Name cannot be empty");
+            if (name == null) throw new ArgumentNullException(
+                "Name cannot be null");
+            if (name.Value == "") throw new ArgumentException(
+                "Name cannot be empty");
             return name;
         }
 
         ItemEntity ValidateItemType(ItemEntity itemType)
         {
-            if (itemType == null || itemType.ItemType == null) throw new ArgumentNullException("Item type cannot be null");
+            if (itemType == null || itemType.ItemType == null) throw new ArgumentNullException(
+                "Item type cannot be null");
             return itemType;
         }
 
         ClothingSize ValidateClothingSize(ClothingSize clothingSize)
         {
+            if (this.Type.ItemType.Equals(ItemType.TShirt) || this.Type.ItemType.Equals(ItemType.Sweatshirt))
+            {
+                if (clothingSize == null)
+                    throw new ClothingSizeException($"Item with type {this.Type.ItemType.Name} must have size");
+            }
+            else if (clothingSize != null)
+                throw new ClothingSizeException($"Item with type {this.Type.ItemType.Name} cannot get size");
+
             return clothingSize;
         }
 
         Quantity ValidateQuantity(Quantity quantity)
         {
-            if (quantity == null) throw new ArgumentNullException("Quantity type cannot be null");
-            if (quantity.Value < 0) throw new ArgumentException("Quantity cannot be less than zero");
+            if (quantity == null) throw new ArgumentNullException(
+                "Quantity type cannot be null");
+            if (quantity.Value < 0) throw new NegativeQuantityException(
+                "Quantity cannot be less than zero");
             return quantity;
         }
 
         MinimalQuantity ValidateMinimalQuantity(MinimalQuantity minimalQuantity)
         {
-            if (minimalQuantity.Value < 0) throw new ArgumentException("Quantity cannot be less than zero");
+            if (minimalQuantity.Value < 0) throw new NegativeQuantityException(
+                $"Quantity cannot be less than zero: {minimalQuantity}");
             return minimalQuantity;
         }
 
@@ -86,6 +128,8 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
         }
 
 
+        #endregion
+        
         #endregion
 
 

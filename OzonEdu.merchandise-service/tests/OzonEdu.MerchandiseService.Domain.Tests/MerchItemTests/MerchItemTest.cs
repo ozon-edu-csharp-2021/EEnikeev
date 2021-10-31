@@ -1,12 +1,12 @@
 using System;
 using FluentAssertions;
-using OzonEdu.MerchandiseService.Domain.AggregationModels;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate;
+using OzonEdu.MerchandiseService.Domain.Exceptions;
 using Xunit;
 
 namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
 {
-    public class MerchItemNullArgumentsTest
+    public class MerchItemTest
     {
 
         [Fact]
@@ -90,13 +90,26 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
         [Fact]
         public void CreateMerchItemWithNegativeQuantity()
         {
-            Assert.Throws<ArgumentException>(() => new MerchItem(
+            Assert.Throws<NegativeQuantityException>(() => new MerchItem(
                 new Sku(100500),
                 new Name("some tshirt"),
                 new ItemEntity(ItemType.TShirt),
                 ClothingSize.L,
                 new Quantity(-10),
                 new MinimalQuantity(5),
+                new Tag("some tag")));
+        }
+        
+        [Fact]
+        public void CreateMerchItemWithNegativeMinimalQuantity()
+        {
+            Assert.Throws<NegativeQuantityException>(() => new MerchItem(
+                new Sku(100500),
+                new Name("some tshirt"),
+                new ItemEntity(ItemType.TShirt),
+                ClothingSize.L,
+                new Quantity(10),
+                new MinimalQuantity(-5),
                 new Tag("some tag")));
         }
 
@@ -114,10 +127,9 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
                 new Quantity(quantity),
                 new MinimalQuantity(5),
                 new Tag("some tag"));
+            
             // Act
-
             var valueToIncrease = 10;
-
             item.IncreaseQuantity(valueToIncrease);
 
             // Assert
@@ -139,13 +151,86 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
                 new Quantity(quantity),
                 new MinimalQuantity(5),
                 new Tag("some tag"));
+            
             // Act
-
             var valueToIncrease = -10;
 
             // Assert
-            Assert.Throws<ArgumentException>(() => item.IncreaseQuantity(valueToIncrease));
+            Assert.Throws<NegativeQuantityException>(() => item.IncreaseQuantity(valueToIncrease));
 
+        }
+        
+        [Fact]
+        public void GiveOutMerchItemNegativeQuantity()
+        {
+            // Arrange
+            int quantity = 10;
+            
+            var item = new MerchItem(
+                new Sku(100500),
+                new Name("some tshirt"),
+                new ItemEntity(ItemType.TShirt),
+                ClothingSize.L,
+                new Quantity(quantity),
+                new MinimalQuantity(5),
+                new Tag("some tag"));
+            
+            // Act
+            var valueToGiveOut = -5;
+
+            // Assert
+            Assert.Throws<NegativeQuantityException>(() => item.GiveOutItems(valueToGiveOut));
+
+        }
+        
+        [Fact]
+        public void GiveOutMerchItemQuantityMoreThanCurrentQuantity()
+        {
+            // Arrange
+            int quantity = 10;
+            
+            var item = new MerchItem(
+                new Sku(100500),
+                new Name("some tshirt"),
+                new ItemEntity(ItemType.TShirt),
+                ClothingSize.L,
+                new Quantity(quantity),
+                new MinimalQuantity(5),
+                new Tag("some tag"));
+            
+            // Act
+            var valueToGiveOut = 20;
+
+            // Assert
+            Assert.Throws<NotEnoughQuantityException>(() => item.GiveOutItems(valueToGiveOut));
+
+        }
+        
+        [Fact]
+        public void SetClothesWithNullClothingSize()
+        {
+           Assert.Throws<ClothingSizeException>(() => new MerchItem(
+                new Sku(100500),
+                new Name("some tshirt"),
+                new ItemEntity(ItemType.TShirt),
+                null,
+                new Quantity(10),
+                new MinimalQuantity(5),
+                new Tag("some tag")));
+
+        }
+        
+        [Fact]
+        public void SetClothingSizeToItemWithoutClothingSize()
+        {
+            Assert.Throws<ClothingSizeException>(() => new MerchItem(
+                new Sku(100500),
+                new Name("some bag"),
+                new ItemEntity(ItemType.Bag),
+                ClothingSize.M, 
+                new Quantity(10),
+                new MinimalQuantity(5),
+                new Tag("some tag")));
         }
 
     }
