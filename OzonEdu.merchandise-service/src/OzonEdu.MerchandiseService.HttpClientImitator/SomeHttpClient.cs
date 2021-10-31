@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading;
-using OzonEdu.merchandise_service.HttpClient;
+using OzonEdu.MerchandiseService.HttpClient;
 
 namespace OzonEdu.MerchandiseService.HttpClientImitator
 {

@@ -1,6 +1,6 @@
-using OzonEdu.merchandise_service.Infrastructure.Models.Interfaces;
+using OzonEdu.MerchandiseService.Models.Interfaces;
 
-namespace OzonEdu.merchandise_service.Models.Mocks
+namespace OzonEdu.MerchandiseService.Models.Mocks
 {
     public class MerchItemMock : IMerchItem
     {

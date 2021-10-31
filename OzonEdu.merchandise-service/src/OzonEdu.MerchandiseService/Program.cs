@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using OzonEdu.merchandise_service.Infrastructure.Extensions;
+using OzonEdu.MerchandiseService.Infrastructure.Extensions;
 
-namespace OzonEdu.merchandise_service
+namespace OzonEdu.MerchandiseService
 {
     public class Program
     {

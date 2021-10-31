@@ -1,10 +1,10 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using OzonEdu.merchandise_service.HttpModels;
-using OzonEdu.merchandise_service.Services.Interfaces;
+using OzonEdu.MerchandiseService.HttpModels;
+using OzonEdu.MerchandiseService.Services.Interfaces;
 
-namespace OzonEdu.merchandise_service.Controllers
+namespace OzonEdu.MerchandiseService.Controllers
 {
     [ApiController]
     [Route("v1/api/merch")]

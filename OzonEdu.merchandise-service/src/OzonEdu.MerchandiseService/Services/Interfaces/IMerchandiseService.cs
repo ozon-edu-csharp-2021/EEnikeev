@@ -1,9 +1,8 @@
 using System.Threading;
 using System.Threading.Tasks;
-using OzonEdu.merchandise_service.Infrastructure.Models.Interfaces;
+using OzonEdu.MerchandiseService.Models.Interfaces;
 
-
-namespace OzonEdu.merchandise_service.Services.Interfaces
+namespace OzonEdu.MerchandiseService.Services.Interfaces
 {
     /// <summary> Сервис учета выдачи мерча сотрудникам </summary>
     public interface IMerchandiseService

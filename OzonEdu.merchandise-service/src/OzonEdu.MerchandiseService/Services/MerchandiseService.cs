@@ -1,10 +1,10 @@
 using System.Threading;
 using System.Threading.Tasks;
-using OzonEdu.merchandise_service.Infrastructure.Models.Interfaces;
-using OzonEdu.merchandise_service.Models.Mocks;
-using OzonEdu.merchandise_service.Services.Interfaces;
+using OzonEdu.MerchandiseService.Models.Interfaces;
+using OzonEdu.MerchandiseService.Models.Mocks;
+using OzonEdu.MerchandiseService.Services.Interfaces;
 
-namespace OzonEdu.merchandise_service.Services
+namespace OzonEdu.MerchandiseService.Services
 {
     /// <summary> Сервис учета выдачи мерча сотрудникам </summary>
     public class MerchandiseService : IMerchandiseService

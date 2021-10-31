@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Grpc.Core;
 using Grpc.Net.Client;
-using OzonEdu.merchandise_service.Grpc;
+using OzonEdu.MerchandiseService.Grpc;
 
 namespace OzonEdu.MerchandiseService.GrpcClient
 {

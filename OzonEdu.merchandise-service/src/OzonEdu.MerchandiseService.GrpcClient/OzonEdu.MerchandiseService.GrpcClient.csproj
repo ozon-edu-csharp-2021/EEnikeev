@@ -6,7 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\OzonEdu.merchandise_service.Grpc\OzonEdu.merchandise_service.Grpc.csproj" />
+      <ProjectReference Include="..\OzonEdu.MerchandiseService.Grpc\OzonEdu.MerchandiseService.Grpc.csproj" />
     </ItemGroup>
 
 </Project>

@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using OzonEdu.MerchandiseService.HttpModels;
 
-namespace OzonEdu.merchandise_service.HttpClient
+namespace OzonEdu.MerchandiseService.HttpClient
 {
     /// <summary> HttpClient </summary>
     public class MerchHttpClient : IMerchHttpClient

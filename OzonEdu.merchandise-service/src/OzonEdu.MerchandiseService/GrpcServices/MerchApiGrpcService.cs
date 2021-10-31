@@ -1,10 +1,9 @@
 using System.Threading.Tasks;
 using Grpc.Core;
-using Microsoft.AspNetCore.Http;
-using OzonEdu.merchandise_service.Grpc;
-using OzonEdu.merchandise_service.Services.Interfaces;
+using OzonEdu.MerchandiseService.Grpc;
+using OzonEdu.MerchandiseService.Services.Interfaces;
 
-namespace OzonEdu.merchandise_service.GrpcServices
+namespace OzonEdu.MerchandiseService.GrpcServices
 {
     public class MerchApiGrpcService : MerchServiceGrpc.MerchServiceGrpcBase
     {

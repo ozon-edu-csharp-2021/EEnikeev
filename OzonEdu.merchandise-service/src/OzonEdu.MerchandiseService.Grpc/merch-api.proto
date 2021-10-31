@@ -1,5 +1,5 @@
 syntax = "proto3";
-option csharp_namespace = "OzonEdu.merchandise_service.Grpc";
+option csharp_namespace = "OzonEdu.MerchandiseService.Grpc";
 package MerchService;
 
 import "google/protobuf/wrappers.proto";

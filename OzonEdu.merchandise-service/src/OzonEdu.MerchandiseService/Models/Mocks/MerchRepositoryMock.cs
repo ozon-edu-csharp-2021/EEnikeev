@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using OzonEdu.merchandise_service.Infrastructure.Models.Interfaces;
+using OzonEdu.MerchandiseService.Models.Interfaces;
 
-namespace OzonEdu.merchandise_service.Models.Mocks
+namespace OzonEdu.MerchandiseService.Models.Mocks
 {
     /// <summary> Имитация какого-то хранилища с мерчами </summary>
     public class MerchRepositoryMock

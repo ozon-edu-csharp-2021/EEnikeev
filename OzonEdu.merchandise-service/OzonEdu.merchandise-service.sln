@@ -11,19 +11,19 @@ EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{17DFC49C-F9EA-4196-B481-A00E45EF6B56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.merchandise-service", "src\OzonEdu.merchandise-service\OzonEdu.merchandise-service.csproj", "{3BF34573-2790-4221-9EDF-3081C5CB90FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService", "src\OzonEdu.MerchandiseService\OzonEdu.MerchandiseService.csproj", "{3BF34573-2790-4221-9EDF-3081C5CB90FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.merchandise_service.HttpModels", "src\OzonEdu.merchandise_service.HttpModels\OzonEdu.merchandise_service.HttpModels.csproj", "{71EC0612-B5AE-49E3-AFE3-E63D8285FC1A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService.HttpModels", "src\OzonEdu.MerchandiseService.HttpModels\OzonEdu.MerchandiseService.HttpModels.csproj", "{71EC0612-B5AE-49E3-AFE3-E63D8285FC1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.merchandise_service.HttpClients", "src\OzonEdu.merchandise_service.HttpClients\OzonEdu.merchandise_service.HttpClients.csproj", "{0F930F98-9386-4DB4-8457-1254DD31BF5A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService.HttpClients", "src\OzonEdu.MerchandiseService.HttpClients\OzonEdu.MerchandiseService.HttpClients.csproj", "{0F930F98-9386-4DB4-8457-1254DD31BF5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.merchandise_service.Grpc", "src\OzonEdu.merchandise_service.Grpc\OzonEdu.merchandise_service.Grpc.csproj", "{55C47C94-5BB2-4039-B063-CA2FCE1DE553}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService.Grpc", "src\OzonEdu.MerchandiseService.Grpc\OzonEdu.MerchandiseService.Grpc.csproj", "{55C47C94-5BB2-4039-B063-CA2FCE1DE553}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.merchandise_service.GrpcClient", "src\OzonEdu.merchandise_service.GrpcClient\OzonEdu.merchandise_service.GrpcClient.csproj", "{E0E85CB2-17FD-4421-A69C-785DFA2C949E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService.GrpcClient", "src\OzonEdu.MerchandiseService.GrpcClient\OzonEdu.MerchandiseService.GrpcClient.csproj", "{E0E85CB2-17FD-4421-A69C-785DFA2C949E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.merchandise_service.HttpClientImitator", "src\OzonEdu.merchandise_service.HttpClientImitator\OzonEdu.merchandise_service.HttpClientImitator.csproj", "{0F9B3754-F690-4833-A7CB-A6E6457C0C30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService.HttpClientImitator", "src\OzonEdu.MerchandiseService.HttpClientImitator\OzonEdu.MerchandiseService.HttpClientImitator.csproj", "{0F9B3754-F690-4833-A7CB-A6E6457C0C30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.merchandise_service.Infrastructure", "src\OzonEdu.merchandise_service.Infrastructure\OzonEdu.merchandise_service.Infrastructure.csproj", "{E918CED3-BB8C-4F53-9820-99956DFA730E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService.Infrastructure", "src\OzonEdu.MerchandiseService.Infrastructure\OzonEdu.MerchandiseService.Infrastructure.csproj", "{E918CED3-BB8C-4F53-9820-99956DFA730E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

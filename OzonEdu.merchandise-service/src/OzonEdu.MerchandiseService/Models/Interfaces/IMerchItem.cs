@@ -1,4 +1,4 @@
-namespace OzonEdu.merchandise_service.Infrastructure.Models.Interfaces
+namespace OzonEdu.MerchandiseService.Models.Interfaces
 {
    public interface IMerchItem
     {
