@@ -4,15 +4,15 @@ using OzonEdu.MerchandiseService.Domain.Models;
 namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate
 {
     /// <summary> Тип пакета мерча </summary>
-    public class MerchPackEntity : Entity
+    public class PackEntity : Entity
     {
-        public MerchPackType MerchPackType { get; }
+        public PackType Type { get; }
         
         public SkuList SkuItems { get; }
 
-        public MerchPackEntity(MerchPackType merchPackType, SkuList skuItems)
+        public PackEntity(PackType merchPackType, SkuList skuItems)
         {
-            MerchPackType = merchPackType;
+            Type = merchPackType;
             SkuItems = skuItems;
         }
     }
