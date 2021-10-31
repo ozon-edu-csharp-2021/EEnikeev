@@ -9,10 +9,10 @@ namespace OzonEdu.merchandise_service.Models.Mocks
         /// <summary> Список мерчей </summary>
         private Dictionary<long, IMerchItem> _items;
 
-        /// <summary> Конструктор типа </summary>
+        
         public MerchRepositoryMock()
         {
-            // наполняем список для проверки
+            
             _items = new Dictionary<long, IMerchItem>();
 
             var merch = new MerchItemMock("Футболка");
@@ -31,27 +31,21 @@ namespace OzonEdu.merchandise_service.Models.Mocks
             _items.Add(merch.Id, merch);
         }
 
-        /// <summary> Возвращает мерч по id </summary>
-        /// <param name="id"> id мерча </param>
-        /// <returns> IMerchItem? </returns>
+        
         public IMerchItem? GetMerchById(long id)
         {
             if (_items.ContainsKey(id)) return _items[id];
             return null;
         }
 
-        /// <summary> Возвращает информацию о выдаче мерча </summary>
-        /// <param name="id"> id мерча </param>
-        /// <returns> bool? </returns>
+        
         public bool? GetMerchIsIssuedInfo(long id)
         {
             if (_items.ContainsKey(id)) return _items[id].IsIssued;
             return null;
         }
 
-        /// <summary> Выдает мерч </summary>
-        /// <param name="id"> id мерча </param>
-        /// <returns> bool? </returns>
+        
         public bool? IssueMerch(long id)
         {
             if (!_items.ContainsKey(id)) return null;

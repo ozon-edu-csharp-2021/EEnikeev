@@ -1,16 +1,11 @@
-using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Grpc.Core;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OzonEdu.merchandise_service.HttpModels;
-using OzonEdu.merchandise_service.Models.Mocks;
 using OzonEdu.merchandise_service.Services.Interfaces;
 
 namespace OzonEdu.merchandise_service.Controllers
 {
-    /// <summary> Контроллер </summary>
     [ApiController]
     [Route("v1/api/merch")]
     [Produces("application/json")]
@@ -18,17 +13,12 @@ namespace OzonEdu.merchandise_service.Controllers
     {
         private readonly IMerchandiseService _merchService;
 
-        /// <summary> Конструктор класса </summary>
-        /// <param name="merchService"></param>
         public MerchController(IMerchandiseService merchService)
         {
             _merchService = merchService;
         }
 
-        /// <summary> Возвращает мерч по указанному идентификатору </summary>
-        /// <param name="id"> Идентификатор </param>
-        /// <param name="token"> Токен отмены </param>
-        /// <returns> MerchItemResponse </returns>
+        /// <summary> Возвращает мерч по указанному идентификатору</summary>
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [HttpGet]
@@ -52,10 +42,7 @@ namespace OzonEdu.merchandise_service.Controllers
 
         }
         
-        /// <summary> Возвращает информацию о выдаче мерча с указанным Id </summary>
-        /// <param name="id"> Id мерча </param>
-        /// <param name="token"> токен отмены </param>
-        /// <returns> true если мерч выдан </returns>
+        /// <summary> Возвращает информацию о выдаче мерча с указанным Id  </summary>
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [HttpGet]
