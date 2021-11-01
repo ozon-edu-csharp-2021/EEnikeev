@@ -53,7 +53,7 @@ namespace OzonEdu.MerchandiseService.Controllers
         [Route("GetMerchIsIssued/{id:long}")]
         public async Task<ActionResult<MerchItemResponse>> GetMerchIsIssuedById(long id, CancellationToken token)
         {
-            var command = new GetMerchIsIssuedCommand((int)id);
+            var command = new GetMerchIsIssuedCommand((int)id, (int)id);
 
             var isIssued = await _mediator.Send(command);
             

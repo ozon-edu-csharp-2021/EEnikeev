@@ -8,7 +8,7 @@ using OzonEdu.MerchandiseService.Infrastructure.Commands.GiveOutMerchItem;
 
 namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
 {
-    public class GetMerchIsIssuedCommandHandler : IRequestHandler<GetMerchIsIssuedCommand, Unit>
+    public class GetMerchIsIssuedCommandHandler : IRequestHandler<GetMerchIsIssuedCommand, bool>
     {
         private IMerchItemRepository _merchItemRepository;
 
@@ -17,9 +17,9 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
             _merchItemRepository = merchItemRepository;
         }
 
-        public async Task<Unit> Handle(GetMerchIsIssuedCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(GetMerchIsIssuedCommand request, CancellationToken cancellationToken)
         {
-            return Unit.Value;
+            return false;
         }
     }
 }

@@ -19,11 +19,15 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
         
         public async Task<Unit> Handle(GiveOutMerchItemCommand request, CancellationToken cancellationToken)
         {
-            var merchItem = await _merchItemRepository.FindBySkuAsync(new Sku(request.Sku), cancellationToken);
+            /*var merchItem = await _merchItemRepository.FindBySkuAsync(new Sku(request.Sku), cancellationToken);
+            
             if (merchItem == null) throw new Exception($"Not found with sku {request.Sku}");
+            
             merchItem.GiveOutItems(request.Quantity);
+            
             await _merchItemRepository.UpdateAsync(merchItem, cancellationToken);
-            await _merchItemRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
+            
+            await _merchItemRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);*/
 
             return Unit.Value;
 
