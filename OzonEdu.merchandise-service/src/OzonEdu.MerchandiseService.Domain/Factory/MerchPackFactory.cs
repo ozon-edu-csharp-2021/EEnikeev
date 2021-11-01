@@ -60,12 +60,9 @@ namespace OzonEdu.MerchandiseService.Domain.Factory
         {
             MerchItemList merchItems = new MerchItemList(new List<MerchItem>()
             {
-                MerchItemFactory.GetPen(),
-                MerchItemFactory.GetPen(),
-                MerchItemFactory.GetNotepad(),
-                MerchItemFactory.GetNotepad(),
-                MerchItemFactory.GetTShirt(size),
-                MerchItemFactory.GetTShirt(size),
+                MerchItemFactory.GetPen(2),
+                MerchItemFactory.GetNotepad(2),
+                MerchItemFactory.GetTShirt(size,2),
                 MerchItemFactory.GetSweatshirt(size),
                 MerchItemFactory.GetSocks(),
                 MerchItemFactory.GetBag()
@@ -81,18 +78,12 @@ namespace OzonEdu.MerchandiseService.Domain.Factory
         {
             MerchItemList merchItems = new MerchItemList(new List<MerchItem>()
             {
-                MerchItemFactory.GetPen(),
-                MerchItemFactory.GetPen(),
-                MerchItemFactory.GetNotepad(),
-                MerchItemFactory.GetNotepad(),
-                MerchItemFactory.GetTShirt(size),
-                MerchItemFactory.GetTShirt(size),
-                MerchItemFactory.GetSweatshirt(size),
-                MerchItemFactory.GetSweatshirt(size),
-                MerchItemFactory.GetSocks(),
-                MerchItemFactory.GetSocks(),
-                MerchItemFactory.GetBag(),
-                MerchItemFactory.GetBag()
+                MerchItemFactory.GetPen(2),
+                MerchItemFactory.GetNotepad(2),
+                MerchItemFactory.GetTShirt(size,2),
+                MerchItemFactory.GetSweatshirt(size,2),
+                MerchItemFactory.GetSocks(2),
+                MerchItemFactory.GetBag(2),
             });
             return new MerchPack(new Name("Veteran pack"), merchItems);
         }

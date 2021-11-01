@@ -6,14 +6,14 @@ namespace OzonEdu.MerchandiseService.Domain.Factory
     {
         #region TShirt
         
-        public static MerchItem GetTShirt(ClothingSize size)
+        public static MerchItem GetTShirt(ClothingSize size, int count = 1)
         {
             return new MerchItem(
                 new Sku(10),
                 new Name("Some tshirt"),
                 new ItemEntity(ItemType.TShirt),
                 size, 
-                new Quantity(10),
+                new Quantity(count),
                 new MinimalQuantity(0),
                 new Tag("tshirts"));
         }
@@ -33,14 +33,14 @@ namespace OzonEdu.MerchandiseService.Domain.Factory
 
         #region Sweatshirt
 
-        public static MerchItem GetSweatshirt(ClothingSize size)
+        public static MerchItem GetSweatshirt(ClothingSize size, int count = 1)
         {
             return new MerchItem(
                 new Sku(20),
                 new Name("Some sweatshirt"),
                 new ItemEntity(ItemType.Sweatshirt),
                 size, 
-                new Quantity(10),
+                new Quantity(count),
                 new MinimalQuantity(0),
                 new Tag("sweatshirts"));
         }
@@ -60,14 +60,14 @@ namespace OzonEdu.MerchandiseService.Domain.Factory
         
         #region Notepad
         
-        public static MerchItem GetNotepad()
+        public static MerchItem GetNotepad(int count = 1)
         {
             return new MerchItem(
                 new Sku(30),
                 new Name("Some notepad"),
                 new ItemEntity(ItemType.Notepad),
                 null, 
-                new Quantity(10),
+                new Quantity(count),
                 new MinimalQuantity(0),
                 new Tag("notepads"));
         }
@@ -87,14 +87,14 @@ namespace OzonEdu.MerchandiseService.Domain.Factory
 
         #region Bag
 
-        public static MerchItem GetBag()
+        public static MerchItem GetBag(int count = 1)
         {
             return new MerchItem(
                 new Sku(40),
                 new Name("Some bag"),
                 new ItemEntity(ItemType.Bag),
                 null, 
-                new Quantity(10),
+                new Quantity(count),
                 new MinimalQuantity(0),
                 new Tag("bags"));
         }
@@ -114,14 +114,14 @@ namespace OzonEdu.MerchandiseService.Domain.Factory
         
         #region Pen
 
-        public static MerchItem GetPen()
+        public static MerchItem GetPen(int count = 1)
         {
             return new MerchItem(
                 new Sku(50),
                 new Name("Some pen"),
                 new ItemEntity(ItemType.Pen),
                 null, 
-                new Quantity(10),
+                new Quantity(count),
                 new MinimalQuantity(0),
                 new Tag("pens"));
         }
@@ -141,27 +141,16 @@ namespace OzonEdu.MerchandiseService.Domain.Factory
         
         #region Socks
 
-        public static MerchItem GetSocks()
+        public static MerchItem GetSocks(int count = 1)
         {
             return new MerchItem(
                 new Sku(60),
                 new Name("Some socks"),
                 new ItemEntity(ItemType.Socks),
                 null, 
-                new Quantity(10),
+                new Quantity(count),
                 new MinimalQuantity(0),
                 new Tag("socks"));
-        }
-        
-        public static MerchItem[] GetSocks(int count)
-        {
-            MerchItem[] items = new MerchItem[count];
-            for (int i = 0; i < count; i++)
-            {
-                items[i] = GetSocks();
-            }
-
-            return items;
         }
 
         #endregion
