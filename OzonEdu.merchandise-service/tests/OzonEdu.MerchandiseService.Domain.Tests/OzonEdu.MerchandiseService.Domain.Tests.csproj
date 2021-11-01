@@ -22,11 +22,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="EmployeeTests" />
-      <Folder Include="MerchPackTests" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\..\src\OzonEdu.MerchandiseService.Domain\OzonEdu.MerchandiseService.Domain.csproj" />
     </ItemGroup>
 

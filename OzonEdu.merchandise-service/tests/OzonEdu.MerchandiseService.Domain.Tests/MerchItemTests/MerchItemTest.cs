@@ -36,6 +36,19 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
         }
         
         [Fact]
+        public void CreateMerchItemWithNullNameValue()
+        {
+            Assert.Throws<ArgumentNullException>(() => new MerchItem(
+                new Sku(100500),
+                new Name(null),
+                new ItemEntity(ItemType.Bag),
+                ClothingSize.L,
+                new Quantity(10),
+                new MinimalQuantity(5),
+                new Tag("some tag")));
+        }
+        
+        [Fact]
         public void CreateMerchItemWithEmptyName()
         {
             Assert.Throws<ArgumentException>(() => new MerchItem(

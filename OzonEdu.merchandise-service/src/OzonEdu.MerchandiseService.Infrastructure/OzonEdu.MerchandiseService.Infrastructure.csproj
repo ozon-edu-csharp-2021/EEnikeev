@@ -15,6 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Commands\GetMerch" />
       <Folder Include="Handlers\DomainEvent" />
       <Folder Include="Queries" />
     </ItemGroup>    

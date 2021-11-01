@@ -79,7 +79,7 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
 
         Name ValidateName(Name name)
         {
-            if (name == null) throw new ArgumentNullException(
+            if (name == null || name.Value is null) throw new ArgumentNullException(
                 "Name cannot be null");
             if (name.Value == "") throw new ArgumentException(
                 "Name cannot be empty");
