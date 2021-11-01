@@ -1,12 +1,12 @@
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate;
 
-namespace OzonEdu.MerchandiseService.Domain.Extensions
+namespace OzonEdu.MerchandiseService.Domain.Factory
 {
-    public static class MerchItemExtensions
+    public static class MerchItemFactory
     {
         #region TShirt
         
-        public static MerchItem GetTShirt(this MerchItem item, ClothingSize size)
+        public static MerchItem GetTShirt(ClothingSize size)
         {
             return new MerchItem(
                 new Sku(10),
@@ -18,12 +18,12 @@ namespace OzonEdu.MerchandiseService.Domain.Extensions
                 new Tag("tshirts"));
         }
         
-        public static MerchItem[] GetTShirts(this MerchItem item, int count, ClothingSize size)
+        public static MerchItem[] GetTShirts(int count, ClothingSize size)
         {
             MerchItem[] items = new MerchItem[count];
             for (int i = 0; i < count; i++)
             {
-                items[i] = GetTShirt(item, size);
+                items[i] = GetTShirt(size);
             }
 
             return items;
@@ -33,7 +33,7 @@ namespace OzonEdu.MerchandiseService.Domain.Extensions
 
         #region Sweatshirt
 
-        public static MerchItem GetSweatshirt(this MerchItem item, ClothingSize size)
+        public static MerchItem GetSweatshirt(ClothingSize size)
         {
             return new MerchItem(
                 new Sku(20),
@@ -45,12 +45,12 @@ namespace OzonEdu.MerchandiseService.Domain.Extensions
                 new Tag("sweatshirts"));
         }
         
-        public static MerchItem[] GetSweatshirts(this MerchItem item, int count, ClothingSize size)
+        public static MerchItem[] GetSweatshirts(int count, ClothingSize size)
         {
             MerchItem[] items = new MerchItem[count];
             for (int i = 0; i < count; i++)
             {
-                items[i] = GetSweatshirt(item, size);
+                items[i] = GetSweatshirt(size);
             }
 
             return items;
@@ -60,7 +60,7 @@ namespace OzonEdu.MerchandiseService.Domain.Extensions
         
         #region Notepad
         
-        public static MerchItem GetNotepad(this MerchItem item)
+        public static MerchItem GetNotepad()
         {
             return new MerchItem(
                 new Sku(30),
@@ -72,12 +72,12 @@ namespace OzonEdu.MerchandiseService.Domain.Extensions
                 new Tag("notepads"));
         }
         
-        public static MerchItem[] GetNotepads(this MerchItem item, int count)
+        public static MerchItem[] GetNotepads(int count)
         {
             MerchItem[] items = new MerchItem[count];
             for (int i = 0; i < count; i++)
             {
-                items[i] = GetNotepad(item);
+                items[i] = GetNotepad();
             }
 
             return items;
@@ -87,7 +87,7 @@ namespace OzonEdu.MerchandiseService.Domain.Extensions
 
         #region Bag
 
-        public static MerchItem GetBag(this MerchItem item)
+        public static MerchItem GetBag()
         {
             return new MerchItem(
                 new Sku(40),
@@ -99,12 +99,12 @@ namespace OzonEdu.MerchandiseService.Domain.Extensions
                 new Tag("bags"));
         }
         
-        public static MerchItem[] GetBags(this MerchItem item, int count)
+        public static MerchItem[] GetBags(int count)
         {
             MerchItem[] items = new MerchItem[count];
             for (int i = 0; i < count; i++)
             {
-                items[i] = GetBag(item);
+                items[i] = GetBag();
             }
 
             return items;
@@ -114,7 +114,7 @@ namespace OzonEdu.MerchandiseService.Domain.Extensions
         
         #region Pen
 
-        public static MerchItem GetPen(this MerchItem item)
+        public static MerchItem GetPen()
         {
             return new MerchItem(
                 new Sku(50),
@@ -126,12 +126,12 @@ namespace OzonEdu.MerchandiseService.Domain.Extensions
                 new Tag("pens"));
         }
         
-        public static MerchItem[] GetPens(this MerchItem item, int count)
+        public static MerchItem[] GetPens(int count)
         {
             MerchItem[] items = new MerchItem[count];
             for (int i = 0; i < count; i++)
             {
-                items[i] = GetPen(item);
+                items[i] = GetPen();
             }
 
             return items;
@@ -141,7 +141,7 @@ namespace OzonEdu.MerchandiseService.Domain.Extensions
         
         #region Socks
 
-        public static MerchItem GetSocks(this MerchItem item)
+        public static MerchItem GetSocks()
         {
             return new MerchItem(
                 new Sku(60),
@@ -153,12 +153,12 @@ namespace OzonEdu.MerchandiseService.Domain.Extensions
                 new Tag("socks"));
         }
         
-        public static MerchItem[] GetSocks(this MerchItem item, int count)
+        public static MerchItem[] GetSocks(int count)
         {
             MerchItem[] items = new MerchItem[count];
             for (int i = 0; i < count; i++)
             {
-                items[i] = GetSocks(item);
+                items[i] = GetSocks();
             }
 
             return items;

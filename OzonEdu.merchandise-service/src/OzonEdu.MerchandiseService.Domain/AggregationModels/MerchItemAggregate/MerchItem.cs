@@ -37,6 +37,11 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
             Tag = ValidateTag(tag);
         }
 
+        public MerchItem()
+        {
+            
+        }
+
         #region Methods
 
         public void IncreaseQuantity(int valueToIncrease)
@@ -63,7 +68,7 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
         void AddReachedMinimumQuantityDomainEvent(Sku sku)
         {
             var orderStartedDomainEvent = new ReachedMinimumMerchItemQuantityDomainEvent(sku);
-            this.AddDomainEvent(orderStartedDomainEvent);
+            this.AddDomainEvent(orderStartedDomainEvent); 
         }
         
         
