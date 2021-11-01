@@ -1,17 +1,17 @@
 using System.Collections.Generic;
 using OzonEdu.MerchandiseService.Domain.Models;
 
-namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
+namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate.V1
 {
-    public class MerchIssued : ValueObject
+    /// <summary> Наименование товара </summary>
+    public class Name : ValueObject
     {
-        public bool Value { get; }
-        
-        public MerchIssued(bool value)
+        public string Value { get; }
+
+        public Name(string value)
         {
             Value = value;
         }
-        
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return Value;

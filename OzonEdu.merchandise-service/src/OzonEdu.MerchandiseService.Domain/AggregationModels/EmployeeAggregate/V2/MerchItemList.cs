@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate.V2;
 using OzonEdu.MerchandiseService.Domain.Models;
 
-namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate
+namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.V2
 {
     public class MerchItemList : ValueObject
     {

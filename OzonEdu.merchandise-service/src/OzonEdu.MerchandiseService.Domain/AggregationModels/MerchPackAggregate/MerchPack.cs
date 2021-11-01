@@ -1,3 +1,4 @@
+using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.V1;
 using OzonEdu.MerchandiseService.Domain.Models;
 
 namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate

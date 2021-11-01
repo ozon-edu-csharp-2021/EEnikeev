@@ -3,7 +3,7 @@ using OzonEdu.MerchandiseService.Domain.Events;
 using OzonEdu.MerchandiseService.Domain.Exceptions;
 using OzonEdu.MerchandiseService.Domain.Models;
 
-namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
+namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate.V1
 {
     /// <summary> Мерч </summary>
     public class MerchItem : Entity

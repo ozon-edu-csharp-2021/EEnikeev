@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using OzonEdu.MerchandiseService.Domain.Models;
 
-namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
+namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate.V1
 {
     /// <summary> Идентификатор товара на складе </summary>
     public class Sku : ValueObject

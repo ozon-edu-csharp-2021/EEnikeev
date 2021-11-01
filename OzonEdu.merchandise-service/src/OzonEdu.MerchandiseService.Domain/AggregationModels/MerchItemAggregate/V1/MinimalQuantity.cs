@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using OzonEdu.MerchandiseService.Domain.Models;
 
-namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
+namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate.V1
 {
     /// <summary> Ограничение по минимальному количеству товара </summary>
     public class MinimalQuantity : ValueObject

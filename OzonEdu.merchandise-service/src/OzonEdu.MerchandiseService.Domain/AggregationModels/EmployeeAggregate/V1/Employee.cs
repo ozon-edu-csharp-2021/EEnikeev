@@ -1,7 +1,7 @@
 using System;
 using OzonEdu.MerchandiseService.Domain.Models;
 
-namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
+namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.V1
 {
     /// <summary> Сотрудник </summary>
     public class Employee : Entity

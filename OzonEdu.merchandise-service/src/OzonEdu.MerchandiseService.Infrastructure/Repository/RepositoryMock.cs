@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.V1;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate.V1;
 using OzonEdu.MerchandiseService.Domain.Contracts;
 
 namespace OzonEdu.MerchandiseService.Infrastructure.Repository

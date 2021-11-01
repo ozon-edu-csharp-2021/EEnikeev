@@ -1,6 +1,7 @@
 using System;
 using FluentAssertions;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate.V1;
 using OzonEdu.MerchandiseService.Domain.Exceptions;
 using Xunit;
 

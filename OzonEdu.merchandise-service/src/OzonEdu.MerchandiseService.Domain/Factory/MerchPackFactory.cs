@@ -1,7 +1,9 @@
 using System.Collections.Generic;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.V1;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate.V1;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
 using Name = OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate.Name;
+
 
 namespace OzonEdu.MerchandiseService.Domain.Factory
 {

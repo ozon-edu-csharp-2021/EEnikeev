@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate.V1;
 using OzonEdu.MerchandiseService.Infrastructure.Handlers;
 
 namespace OzonEdu.MerchandiseService.Infrastructure.Extensions

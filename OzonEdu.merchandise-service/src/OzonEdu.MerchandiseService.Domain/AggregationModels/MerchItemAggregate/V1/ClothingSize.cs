@@ -1,6 +1,6 @@
 using OzonEdu.MerchandiseService.Domain.Models;
 
-namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
+namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate.V1
 {
     /// <summary> Размер одежды </summary>
     public class ClothingSize : Enumeration
