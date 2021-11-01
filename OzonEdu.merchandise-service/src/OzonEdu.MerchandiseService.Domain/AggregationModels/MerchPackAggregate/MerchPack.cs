@@ -6,8 +6,16 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate
     {
         #region Properties
 
+        public Name Name { get; }
         
+        public MerchItemList MerchItems { get; }
 
         #endregion
+
+        public MerchPack(Name name, MerchItemList merchItems)
+        {
+            Name = name;
+            MerchItems = merchItems;
+        }
     }
 }
