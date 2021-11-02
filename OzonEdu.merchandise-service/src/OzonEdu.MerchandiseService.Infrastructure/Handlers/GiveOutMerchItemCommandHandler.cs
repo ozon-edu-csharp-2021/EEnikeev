@@ -1,31 +1,48 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate.V1;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.V2;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate.V2;
 using OzonEdu.MerchandiseService.Infrastructure.Commands.GiveOutMerchItem;
 
 namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
 {
     public class GiveOutMerchItemCommandHandler : IRequestHandler<GiveOutMerchItemCommand>
     {
-        private IMerchItemRepository _merchItemRepository;
+        private IEmployeeRepository _employeeRepository;
 
-        public GiveOutMerchItemCommandHandler(IMerchItemRepository merchItemRepository)
+        public GiveOutMerchItemCommandHandler(IEmployeeRepository employeeRepository)
         {
-            _merchItemRepository = merchItemRepository;
+            _employeeRepository = employeeRepository;
         }
         
         public async Task<Unit> Handle(GiveOutMerchItemCommand request, CancellationToken cancellationToken)
         {
-            /*var merchItem = await _merchItemRepository.FindBySkuAsync(new Sku(request.Sku), cancellationToken);
+            var employee = await _employeeRepository.FindByIdAsync(new EmployeeId(request.EmployeeId), cancellationToken);
             
-            if (merchItem == null) throw new Exception($"Not found with sku {request.Sku}");
+            // если такого сотрудника еще нет, значит надо его создать
+            if (employee == null)
+            {
+                employee = new Employee(new EmployeeId(request.EmployeeId));
+            }
+
+            //bool inStock = false;
             
-            merchItem.GiveOutItems(request.Quantity);
+            // если мерч не выдавался, то делаем запрос на выдачу
+            //if (!employee.AlreadyIssued(request.MerchId))
+            {
+                 //inStock = true;
+            }
             
-            await _merchItemRepository.UpdateAsync(merchItem, cancellationToken);
+            // если мерч есть на складе, то выдаем сотруднику, иначе помещаем в список на ожидание
+            //if (inStock) employee.Give(request.MerchId);
+            //else employee.AddInQueue(request.MerchId);
+
+            /*employee.GiveOutItems(request.Quantity);
+            
+            await _merchItemRepository.UpdateAsync(employee, cancellationToken);
             
             await _merchItemRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);*/
 

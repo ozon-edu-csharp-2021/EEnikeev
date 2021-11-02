@@ -7,7 +7,7 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
     {
         public Sku sku { get; }
         
-        public Quantity Quantity { get; }
+        public Quantity Quantity { get; private set; }
 
         public MerchItem(Sku sku, Quantity quantity)
         {
@@ -16,6 +16,23 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
         }
 
         #region Methods
+        
+        public void IncreaseQuantity(int valueToIncrease)
+        {
+            if (valueToIncrease < 0) throw new ArgumentException($"Value to increase cannot be less than zero: {valueToIncrease}");
+            
+            Quantity = new Quantity(this.Quantity.Value + valueToIncrease);
+        }
+
+        public void DecreaseQuantity(int quantityToGiveOut)
+        {
+            if (quantityToGiveOut < 0) throw new ArgumentException(
+                $"Items to give out cannot be less than zero: {quantityToGiveOut}");
+            if (Quantity.Value < quantityToGiveOut) throw new ArgumentException(
+                "Not enough items to decrease");
+            
+            Quantity = new Quantity(this.Quantity.Value - quantityToGiveOut);
+        }
 
         Sku ValidateSku(Sku sku)
         {

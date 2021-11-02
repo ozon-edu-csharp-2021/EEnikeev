@@ -1,20 +1,20 @@
-using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.V1;
 using OzonEdu.MerchandiseService.Domain.Models;
 
 namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate
 {
-    public class MerchPack : Entity
+    public sealed class MerchPack : Entity
     {
         #region Properties
-
+        
         public Name Name { get; }
         
         public MerchItemList MerchItems { get; }
 
         #endregion
 
-        public MerchPack(Name name, MerchItemList merchItems)
+        public MerchPack(int id, Name name, MerchItemList merchItems)
         {
+            Id = id;
             Name = name;
             MerchItems = merchItems;
         }

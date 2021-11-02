@@ -1,31 +1,59 @@
 using System;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
+using OzonEdu.MerchandiseService.Domain.Events;
 using OzonEdu.MerchandiseService.Domain.Models;
 
 namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.V1
 {
     /// <summary> Сотрудник </summary>
-    public class Employee : Entity
+    public sealed class Employee : Entity
     {
         #region Properties
 
-        public EmployeeId EId { get; }
+        //public EmployeeId EId { get; }
         public EmployeeName FirstName { get; }
         public EmployeeName LastName { get; }
         public PositionEntity Position { get; }
-        public MerchIssued MerchIsIssued { get; }
+        public EmployeeEmail Email { get; }
+        //public MerchIssued MerchIsIssued { get; }
+        public EmployeeMerchPack Merch { get; private set; }
         
         #endregion
 
-        public Employee(EmployeeId id, EmployeeName firstName, EmployeeName lastName, PositionEntity position, MerchIssued merchIsIssued)
+        public Employee(int id, EmployeeName firstName, EmployeeName lastName, PositionEntity position, EmployeeEmail email)
         {
-            EId = ValidateId(id);
+            //EId = ValidateId(id);
+            Id = id;
             FirstName = ValidateName(firstName);
             LastName = ValidateName(lastName);
             Position = ValidatePosition(position);
-            MerchIsIssued = ValidateIssued(merchIsIssued);
+            Email = ValidateEmail(email);
+            
+            //MerchIsIssued = ValidateIssued(merchIsIssued);
         }
         
         #region Methods
+
+        public void GiveMerch(MerchPack pack)
+        {
+            if (pack == null) throw new ArgumentNullException("Merch pack cannot be null");
+            this.Merch = new EmployeeMerchPack(pack);
+            MerchGiven( pack);
+        }
+        
+        public bool IsGiven(int merchId)
+        {
+            return (Merch is not null && Merch.Value.Id == merchId);
+        }
+        
+        void MerchGiven(MerchPack pack)
+        {
+            var merchItemGivenDomainEvent = new MerchItemGivenDomainEvent(
+                this.Email.Value, this.FirstName.Value + " " + this.LastName.Value, pack.Id);
+            this.AddDomainEvent(merchItemGivenDomainEvent); 
+        }
+
+        #region Validations
 
         EmployeeId ValidateId(EmployeeId id)
         {
@@ -45,6 +73,15 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.
             if (position is null || position.Position is null) throw new ArgumentNullException("Employee position cannot be null");
             return position;
         }
+        
+        EmployeeEmail ValidateEmail(EmployeeEmail email)
+        {
+            if (email is null || email.Value is null) throw new ArgumentNullException("Email cannot be null");
+            if (email.Value == "") throw new ArgumentException("Email name cannot be empty");
+            if (!email.Value.Contains("@")) throw new ArgumentException(
+                $"Incorrect email: {email.Value}. Email must contain \"@\" ");
+            return email;
+        }
 
         MerchIssued ValidateIssued(MerchIssued merchIssued)
         {
@@ -52,6 +89,8 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.
             return merchIssued;
         }
 
+        #endregion
+        
         #endregion
     }
 }

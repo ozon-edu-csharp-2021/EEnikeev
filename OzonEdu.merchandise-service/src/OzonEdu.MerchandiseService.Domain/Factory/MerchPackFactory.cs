@@ -18,7 +18,7 @@ namespace OzonEdu.MerchandiseService.Domain.Factory
                 MerchItemFactory.GetPen(),
                 MerchItemFactory.GetNotepad()
             });
-            return new MerchPack(new Name("Welcome pack"), merchItems);
+            return new MerchPack(10, new Name("Welcome pack"), merchItems);
         }
 
         #endregion
@@ -34,7 +34,7 @@ namespace OzonEdu.MerchandiseService.Domain.Factory
                 MerchItemFactory.GetTShirt(size),
                 
             });
-            return new MerchPack(new Name("Starter pack"), merchItems);
+            return new MerchPack(20, new Name("Starter pack"), merchItems);
         }
         
         #endregion
@@ -51,7 +51,7 @@ namespace OzonEdu.MerchandiseService.Domain.Factory
                 MerchItemFactory.GetSweatshirt(size),
                 MerchItemFactory.GetSocks() 
             });
-            return new MerchPack(new Name("Conference listener pack"), merchItems);
+            return new MerchPack(30, new Name("Conference listener pack"), merchItems);
         }
         
         #endregion
@@ -69,7 +69,7 @@ namespace OzonEdu.MerchandiseService.Domain.Factory
                 MerchItemFactory.GetSocks(),
                 MerchItemFactory.GetBag()
             });
-            return new MerchPack(new Name("Conference speaker pack"), merchItems);
+            return new MerchPack(40, new Name("Conference speaker pack"), merchItems);
         }
         
         #endregion
@@ -87,7 +87,7 @@ namespace OzonEdu.MerchandiseService.Domain.Factory
                 MerchItemFactory.GetSocks(2),
                 MerchItemFactory.GetBag(2),
             });
-            return new MerchPack(new Name("Veteran pack"), merchItems);
+            return new MerchPack(50,new Name("Veteran pack"), merchItems);
         }
         
         #endregion

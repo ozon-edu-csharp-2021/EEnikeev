@@ -29,7 +29,10 @@ namespace OzonEdu.MerchandiseService.Controllers
         [Route("GetMerch/{id:long}")]
         public async Task<ActionResult<MerchItemResponse>> GetMerchById(long id, CancellationToken token)
         {
-            var merchItem = await _merchService.GetMerchById(id, token);
+            var  command= new GiveOutMerchItemCommand((int)id, (int)id);
+            await _mediator.Send(command);
+            
+            /*var merchItem = await _merchService.GetMerchById(id, token);
 
             if (merchItem is null)
             {
@@ -40,9 +43,9 @@ namespace OzonEdu.MerchandiseService.Controllers
             {
                 Id = merchItem.Id,
                 Name = merchItem.Name
-            };
+            };*/
 
-            return Ok(response);
+            return Ok();
 
         }
         

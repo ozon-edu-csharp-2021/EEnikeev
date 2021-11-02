@@ -7,22 +7,13 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.EmployeeTests
 {
     public class EmployeeTest
     {
-        [Fact]
-        public void CreateEmployeeWithNullId()
-        {
-            Assert.Throws<ArgumentNullException>(() => new Employee(
-                null,
-                new EmployeeName("first"),
-                new EmployeeName("last"),
-                new PositionEntity(Position.Manager),
-                new MerchIssued(false)));
-        }
+        
         
         [Fact]
         public void CreateEmployeeWithNullFirstname()
         {
             Assert.Throws<ArgumentNullException>(() => new Employee(
-                new EmployeeId(100500),
+                100500,
                 null,
                 new EmployeeName("last"),
                 new PositionEntity(Position.Manager),
