@@ -1,6 +1,8 @@
 using System;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.V1;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate.V1;
+using OzonEdu.MerchandiseService.Domain.Factory;
 using Xunit;
 
 namespace OzonEdu.MerchandiseService.Domain.Tests.EmployeeTests
@@ -17,95 +19,148 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.EmployeeTests
                 null,
                 new EmployeeName("last"),
                 new PositionEntity(Position.Manager),
-                new MerchIssued(false)));
+                new EmployeeEmail("employee@ozon.ru")));
         }
         
         [Fact]
         public void CreateEmployeeWithNullFirstnameValue()
         {
             Assert.Throws<ArgumentNullException>(() => new Employee(
-                new EmployeeId(100500),
+                100500,
                 new EmployeeName(null),
                 new EmployeeName("last"),
                 new PositionEntity(Position.Manager),
-                new MerchIssued(false)));
+                new EmployeeEmail("employee@ozon.ru")));
         }
         
         [Fact]
         public void CreateEmployeeWithEmptyFirstname()
         {
             Assert.Throws<ArgumentException>(() => new Employee(
-                new EmployeeId(100500),
+                100500,
                 new EmployeeName(""),
                 new EmployeeName("last"),
                 new PositionEntity(Position.Manager),
-                new MerchIssued(false)));
+                new EmployeeEmail("employee@ozon.ru")));
         }
         
         [Fact]
         public void CreateEmployeeWithNullLastName()
         {
             Assert.Throws<ArgumentNullException>(() => new Employee(
-                new EmployeeId(100500),
+                100500,
                 new EmployeeName("first"),
                 null,
                 new PositionEntity(Position.Manager),
-                new MerchIssued(false)));
+                new EmployeeEmail("employee@ozon.ru")));
         }
         
         [Fact]
         public void CreateEmployeeWithNullLastnameValue()
         {
             Assert.Throws<ArgumentNullException>(() => new Employee(
-                new EmployeeId(100500),
+                100500,
                 new EmployeeName("first"),
                 new EmployeeName(null),
                 new PositionEntity(Position.Manager),
-                new MerchIssued(false)));
+                new EmployeeEmail("employee@ozon.ru")));
         }
         
         [Fact]
         public void CreateEmployeeWithEmptyLastname()
         {
             Assert.Throws<ArgumentException>(() => new Employee(
-                new EmployeeId(100500),
+                100500,
                 new EmployeeName("first"),
                 new EmployeeName(""),
                 new PositionEntity(Position.Manager),
-                new MerchIssued(false)));
+                new EmployeeEmail("employee@ozon.ru")));
         }
         
         [Fact]
         public void CreateEmployeeWithNullPosition()
         {
             Assert.Throws<ArgumentNullException>(() => new Employee(
-                new EmployeeId(100500),
+                100500,
                 new EmployeeName("first"),
                 new EmployeeName("last"),
                 null,
-                new MerchIssued(false)));
+                new EmployeeEmail("employee@ozon.ru")));
         }
         
         [Fact]
         public void CreateEmployeeWithNullPositionType()
         {
             Assert.Throws<ArgumentNullException>(() => new Employee(
-                new EmployeeId(100500),
+                100500,
                 new EmployeeName("first"),
                 new EmployeeName("last"),
                 new PositionEntity(null),
-                new MerchIssued(false)));
+                new EmployeeEmail("employee@ozon.ru")));
         }
         
         [Fact]
-        public void CreateEmployeeWithNullMerchIssue()
+        public void CreateEmployeeWithNullEmail()
         {
             Assert.Throws<ArgumentNullException>(() => new Employee(
-                new EmployeeId(100500),
+                100500,
                 new EmployeeName("first"),
                 new EmployeeName("last"),
                 new PositionEntity(Position.Manager),
                 null));
         }
+        
+        [Fact]
+        public void CreateEmployeeWithEmptyEmail()
+        {
+            Assert.Throws<ArgumentException>(() => new Employee(
+                100500,
+                new EmployeeName("first"),
+                new EmployeeName("last"),
+                new PositionEntity(Position.Manager),
+                new EmployeeEmail("")));
+        }
+        
+        [Fact]
+        public void CreateEmployeeWithEmailWithoutDog()
+        {
+            Assert.Throws<ArgumentException>(() => new Employee(
+                100500,
+                new EmployeeName("first"),
+                new EmployeeName("last"),
+                new PositionEntity(Position.Manager),
+                new EmployeeEmail("email")));
+        }
+        
+        [Fact]
+        public void CheckMerchIsGivenFalse()
+        {
+            var emp = new Employee(
+                100500,
+                new EmployeeName("first"),
+                new EmployeeName("last"),
+                new PositionEntity(Position.Manager),
+                new EmployeeEmail("employee@ozon.ru"));
+
+            var pack = MerchPackFactory.GetStarterPack(ClothingSize.M);
+            
+            Assert.Equal(emp.IsGiven(pack.Id),false);
+        }
+        
+        [Fact]
+        public void CheckMerchIsGivenTrue()
+        {
+            var emp = new Employee(
+                100500,
+                new EmployeeName("first"),
+                new EmployeeName("last"),
+                new PositionEntity(Position.Manager),
+                new EmployeeEmail("employee@ozon.ru"));
+
+            var pack = MerchPackFactory.GetStarterPack(ClothingSize.M);
+            emp.GiveMerch(pack);
+            Assert.Equal(emp.IsGiven(pack.Id),true);
+        }
+        
     }
 }
