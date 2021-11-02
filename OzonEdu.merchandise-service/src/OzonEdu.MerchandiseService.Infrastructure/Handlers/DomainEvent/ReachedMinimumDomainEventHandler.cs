@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using OzonEdu.MerchandiseService.Domain.Events;
 
-namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
+namespace OzonEdu.MerchandiseService.Infrastructure.Handlers.DomainEvent
 {
     public class ReachedMinimumDomainEventHandler : INotificationHandler<ReachedMinimumMerchItemQuantityDomainEvent>
     {

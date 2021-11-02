@@ -1,6 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.V2;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.V1;
 using OzonEdu.MerchandiseService.Domain.Contracts;
 
 namespace OzonEdu.MerchandiseService.Domain.Repo
@@ -18,7 +19,7 @@ namespace OzonEdu.MerchandiseService.Domain.Repo
             throw new System.NotImplementedException();
         }
 
-        public Task<Employee> FindByIdAsync(EmployeeId id, CancellationToken cancellationToken = default)
+        public Task<Employee> FindByIdAsync(int id, CancellationToken cancellationToken = default)
         {
             throw new System.NotImplementedException();
         }

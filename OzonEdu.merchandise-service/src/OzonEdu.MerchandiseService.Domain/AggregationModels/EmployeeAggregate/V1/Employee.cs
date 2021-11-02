@@ -16,34 +16,43 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.
         public PositionEntity Position { get; }
         public EmployeeEmail Email { get; }
         //public MerchIssued MerchIsIssued { get; }
-        public EmployeeMerchPack Merch { get; private set; }
+        public EmployeeMerchPack GivenMerch { get; private set; }
+        
+        public EmployeeMerchPack RequestedMerch { get; private set; }
         
         #endregion
 
         public Employee(int id, EmployeeName firstName, EmployeeName lastName, PositionEntity position, EmployeeEmail email)
         {
+            
             //EId = ValidateId(id);
             Id = id;
             FirstName = ValidateName(firstName);
             LastName = ValidateName(lastName);
             Position = ValidatePosition(position);
             Email = ValidateEmail(email);
-            
+            //GivenMerch = givenMerch;
+            //RequestedMerch = requestedMerch;
             //MerchIsIssued = ValidateIssued(merchIsIssued);
         }
         
         #region Methods
 
+        public void RequestMerch(MerchPack pack)
+        {
+            
+        }
+        
         public void GiveMerch(MerchPack pack)
         {
             if (pack == null) throw new ArgumentNullException("Merch pack cannot be null");
-            this.Merch = new EmployeeMerchPack(pack);
+            this.GivenMerch = new EmployeeMerchPack(pack);
             MerchGiven( pack);
         }
         
         public bool IsGiven(int merchId)
         {
-            return (Merch is not null && Merch.Value.Id == merchId);
+            return (GivenMerch is not null && GivenMerch.Value.Id == merchId);
         }
         
         void MerchGiven(MerchPack pack)

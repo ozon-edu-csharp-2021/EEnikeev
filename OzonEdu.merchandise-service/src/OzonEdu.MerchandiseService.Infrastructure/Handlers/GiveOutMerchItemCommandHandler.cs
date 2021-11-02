@@ -1,10 +1,8 @@
-using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.V2;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate.V2;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
+using OzonEdu.MerchandiseService.Domain.Factory;
 using OzonEdu.MerchandiseService.Infrastructure.Commands.GiveOutMerchItem;
 
 namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
@@ -20,13 +18,14 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
         
         public async Task<Unit> Handle(GiveOutMerchItemCommand request, CancellationToken cancellationToken)
         {
-            var employee = await _employeeRepository.FindByIdAsync(new EmployeeId(request.EmployeeId), cancellationToken);
+            var employee = await _employeeRepository.FindByIdAsync(request.EmployeeId, cancellationToken);
             
             // если такого сотрудника еще нет, значит надо его создать
             if (employee == null)
             {
-                employee = new Employee(new EmployeeId(request.EmployeeId));
+                employee = EmployeeFactory.CreateEmployee();
             }
+            
 
             //bool inStock = false;
             
