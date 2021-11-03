@@ -2,47 +2,43 @@ using System.Threading.Tasks;
 using Grpc.Core;
 using MediatR;
 using OzonEdu.MerchandiseService.Grpc;
+using OzonEdu.MerchandiseService.Infrastructure.Commands.GetMerchIsIssued;
+using OzonEdu.MerchandiseService.Infrastructure.Commands.GiveOutMerchItem;
 using OzonEdu.MerchandiseService.Services.Interfaces;
 
 namespace OzonEdu.MerchandiseService.GrpcServices
 {
     public class MerchApiGrpcService : MerchServiceGrpc.MerchServiceGrpcBase
     {
-        private readonly IMerchandiseService _merchandiseService;
+        //private readonly IMerchandiseService _merchandiseService;
         private readonly IMediator _mediator;
         
-        public MerchApiGrpcService(IMerchandiseService merchandiseService, IMediator mediator)
+        public MerchApiGrpcService(IMediator mediator)
         {
-            _merchandiseService = merchandiseService;
+            //_merchandiseService = merchandiseService;
             _mediator = mediator;
         }
 
-        public override async Task<GetMerchItemByIdResponse> GetMerchById(
-            GetMerchItemByIdRequest request,
+        public override async Task<GiveMerchItemResponse> GiveMerchToEmployee(
+            GiveMerchItemRequest request,
             ServerCallContext context)
         {
-            var merchItem = await _merchandiseService.GetMerchById(request.ItemId, 
-                context.CancellationToken);
-            if (merchItem == null) throw new RpcException(new Status(StatusCode.InvalidArgument,
-                "Запрашиваемый элемент не найден"));
-            return new GetMerchItemByIdResponse()
-            {
-                ItemId = merchItem.Id,
-                ItemName = merchItem.Name
-            };
+            var command = new GiveMerchItemCommand(request.EmployeeId, request.MerchId, request.ClothingSizeId);
+            await _mediator.Send(command);
+
+            return new GiveMerchItemResponse();
         }
         
-        public override async Task<GetMerchIsIssuedResponse> GetMerchIsIssuedById(
-            GetMerchItemByIdRequest request,
+        public override async Task<GetMerchIsIssuedResponse> GetMerchIsIssued(
+            GetMerchItemIsGivenRequest request,
             ServerCallContext context)
         {
-            var isIssued = await _merchandiseService.GetMerchIsIssuedById(request.ItemId, 
-                context.CancellationToken);
-            if (isIssued == null)throw new RpcException(new Status(StatusCode.InvalidArgument, 
-                "Запрашиваемый элемент не найден"));
+            var command = new GetMerchIsIssuedCommand(request.EmployeeId, request.MerchId);
+            var result = await _mediator.Send(command);
+            
             return new GetMerchIsIssuedResponse()
             {
-                IsIssued = isIssued
+                IsIssued = result
             };
         }
     }

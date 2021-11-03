@@ -16,6 +16,12 @@ namespace OzonEdu.MerchandiseService.GrpcClient
 
             try
             {
+
+                for (int i = 1; i < 4; i++)
+                {
+                    
+                }
+                
                 // запрашиваем все товары и информацию о выдаче
                 for (int i = 0; i < 5; i++)
                 {
