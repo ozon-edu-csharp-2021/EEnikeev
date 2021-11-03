@@ -19,7 +19,9 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.EmployeeTests
                 null,
                 new EmployeeName("last"),
                 new PositionEntity(Position.Manager),
-                new EmployeeEmail("employee@ozon.ru")));
+                new EmployeeEmail("employee@ozon.ru"),
+                null,
+                new MerchIssued(false)));
         }
         
         [Fact]
@@ -30,7 +32,9 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.EmployeeTests
                 new EmployeeName(null),
                 new EmployeeName("last"),
                 new PositionEntity(Position.Manager),
-                new EmployeeEmail("employee@ozon.ru")));
+                new EmployeeEmail("employee@ozon.ru"),
+                null,
+                new MerchIssued(false)));
         }
         
         [Fact]
@@ -41,7 +45,9 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.EmployeeTests
                 new EmployeeName(""),
                 new EmployeeName("last"),
                 new PositionEntity(Position.Manager),
-                new EmployeeEmail("employee@ozon.ru")));
+                new EmployeeEmail("employee@ozon.ru"),
+                null,
+                new MerchIssued(false)));
         }
         
         [Fact]
@@ -52,7 +58,9 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.EmployeeTests
                 new EmployeeName("first"),
                 null,
                 new PositionEntity(Position.Manager),
-                new EmployeeEmail("employee@ozon.ru")));
+                new EmployeeEmail("employee@ozon.ru"),
+                null,
+                new MerchIssued(false)));
         }
         
         [Fact]
@@ -63,7 +71,9 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.EmployeeTests
                 new EmployeeName("first"),
                 new EmployeeName(null),
                 new PositionEntity(Position.Manager),
-                new EmployeeEmail("employee@ozon.ru")));
+                new EmployeeEmail("employee@ozon.ru"),
+                null,
+                new MerchIssued(false)));
         }
         
         [Fact]
@@ -74,7 +84,9 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.EmployeeTests
                 new EmployeeName("first"),
                 new EmployeeName(""),
                 new PositionEntity(Position.Manager),
-                new EmployeeEmail("employee@ozon.ru")));
+                new EmployeeEmail("employee@ozon.ru"),
+                null,
+                new MerchIssued(false)));
         }
         
         [Fact]
@@ -85,7 +97,9 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.EmployeeTests
                 new EmployeeName("first"),
                 new EmployeeName("last"),
                 null,
-                new EmployeeEmail("employee@ozon.ru")));
+                new EmployeeEmail("employee@ozon.ru"),
+                null,
+                new MerchIssued(false)));
         }
         
         [Fact]
@@ -96,7 +110,9 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.EmployeeTests
                 new EmployeeName("first"),
                 new EmployeeName("last"),
                 new PositionEntity(null),
-                new EmployeeEmail("employee@ozon.ru")));
+                new EmployeeEmail("employee@ozon.ru"),
+                null,
+                new MerchIssued(false)));
         }
         
         [Fact]
@@ -107,7 +123,9 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.EmployeeTests
                 new EmployeeName("first"),
                 new EmployeeName("last"),
                 new PositionEntity(Position.Manager),
-                null));
+                null,
+                null,
+                new MerchIssued(false)));
         }
         
         [Fact]
@@ -118,7 +136,9 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.EmployeeTests
                 new EmployeeName("first"),
                 new EmployeeName("last"),
                 new PositionEntity(Position.Manager),
-                new EmployeeEmail("")));
+                new EmployeeEmail(""),
+                null,
+                new MerchIssued(false)));
         }
         
         [Fact]
@@ -129,8 +149,37 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.EmployeeTests
                 new EmployeeName("first"),
                 new EmployeeName("last"),
                 new PositionEntity(Position.Manager),
-                new EmployeeEmail("email")));
+                new EmployeeEmail("email"),
+                null,
+                new MerchIssued(false)));
         }
+        
+        [Fact]
+        public void CreateEmployeeWithNullGivenStatus()
+        {
+            Assert.Throws<ArgumentException>(() => new Employee(
+                100500,
+                new EmployeeName("first"),
+                new EmployeeName("last"),
+                new PositionEntity(Position.Manager),
+                new EmployeeEmail("email"),
+                null,
+                null));
+        }
+        
+        [Fact]
+        public void CreateEmployeeWithNullMerchAndTrueGivenStatus()
+        {
+            Assert.Throws<ArgumentException>(() => new Employee(
+                100500,
+                new EmployeeName("first"),
+                new EmployeeName("last"),
+                new PositionEntity(Position.Manager),
+                new EmployeeEmail("email"),
+                null,
+                new MerchIssued(true)));
+        }
+        
         
         [Fact]
         public void CheckMerchIsGivenFalse()
@@ -140,10 +189,29 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.EmployeeTests
                 new EmployeeName("first"),
                 new EmployeeName("last"),
                 new PositionEntity(Position.Manager),
-                new EmployeeEmail("employee@ozon.ru"));
+                new EmployeeEmail("employee@ozon.ru"),
+                null,
+                new MerchIssued(false));
 
             var pack = MerchPackFactory.GetStarterPack(ClothingSize.M);
             
+            Assert.Equal(emp.IsGiven(pack.Id),false);
+        }
+        
+        [Fact]
+        public void CheckMerchIsNotGivenIfIsNotStock()
+        {
+            var emp = new Employee(
+                100500,
+                new EmployeeName("first"),
+                new EmployeeName("last"),
+                new PositionEntity(Position.Manager),
+                new EmployeeEmail("employee@ozon.ru"),
+                null,
+                new MerchIssued(false));
+
+            var pack = MerchPackFactory.GetStarterPack(ClothingSize.M);
+            emp.GiveMerch(pack, false);
             Assert.Equal(emp.IsGiven(pack.Id),false);
         }
         
@@ -155,10 +223,11 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.EmployeeTests
                 new EmployeeName("first"),
                 new EmployeeName("last"),
                 new PositionEntity(Position.Manager),
-                new EmployeeEmail("employee@ozon.ru"));
+                new EmployeeEmail("employee@ozon.ru"),null,
+                new MerchIssued(false));
 
             var pack = MerchPackFactory.GetStarterPack(ClothingSize.M);
-            emp.GiveMerch(pack);
+            emp.GiveMerch(pack, true);
             Assert.Equal(emp.IsGiven(pack.Id),true);
         }
         

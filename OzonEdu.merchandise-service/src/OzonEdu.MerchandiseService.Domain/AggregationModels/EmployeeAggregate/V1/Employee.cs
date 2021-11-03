@@ -15,14 +15,18 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.
         public EmployeeName LastName { get; }
         public PositionEntity Position { get; }
         public EmployeeEmail Email { get; }
-        //public MerchIssued MerchIsIssued { get; }
-        public EmployeeMerchPack GivenMerch { get; private set; }
-        
-        public EmployeeMerchPack RequestedMerch { get; private set; }
+        public EmployeeMerchPack Merch { get; private set; }
+        public MerchIssued MerchIsGiven { get; private set; }
         
         #endregion
 
-        public Employee(int id, EmployeeName firstName, EmployeeName lastName, PositionEntity position, EmployeeEmail email)
+        public Employee(int id, 
+            EmployeeName firstName, 
+            EmployeeName lastName, 
+            PositionEntity position, 
+            EmployeeEmail email, 
+            EmployeeMerchPack merch, 
+            MerchIssued merchIsGiven)
         {
             
             //EId = ValidateId(id);
@@ -31,28 +35,28 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.
             LastName = ValidateName(lastName);
             Position = ValidatePosition(position);
             Email = ValidateEmail(email);
-            //GivenMerch = givenMerch;
+            Merch = merch;
             //RequestedMerch = requestedMerch;
-            //MerchIsIssued = ValidateIssued(merchIsIssued);
+            MerchIsGiven = ValidateIssued(merchIsGiven);
         }
         
         #region Methods
 
-        public void RequestMerch(MerchPack pack)
-        {
-            
-        }
-        
-        public void GiveMerch(MerchPack pack)
+        public void GiveMerch(MerchPack pack, bool isInStock)
         {
             if (pack == null) throw new ArgumentNullException("Merch pack cannot be null");
-            this.GivenMerch = new EmployeeMerchPack(pack);
-            MerchGiven( pack);
+            
+            this.Merch = new EmployeeMerchPack(pack);
+            this.MerchIsGiven = new MerchIssued(isInStock);
+            //если мерч выдан, кидаем оповещение
+            if (MerchIsGiven.Value) MerchGiven( pack);
         }
         
         public bool IsGiven(int merchId)
         {
-            return (GivenMerch is not null && GivenMerch.Value.Id == merchId);
+            if (Merch is null || Merch.Value is null) return false;
+            if (Merch.Value.Id != merchId) return false;
+            return MerchIsGiven.Value;
         }
         
         void MerchGiven(MerchPack pack)
@@ -64,12 +68,7 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.
 
         #region Validations
 
-        EmployeeId ValidateId(EmployeeId id)
-        {
-            if (id == null) throw new ArgumentNullException("Employee id cannot be null");
-            return id;
-        }
-
+        
         EmployeeName ValidateName(EmployeeName name)
         {
             if (name is null || name.Value is null) throw new ArgumentNullException("Employee name cannot be null");
@@ -94,7 +93,8 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.
 
         MerchIssued ValidateIssued(MerchIssued merchIssued)
         {
-            if (merchIssued is null) throw new ArgumentNullException("Merch issue status cannot be null");
+            if (merchIssued is null) throw new ArgumentNullException("Merch given status cannot be null");
+            if (merchIssued.Value && (Merch is null || Merch.Value is null)) throw new ArgumentException("Unknown merch cannot be market as given");
             return merchIssued;
         }
 
