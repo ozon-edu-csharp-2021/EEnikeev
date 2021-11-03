@@ -1,8 +1,12 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate.V1;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
 using OzonEdu.MerchandiseService.Domain.Factory;
+using OzonEdu.MerchandiseService.Domain.Repo;
 using OzonEdu.MerchandiseService.Infrastructure.Commands.GiveOutMerchItem;
 
 namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
@@ -10,40 +14,62 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
     public class GiveOutMerchItemCommandHandler : IRequestHandler<GiveOutMerchItemCommand>
     {
         private IEmployeeRepository _employeeRepository;
+        private IStockRepository _stockRepository;
 
-        public GiveOutMerchItemCommandHandler(IEmployeeRepository employeeRepository)
+        public GiveOutMerchItemCommandHandler(IEmployeeRepository employeeRepository, IStockRepository stockRepository)
         {
             _employeeRepository = employeeRepository;
+            _stockRepository = stockRepository;
         }
         
         public async Task<Unit> Handle(GiveOutMerchItemCommand request, CancellationToken cancellationToken)
         {
             var employee = await _employeeRepository.FindByIdAsync(request.EmployeeId, cancellationToken);
             
-            // если такого сотрудника еще нет, значит надо его создать
             if (employee == null)
             {
-                employee = EmployeeFactory.CreateEmployee();
+                throw new ArgumentException($"Employee with id={request.EmployeeId} did not found");
             }
             
-
-            //bool inStock = false;
+            // если такой мерч уже был выдан сотруднику
+            if (employee.IsGiven(request.MerchId))
+                throw new ArgumentException(
+                    $"Merch with id={request.MerchId} is already given to employee with id={request.EmployeeId}");
             
-            // если мерч не выдавался, то делаем запрос на выдачу
-            //if (!employee.AlreadyIssued(request.MerchId))
+            // выбираем мерч
+            EMerchType type;
+            try
             {
-                 //inStock = true;
+                type = (EMerchType)request.MerchId;
+            }
+            catch (InvalidCastException e)
+            {
+                throw new ArgumentException($"Unknown merch type requested: id={request.MerchId}");
+            }
+
+            MerchPack pack = MerchPackFactory.GetPack(type, ClothingSize.GetById(request.SizeId));
+
+            bool isInStock = false;
+            // запрашиваем позиции на складе
+            foreach (var item in pack.MerchItems.Items)
+            {
+                isInStock = await _stockRepository.CheckInStockBySkuAsync(item.Sku.Value, cancellationToken);
+                // если какой-то позиции нет, то выходим
+                if (isInStock == false) break;
+            }
+
+            //если все в наличии, езервируем
+            foreach (var item in pack.MerchItems.Items)
+            {
+                await _stockRepository.ReserveAsync(item, cancellationToken);
             }
             
-            // если мерч есть на складе, то выдаем сотруднику, иначе помещаем в список на ожидание
-            //if (inStock) employee.Give(request.MerchId);
-            //else employee.AddInQueue(request.MerchId);
-
-            /*employee.GiveOutItems(request.Quantity);
+            // если не было нужной позиции, помещаем в ожидание, иначе выдаем
+            employee.GiveMerch(pack, isInStock);
             
-            await _merchItemRepository.UpdateAsync(employee, cancellationToken);
             
-            await _merchItemRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);*/
+            await _employeeRepository.UpdateAsync(employee, cancellationToken);
+            await _employeeRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 
             return Unit.Value;
 

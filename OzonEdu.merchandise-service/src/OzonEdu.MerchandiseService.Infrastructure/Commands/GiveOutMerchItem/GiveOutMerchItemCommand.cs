@@ -6,11 +6,13 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Commands.GiveOutMerchItem
     {
         public int EmployeeId { get; }
         public int MerchId { get; }
+        public int SizeId { get; }
 
-        public GiveOutMerchItemCommand(int employeeId, int merchId)
+        public GiveOutMerchItemCommand(int employeeId, int merchId, int sizeId)
         {
             EmployeeId = employeeId;
             MerchId = merchId;
+            SizeId = sizeId;
         }
     }
 }

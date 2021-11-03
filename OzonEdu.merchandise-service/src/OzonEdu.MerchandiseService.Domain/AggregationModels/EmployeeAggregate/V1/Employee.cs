@@ -15,6 +15,7 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.
         public EmployeeName LastName { get; }
         public PositionEntity Position { get; }
         public EmployeeEmail Email { get; }
+        public EmployeeClothingSize ClothingSize { get; }
         public EmployeeMerchPack Merch { get; private set; }
         public MerchIssued MerchIsGiven { get; private set; }
         
@@ -25,6 +26,7 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.
             EmployeeName lastName, 
             PositionEntity position, 
             EmployeeEmail email, 
+            //EmployeeClothingSize clothingSize,
             EmployeeMerchPack merch, 
             MerchIssued merchIsGiven)
         {
@@ -35,7 +37,8 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.
             LastName = ValidateName(lastName);
             Position = ValidatePosition(position);
             Email = ValidateEmail(email);
-            Merch = merch;
+            //ClothingSize = ValidateClothingSize(clothingSize);
+            Merch = ValidateMerch(merch);
             //RequestedMerch = requestedMerch;
             MerchIsGiven = ValidateIssued(merchIsGiven);
         }
@@ -56,6 +59,8 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.
         {
             if (Merch is null || Merch.Value is null) return false;
             if (Merch.Value.Id != merchId) return false;
+            
+            
             return MerchIsGiven.Value;
         }
         
@@ -89,6 +94,18 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.
             if (!email.Value.Contains("@")) throw new ArgumentException(
                 $"Incorrect email: {email.Value}. Email must contain \"@\" ");
             return email;
+        }
+
+        EmployeeClothingSize ValidateClothingSize(EmployeeClothingSize clothingSize)
+        {
+            if (clothingSize is null) throw new ArgumentNullException("Clothing size cannot be null");
+            return clothingSize;
+        }
+        
+        EmployeeMerchPack ValidateMerch(EmployeeMerchPack merch)
+        {
+            if (merch is null || merch.Value is null) return null;
+            return merch;
         }
 
         MerchIssued ValidateIssued(MerchIssued merchIssued)

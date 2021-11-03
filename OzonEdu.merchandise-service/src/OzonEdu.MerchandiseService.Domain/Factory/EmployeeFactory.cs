@@ -25,6 +25,7 @@ namespace OzonEdu.MerchandiseService.Domain.Factory
                 new EmployeeName(lastName),
                 new PositionEntity(Position.Manager),
                 new EmployeeEmail(firstName + lastName + "@ozon.ru"),
+                //EmployeeClothingSize.M, 
                 null,
                 new MerchIssued(false)
             );

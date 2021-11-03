@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.V1;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate.V1;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
 using Name = OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate.Name;
@@ -7,8 +7,40 @@ using Name = OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggreg
 
 namespace OzonEdu.MerchandiseService.Domain.Factory
 {
+    public enum EMerchType
+    {
+        /// <summary> Набор мерча, выдаваемый сотруднику при устройстве на работу. </summary>
+        WelcomePack = 10,
+    
+        /// <summary> Набор мерча, выдаваемый сотруднику при посещении конференции в качестве слушателя. </summary>
+        ConferenceListenerPack = 20,
+    
+        /// <summary> Набор мерча, выдаваемый сотруднику при посещении конференции в качестве спикера. </summary>
+        ConferenceSpeakerPack = 30,
+    
+        /// <summary> Набор мерча, выдаваемый сотруднику при успешном прохождении испытательного срока. </summary>
+        ProbationPeriodEndingPack = 40,
+    
+        /// <summary> Набор мерча, выдаваемый сотруднику за выслугу лет. </summary>
+        VeteranPack = 50
+    }
+    
     public static class MerchPackFactory
     {
+        public static MerchPack GetPack(EMerchType type, ClothingSize size)
+        {
+            switch (type)
+            {
+                case EMerchType.WelcomePack: return GetWelcomePack(size);
+                case EMerchType.ProbationPeriodEndingPack: return GetStarterPack(size);
+                case EMerchType.ConferenceListenerPack: return GetConferenceListenerPack(size);
+                case EMerchType.ConferenceSpeakerPack: return GetConferenceSpeakerPack(size);
+                case EMerchType.VeteranPack: return GetVeteranPack(size);
+                default: throw new ArgumentException($"Неизвестный тип мерча: {type}");
+            }
+        }
+
+
         #region WelcomePack
 
         public static MerchPack GetWelcomePack(ClothingSize size = null)
@@ -18,7 +50,7 @@ namespace OzonEdu.MerchandiseService.Domain.Factory
                 MerchItemFactory.GetPen(),
                 MerchItemFactory.GetNotepad()
             });
-            return new MerchPack(10, new Name("Welcome pack"), merchItems);
+            return new MerchPack((int)EMerchType.WelcomePack, new Name("Welcome pack"), merchItems);
         }
 
         #endregion
@@ -34,7 +66,7 @@ namespace OzonEdu.MerchandiseService.Domain.Factory
                 MerchItemFactory.GetTShirt(size),
                 
             });
-            return new MerchPack(20, new Name("Starter pack"), merchItems);
+            return new MerchPack((int)EMerchType.ProbationPeriodEndingPack, new Name("Starter pack"), merchItems);
         }
         
         #endregion
@@ -51,7 +83,7 @@ namespace OzonEdu.MerchandiseService.Domain.Factory
                 MerchItemFactory.GetSweatshirt(size),
                 MerchItemFactory.GetSocks() 
             });
-            return new MerchPack(30, new Name("Conference listener pack"), merchItems);
+            return new MerchPack((int)EMerchType.ConferenceListenerPack, new Name("Conference listener pack"), merchItems);
         }
         
         #endregion
@@ -69,7 +101,7 @@ namespace OzonEdu.MerchandiseService.Domain.Factory
                 MerchItemFactory.GetSocks(),
                 MerchItemFactory.GetBag()
             });
-            return new MerchPack(40, new Name("Conference speaker pack"), merchItems);
+            return new MerchPack((int)EMerchType.ConferenceSpeakerPack, new Name("Conference speaker pack"), merchItems);
         }
         
         #endregion
@@ -87,7 +119,7 @@ namespace OzonEdu.MerchandiseService.Domain.Factory
                 MerchItemFactory.GetSocks(2),
                 MerchItemFactory.GetBag(2),
             });
-            return new MerchPack(50,new Name("Veteran pack"), merchItems);
+            return new MerchPack((int)EMerchType.VeteranPack,new Name("Veteran pack"), merchItems);
         }
         
         #endregion
