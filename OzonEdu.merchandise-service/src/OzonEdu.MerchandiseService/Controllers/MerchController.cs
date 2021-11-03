@@ -31,7 +31,7 @@ namespace OzonEdu.MerchandiseService.Controllers
         public async Task GiveMerchToEmployee(GiveMerchItemRequest request,
             CancellationToken token)
         {
-            var command = new GiveMerchItemCommand(request.EmployeeId, request.MerchId, request.SizeId);
+            var command = new GiveMerchItemCommand(request.employeeId, request.merchId, request.sizeId);
             await _mediator.Send(command);
 
             return;
@@ -39,7 +39,7 @@ namespace OzonEdu.MerchandiseService.Controllers
         
         /// <summary> Вызвращает информацию о том, был ли выдан мерч </summary>
         [HttpPost]
-        [Route("GetMerchIsIssued/")]
+        [Route("GetMerchIsIssued")]
         public async Task<bool> GetMerchIsIssued(GetMerchItemIsGivenRequest request,
             CancellationToken token)
         {

@@ -23,7 +23,7 @@ namespace OzonEdu.MerchandiseService.GrpcClient
                 }
                 
                 // запрашиваем все товары и информацию о выдаче
-                for (int i = 0; i < 5; i++)
+                /*for (int i = 0; i < 5; i++)
                 {
                     var item = await client.GetMerchByIdAsync(new GetMerchItemByIdRequest { ItemId = i },
                         cancellationToken: CancellationToken.None);
@@ -36,7 +36,7 @@ namespace OzonEdu.MerchandiseService.GrpcClient
                     Console.WriteLine($"Мерч {item.ItemId}: {item.ItemName}");
                     Console.WriteLine($"Выдан: {result.IsIssued}");
                     Console.WriteLine();
-                }
+                }*/
 
             }
             catch (RpcException e)

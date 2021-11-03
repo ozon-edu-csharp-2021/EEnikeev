@@ -69,7 +69,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
             
             
             await _employeeRepository.UpdateAsync(employee, cancellationToken);
-            await _employeeRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
+            //await _employeeRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 
             return Unit.Value;
 
