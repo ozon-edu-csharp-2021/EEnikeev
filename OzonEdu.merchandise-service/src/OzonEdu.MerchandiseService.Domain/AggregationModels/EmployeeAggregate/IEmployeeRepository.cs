@@ -9,7 +9,7 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
     {
         public IUnitOfWork UnitOfWork { get; }
         
-        Task<Employee> CreateAsync(Employee employee, CancellationToken cancellationToken = default);
+        Task<int> CreateAsync(Employee employee, CancellationToken cancellationToken = default);
         Task<Employee> UpdateAsync(Employee employee, CancellationToken cancellationToken = default);
         Task<Employee> FindByIdAsync(int id, CancellationToken cancellationToken = default);
         
