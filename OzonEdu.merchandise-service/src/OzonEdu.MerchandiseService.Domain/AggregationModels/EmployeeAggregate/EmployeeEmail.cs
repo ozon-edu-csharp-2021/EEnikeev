@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using OzonEdu.MerchandiseService.Domain.Models;
 
-namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.V1
+namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
 {
-    public class MerchIssued : ValueObject
+    public class EmployeeEmail : ValueObject
     {
-        public bool Value { get; }
-        
-        public MerchIssued(bool value)
+        public string Value { get; }
+
+        public EmployeeEmail(string value)
         {
             Value = value;
         }

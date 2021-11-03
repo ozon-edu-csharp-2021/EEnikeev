@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using OzonEdu.MerchandiseService.Domain.Models;
 
-namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate.V1
+namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
 {
-    /// <summary> Наименование товара </summary>
-    public class Name : ValueObject
+    /// <summary> Количество товара </summary>
+    public class Quantity : ValueObject
     {
-        public string Value { get; }
+        public int Value { get; }
 
-        public Name(string value)
+        public Quantity(int value)
         {
             Value = value;
         }

@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.V1;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
 
 namespace OzonEdu.MerchandiseService.Domain.Factory
 {

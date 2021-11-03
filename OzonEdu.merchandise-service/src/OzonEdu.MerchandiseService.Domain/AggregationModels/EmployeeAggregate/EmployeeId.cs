@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using OzonEdu.MerchandiseService.Domain.Models;
 
-namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.V1
+namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
 {
     /// <summary> Идентификатор сотрудника </summary>
     public class EmployeeId : ValueObject

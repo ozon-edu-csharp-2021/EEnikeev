@@ -3,7 +3,7 @@ using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
 using OzonEdu.MerchandiseService.Domain.Events;
 using OzonEdu.MerchandiseService.Domain.Models;
 
-namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.V1
+namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
 {
     /// <summary> Сотрудник </summary>
     public sealed class Employee : Entity
@@ -15,7 +15,8 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.
         public EmployeeName LastName { get; }
         public PositionEntity Position { get; }
         public EmployeeEmail Email { get; }
-        public EmployeeClothingSize ClothingSize { get; }
+        
+        //public EmployeeClothingSize ClothingSize { get; }
         public EmployeeMerchPack Merch { get; private set; }
         public MerchIssued MerchIsGiven { get; private set; }
         

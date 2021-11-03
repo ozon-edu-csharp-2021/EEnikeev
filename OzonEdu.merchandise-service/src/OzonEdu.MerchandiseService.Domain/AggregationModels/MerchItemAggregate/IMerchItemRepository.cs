@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using OzonEdu.MerchandiseService.Domain.Contracts;
 
-namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate.V1
+namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
 {
     public interface IMerchItemRepository : IRepository<MerchItem>
     {

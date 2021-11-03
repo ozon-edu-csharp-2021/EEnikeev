@@ -1,6 +1,6 @@
 using OzonEdu.MerchandiseService.Domain.Models;
 
-namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate.V1
+namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
 {
     /// <summary> Тип товара </summary>
     public class ItemEntity : Entity

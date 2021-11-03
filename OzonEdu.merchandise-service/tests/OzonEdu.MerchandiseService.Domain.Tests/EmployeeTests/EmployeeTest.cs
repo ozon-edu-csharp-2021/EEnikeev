@@ -1,7 +1,6 @@
 using System;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate.V1;
-using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate.V1;
+using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate;
 using OzonEdu.MerchandiseService.Domain.Factory;
 using Xunit;
 

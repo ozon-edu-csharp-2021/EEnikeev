@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OzonEdu.MerchandiseService.Domain.Models;
 
-namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate.V1
+namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
 {
     /// <summary> Размер одежды </summary>
     public class ClothingSize : Enumeration
