@@ -24,5 +24,6 @@ message GiveMerchItemResponse{
 }
 
 message GetMerchIsIssuedResponse{
-  google.protobuf.BoolValue is_issued = 1;
+  //google.protobuf.BoolValue is_issued = 1;
+  bool is_issued = 1;
 }
