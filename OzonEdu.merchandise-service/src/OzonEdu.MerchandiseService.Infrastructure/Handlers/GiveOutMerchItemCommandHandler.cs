@@ -11,7 +11,7 @@ using OzonEdu.MerchandiseService.Infrastructure.Commands.GiveOutMerchItem;
 
 namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
 {
-    public class GiveOutMerchItemCommandHandler : IRequestHandler<GiveOutMerchItemCommand>
+    public class GiveOutMerchItemCommandHandler : IRequestHandler<GiveMerchItemCommand>
     {
         private IEmployeeRepository _employeeRepository;
         private IStockRepository _stockRepository;
@@ -22,7 +22,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
             _stockRepository = stockRepository;
         }
         
-        public async Task<Unit> Handle(GiveOutMerchItemCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(GiveMerchItemCommand request, CancellationToken cancellationToken)
         {
             var employee = await _employeeRepository.FindByIdAsync(request.EmployeeId, cancellationToken);
             
@@ -58,7 +58,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
                 if (isInStock == false) break;
             }
 
-            //если все в наличии, езервируем
+            //если все в наличии, резервируем
             foreach (var item in pack.MerchItems.Items)
             {
                 await _stockRepository.ReserveAsync(item, cancellationToken);

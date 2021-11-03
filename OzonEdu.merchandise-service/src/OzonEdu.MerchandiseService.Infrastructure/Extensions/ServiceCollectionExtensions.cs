@@ -11,7 +11,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Extensions
         public static IServiceCollection AddInfrastructure(this IServiceCollection service)
         {
             service.AddMediatR(typeof(GiveOutMerchItemCommandHandler).Assembly);
-            service.AddScoped<IEmployeeRepository, EmployeeRepositoryMock>();
+            service.AddSingleton<IEmployeeRepository, EmployeeRepositoryMock>();
             service.AddScoped<IStockRepository, StockRepositoryMock>();
             return service;
         }
