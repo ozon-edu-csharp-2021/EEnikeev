@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using CSharpCourse.Core.Lib.Enums;
 using MediatR;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate;
@@ -36,10 +37,10 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
 
             
             // выбираем мерч
-            EMerchType type;
-            if (Enum.IsDefined(typeof(EMerchType), request.MerchId))
+            MerchType type;
+            if (Enum.IsDefined(typeof(MerchType), request.MerchId))
             {
-                type = (EMerchType)request.MerchId;
+                type = (MerchType)request.MerchId;
             }
             else
             {
