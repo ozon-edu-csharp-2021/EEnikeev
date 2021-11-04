@@ -1,7 +1,6 @@
 using System;
 using OzonEdu.MerchandiseService.Domain.Contracts;
 using OzonEdu.MerchandiseService.Domain.Events;
-using OzonEdu.MerchandiseService.Domain.Exceptions;
 using OzonEdu.MerchandiseService.Domain.Models;
 
 namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
@@ -47,7 +46,7 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
 
         public void IncreaseQuantity(int valueToIncrease)
         {
-            if (valueToIncrease < 0) throw new NegativeQuantityException(
+            if (valueToIncrease < 0) throw new ArgumentException(
                 $"Value to increase cannot be less than zero: {valueToIncrease}");
             
             Quantity = new Quantity(this.Quantity.Value + valueToIncrease);
@@ -55,9 +54,9 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
 
         public void GiveOutItems(int quantityToGiveOut)
         {
-            if (quantityToGiveOut < 0) throw new NegativeQuantityException(
+            if (quantityToGiveOut < 0) throw new ArgumentException(
                 $"Items to give out cannot be less than zero: {quantityToGiveOut}");
-            if (Quantity.Value < quantityToGiveOut) throw new NotEnoughQuantityException(
+            if (Quantity.Value < quantityToGiveOut) throw new ArgumentException(
                 "Not enough items to give out");
             
             Quantity = new Quantity(this.Quantity.Value - quantityToGiveOut);
@@ -104,10 +103,10 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
             if (this.Type.ItemType.Equals(ItemType.TShirt) || this.Type.ItemType.Equals(ItemType.Sweatshirt))
             {
                 if (clothingSize == null)
-                    throw new ClothingSizeException($"Item with type {this.Type.ItemType.Name} must have size");
+                    throw new ArgumentNullException($"Item with type {this.Type.ItemType.Name} must have size");
             }
             else if (clothingSize != null)
-                throw new ClothingSizeException($"Item with type {this.Type.ItemType.Name} cannot get size");
+                throw new ArgumentException($"Item with type {this.Type.ItemType.Name} cannot get size");
 
             return clothingSize;
         }
@@ -116,14 +115,14 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
         {
             if (quantity == null) throw new ArgumentNullException(
                 "Quantity type cannot be null");
-            if (quantity.Value < 0) throw new NegativeQuantityException(
+            if (quantity.Value < 0) throw new ArgumentException(
                 "Quantity cannot be less than zero");
             return quantity;
         }
 
         MinimalQuantity ValidateMinimalQuantity(MinimalQuantity minimalQuantity)
         {
-            if (minimalQuantity.Value < 0) throw new NegativeQuantityException(
+            if (minimalQuantity.Value < 0) throw new ArgumentException(
                 $"Quantity cannot be less than zero: {minimalQuantity}");
             return minimalQuantity;
         }

@@ -1,7 +1,6 @@
 using System;
 using FluentAssertions;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate;
-using OzonEdu.MerchandiseService.Domain.Exceptions;
 using Xunit;
 
 namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
@@ -103,7 +102,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
         [Fact]
         public void CreateMerchItemWithNegativeQuantity()
         {
-            Assert.Throws<NegativeQuantityException>(() => new MerchItem(
+            Assert.Throws<ArgumentException>(() => new MerchItem(
                 new Sku(100500),
                 new MerchItemName("some tshirt"),
                 new ItemEntity(ItemType.TShirt),
@@ -116,7 +115,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
         [Fact]
         public void CreateMerchItemWithNegativeMinimalQuantity()
         {
-            Assert.Throws<NegativeQuantityException>(() => new MerchItem(
+            Assert.Throws<ArgumentException>(() => new MerchItem(
                 new Sku(100500),
                 new MerchItemName("some tshirt"),
                 new ItemEntity(ItemType.TShirt),
@@ -169,7 +168,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
             var valueToIncrease = -10;
 
             // Assert
-            Assert.Throws<NegativeQuantityException>(() => item.IncreaseQuantity(valueToIncrease));
+            Assert.Throws<ArgumentException>(() => item.IncreaseQuantity(valueToIncrease));
 
         }
         
@@ -192,7 +191,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
             var valueToGiveOut = -5;
 
             // Assert
-            Assert.Throws<NegativeQuantityException>(() => item.GiveOutItems(valueToGiveOut));
+            Assert.Throws<ArgumentException>(() => item.GiveOutItems(valueToGiveOut));
 
         }
         
@@ -215,7 +214,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
             var valueToGiveOut = 20;
 
             // Assert
-            Assert.Throws<NotEnoughQuantityException>(() => item.GiveOutItems(valueToGiveOut));
+            Assert.Throws<ArgumentException>(() => item.GiveOutItems(valueToGiveOut));
 
         }
         
@@ -246,7 +245,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
         [Fact]
         public void SetClothesWithNullClothingSize()
         {
-           Assert.Throws<ClothingSizeException>(() => new MerchItem(
+           Assert.Throws<ArgumentNullException>(() => new MerchItem(
                 new Sku(100500),
                 new MerchItemName("some tshirt"),
                 new ItemEntity(ItemType.TShirt),
@@ -260,7 +259,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
         [Fact]
         public void SetClothingSizeToItemWithoutClothingSize()
         {
-            Assert.Throws<ClothingSizeException>(() => new MerchItem(
+            Assert.Throws<ArgumentException>(() => new MerchItem(
                 new Sku(100500),
                 new MerchItemName("some bag"),
                 new ItemEntity(ItemType.Bag),
