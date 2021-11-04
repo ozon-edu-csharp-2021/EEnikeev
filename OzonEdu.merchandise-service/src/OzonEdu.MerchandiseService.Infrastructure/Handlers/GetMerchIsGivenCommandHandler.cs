@@ -5,23 +5,25 @@ using MediatR;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
 using OzonEdu.MerchandiseService.Infrastructure.Commands.GetMerchIsIssued;
 using OzonEdu.MerchandiseService.Infrastructure.DomainServices;
+using OzonEdu.MerchandiseService.Infrastructure.DomainServices.Interfaces;
 
 
 namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
 {
     public class GetMerchIsGivenCommandHandler : IRequestHandler<GetMerchIsIssuedCommand, bool>
     {
-        private IEmployeeRepository _employeeRepository;
+        
+        private IEmployeeDomainService _employeeDomainService;
 
-        public GetMerchIsGivenCommandHandler(IEmployeeRepository employeeRepository)
+        public GetMerchIsGivenCommandHandler(IEmployeeDomainService employeeDomainService)
         {
-            _employeeRepository = employeeRepository;
+            _employeeDomainService = employeeDomainService;
         }
 
         public async Task<bool> Handle(GetMerchIsIssuedCommand request, CancellationToken cancellationToken)
         {
             var employee = await 
-                EmployeeMerchDomainService.GetEmployeeByIdAsync(request.EmployeeId, _employeeRepository, cancellationToken);
+                _employeeDomainService.GetEmployeeByIdAsync(request.EmployeeId, cancellationToken);
             
             // если такой мерч уже был выдан сотруднику
             var result = employee.IsGiven(request.MerchId);

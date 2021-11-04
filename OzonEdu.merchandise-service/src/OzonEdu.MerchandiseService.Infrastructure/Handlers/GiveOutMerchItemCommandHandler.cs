@@ -8,6 +8,7 @@ using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
 using OzonEdu.MerchandiseService.Infrastructure.Commands.GiveOutMerchItem;
 using OzonEdu.MerchandiseService.Infrastructure.DomainServices;
+using OzonEdu.MerchandiseService.Infrastructure.DomainServices.Interfaces;
 using OzonEdu.MerchandiseService.Infrastructure.Factory;
 using OzonEdu.MerchandiseService.Infrastructure.Repo;
 
@@ -16,19 +17,21 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
     public class GiveOutMerchItemCommandHandler : IRequestHandler<GiveMerchItemCommand>
     {
         private IEmployeeRepository _employeeRepository;
-        private IStockRepository _stockRepository;
 
-        public GiveOutMerchItemCommandHandler(IEmployeeRepository employeeRepository, IStockRepository stockRepository)
+        private IMerchDomainService _merchDomainService;
+        private IEmployeeDomainService _employeeDomainService;
+
+        public GiveOutMerchItemCommandHandler(IEmployeeRepository employeeRepository, IStockRepository stockRepository, IMerchDomainService merchDomainService, IEmployeeDomainService employeeDomainService)
         {
             _employeeRepository = employeeRepository;
-            _stockRepository = stockRepository;
+            _merchDomainService = merchDomainService;
+            _employeeDomainService = employeeDomainService;
         }
         
         public async Task<Unit> Handle(GiveMerchItemCommand request, CancellationToken cancellationToken)
         {
             var employee =
-                await EmployeeMerchDomainService.GetEmployeeByIdAsync(request.EmployeeId, _employeeRepository,
-                    cancellationToken);
+                await _employeeDomainService.GetEmployeeByIdAsync(request.EmployeeId, cancellationToken);
             
             // если такой мерч уже был выдан сотруднику
             if (employee.IsGiven(request.MerchId))
@@ -47,18 +50,15 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
                 throw new ArgumentException($"Unknown merch type requested with id={request.MerchId}");
             }
             
-            MerchPack pack = MerchPackFactory.GetPack(type, ClothingSize.GetById(request.SizeId));
+            MerchPack pack =  MerchPackFactory.GetPack(type, ClothingSize.GetById(request.SizeId));
             
-            bool isInStock = await EmployeeMerchDomainService.RequestMerchInStockBySku(pack, _stockRepository, cancellationToken);
-            
-            // если не было нужной позиции, помещаем в ожидание, иначе выдаем
-            employee.GiveMerch(pack, isInStock);
+            bool isInStock = await _merchDomainService.RequestMerchInStockBySku(pack, cancellationToken);
             
             //если все в наличии, резервируем
-            foreach (var item in pack.MerchItems.Items)
-            {
-                await _stockRepository.ReserveAsync(item, cancellationToken);
-            }
+            if (isInStock) await _merchDomainService.ReserveMerchAsync(pack, cancellationToken);
+                
+            // если не было нужной позиции, помещаем в ожидание, иначе выдаем
+            employee.GiveMerch(pack, isInStock);
             
             
             await _employeeRepository.UpdateAsync(employee, cancellationToken);
