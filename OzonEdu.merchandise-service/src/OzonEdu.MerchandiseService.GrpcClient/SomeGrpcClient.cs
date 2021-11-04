@@ -27,6 +27,7 @@ namespace OzonEdu.MerchandiseService.GrpcClient
                     if (result.IsIssued)
                     {
                         Console.WriteLine("Мерч выдан, выдача не требуется.");
+                        Console.WriteLine();
                         continue;
                     }
                     

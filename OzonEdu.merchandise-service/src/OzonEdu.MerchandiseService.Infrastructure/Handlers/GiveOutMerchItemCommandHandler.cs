@@ -17,20 +17,18 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
     public class GiveOutMerchItemCommandHandler : IRequestHandler<GiveMerchItemCommand>
     {
         private IEmployeeRepository _employeeRepository;
+        
+        private IMerchManagerDomainService _merchManagerDomainService;
 
-        private IMerchDomainService _merchDomainService;
-        private IEmployeeDomainService _employeeDomainService;
-
-        public GiveOutMerchItemCommandHandler(IEmployeeRepository employeeRepository, IStockRepository stockRepository, IMerchDomainService merchDomainService, IEmployeeDomainService employeeDomainService)
+        public GiveOutMerchItemCommandHandler(IEmployeeRepository employeeRepository, IMerchManagerDomainService merchManagerDomainService)
         {
             _employeeRepository = employeeRepository;
-            _merchDomainService = merchDomainService;
-            _employeeDomainService = employeeDomainService;
+            _merchManagerDomainService = merchManagerDomainService;
         }
         
         public async Task<Unit> Handle(GiveMerchItemCommand request, CancellationToken cancellationToken)
         {
-            var employee =
+            /*var employee =
                 await _employeeDomainService.GetEmployeeByIdAsync(request.EmployeeId, cancellationToken);
             
             // если такой мерч уже был выдан сотруднику
@@ -58,14 +56,9 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
             if (isInStock) await _merchDomainService.ReserveMerchAsync(pack, cancellationToken);
                 
             // если не было нужной позиции, помещаем в ожидание, иначе выдаем
-            employee.GiveMerch(pack, isInStock);
-            
-            
-            await _employeeRepository.UpdateAsync(employee, cancellationToken);
-            
-            // пока делаем временную заглушку
-            if (_employeeRepository.UnitOfWork != null)
-                await _employeeRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
+            employee.GiveMerch(pack, isInStock);*/
+
+            var employee = await _merchManagerDomainService.GiveMerchAsync(request, cancellationToken);
 
             return Unit.Value;
 

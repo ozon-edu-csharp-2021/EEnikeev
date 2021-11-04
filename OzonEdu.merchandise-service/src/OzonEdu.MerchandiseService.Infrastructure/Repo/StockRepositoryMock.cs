@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate;
@@ -15,7 +16,17 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Repo
             return Task.FromResult(true);
         }
 
+        public Task<bool> CheckInStockBySkuAsync(IEnumerable<long> skuItems, CancellationToken cancellationToken = default)
+        {
+            return Task.FromResult(true);
+        }
+
         public Task ReserveAsync(MerchItem item, CancellationToken cancellationToken = default)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task ReserveAsync(IEnumerable<MerchItem> items, CancellationToken cancellationToken = default)
         {
             return Task.CompletedTask;
         }

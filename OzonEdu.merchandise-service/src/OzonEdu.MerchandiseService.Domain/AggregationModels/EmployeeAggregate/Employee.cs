@@ -60,6 +60,11 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
             return MerchIsGiven.Value;
         }
         
+        public bool IsGiven()
+        {
+            return MerchIsGiven.Value;
+        }
+        
         void MerchGiven(MerchPack pack)
         {
             var merchItemGivenDomainEvent = new MerchItemGivenDomainEvent(

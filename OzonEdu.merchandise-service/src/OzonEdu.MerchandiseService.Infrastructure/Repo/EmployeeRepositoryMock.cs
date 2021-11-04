@@ -37,5 +37,15 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Repo
         {
             return Task.FromResult(_employees.FirstOrDefault(e => e.Id == id));
         }
+
+        public Task DeleteAsync(int id, CancellationToken token = default)
+        {
+            return Task.FromResult(_employees.Remove(_employees.Find(e => e.Id == id)));
+        }
+
+        public Task<IEnumerable<Employee>> GetWaitingMerchEmployeesAsync(CancellationToken token = default)
+        {
+            return Task.FromResult(_employees.Where(e => e.Merch != null && !e.IsGiven()));
+        }
     }
 }

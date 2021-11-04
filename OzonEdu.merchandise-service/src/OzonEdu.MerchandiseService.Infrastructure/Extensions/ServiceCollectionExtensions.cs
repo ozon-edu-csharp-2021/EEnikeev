@@ -15,8 +15,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Extensions
             service.AddMediatR(typeof(GiveOutMerchItemCommandHandler).Assembly);
             service.AddSingleton<IEmployeeRepository, EmployeeRepositoryMock>();
             service.AddScoped<IStockRepository, StockRepositoryMock>();
-            service.AddTransient<IMerchDomainService, MerchDomainService>();
-            service.AddTransient<IEmployeeDomainService, EmployeeDomainService>();
+            service.AddTransient<IMerchManagerDomainService, MerchManagerDomainService>();
             return service;
         }
     }

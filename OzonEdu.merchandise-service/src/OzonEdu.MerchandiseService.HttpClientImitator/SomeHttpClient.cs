@@ -32,6 +32,7 @@ namespace OzonEdu.MerchandiseService.HttpClientImitator
                     if (result)
                     {
                         Console.WriteLine("Мерч выдан, выдача не требуется.");
+                        Console.WriteLine();
                         continue;
                     }
                     Console.WriteLine("Мерч не выдан, мерч выдается...");

@@ -13,22 +13,18 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
     public class GetMerchIsGivenCommandHandler : IRequestHandler<GetMerchIsIssuedCommand, bool>
     {
         
-        private IEmployeeDomainService _employeeDomainService;
+        private IMerchManagerDomainService _merchManagerDomainService;
 
-        public GetMerchIsGivenCommandHandler(IEmployeeDomainService employeeDomainService)
+        public GetMerchIsGivenCommandHandler(IEmployeeDomainService employeeDomainService, IMerchManagerDomainService merchManagerDomainService)
         {
-            _employeeDomainService = employeeDomainService;
+            _merchManagerDomainService = merchManagerDomainService;
         }
 
         public async Task<bool> Handle(GetMerchIsIssuedCommand request, CancellationToken cancellationToken)
         {
-            var employee = await 
-                _employeeDomainService.GetEmployeeByIdAsync(request.EmployeeId, cancellationToken);
             
-            // если такой мерч уже был выдан сотруднику
-            var result = employee.IsGiven(request.MerchId);
-                
-            return result;
+            return await _merchManagerDomainService.GetMerchIsIssuedAsync(request, cancellationToken);
+
         }
     }
 }
