@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate;
 using OzonEdu.MerchandiseService.Domain.Contracts;
 
-namespace OzonEdu.MerchandiseService.Domain.Repo
+namespace OzonEdu.MerchandiseService.Infrastructure.Repo
 {
     /// <summary> заглушка некоего склада </summary>
     public class StockRepositoryMock : IStockRepository

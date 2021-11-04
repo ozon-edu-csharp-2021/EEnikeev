@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
 
-
-namespace OzonEdu.MerchandiseService.Domain.Factory
+namespace OzonEdu.MerchandiseService.Infrastructure.Factory
 {
     public enum EMerchType
     {

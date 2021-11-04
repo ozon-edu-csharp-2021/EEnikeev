@@ -1,6 +1,6 @@
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate;
 
-namespace OzonEdu.MerchandiseService.Domain.Factory
+namespace OzonEdu.MerchandiseService.Infrastructure.Factory
 {
     public static class MerchItemFactory
     {

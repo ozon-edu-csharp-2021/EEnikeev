@@ -1,8 +1,8 @@
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
-using OzonEdu.MerchandiseService.Domain.Repo;
 using OzonEdu.MerchandiseService.Infrastructure.Handlers;
+using OzonEdu.MerchandiseService.Infrastructure.Repo;
 
 namespace OzonEdu.MerchandiseService.Infrastructure.Extensions
 {

@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
-using OzonEdu.MerchandiseService.Domain.Repo;
+using OzonEdu.MerchandiseService.Infrastructure.Repo;
 
 namespace OzonEdu.MerchandiseService.Infrastructure.DomainServices
 {

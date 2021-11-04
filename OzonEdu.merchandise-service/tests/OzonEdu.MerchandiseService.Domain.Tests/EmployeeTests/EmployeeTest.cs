@@ -1,7 +1,7 @@
 using System;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate;
-using OzonEdu.MerchandiseService.Domain.Factory;
+using OzonEdu.MerchandiseService.Infrastructure.Factory;
 using Xunit;
 
 namespace OzonEdu.MerchandiseService.Domain.Tests.EmployeeTests

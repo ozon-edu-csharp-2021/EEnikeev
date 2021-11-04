@@ -5,10 +5,10 @@ using MediatR;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
-using OzonEdu.MerchandiseService.Domain.Factory;
-using OzonEdu.MerchandiseService.Domain.Repo;
 using OzonEdu.MerchandiseService.Infrastructure.Commands.GiveOutMerchItem;
 using OzonEdu.MerchandiseService.Infrastructure.DomainServices;
+using OzonEdu.MerchandiseService.Infrastructure.Factory;
+using OzonEdu.MerchandiseService.Infrastructure.Repo;
 
 namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
 {

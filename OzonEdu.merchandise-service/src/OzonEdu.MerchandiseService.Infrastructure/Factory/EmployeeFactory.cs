@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
 
-namespace OzonEdu.MerchandiseService.Domain.Factory
+namespace OzonEdu.MerchandiseService.Infrastructure.Factory
 {
     public class EmployeeFactory
     {

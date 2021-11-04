@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate;
 using OzonEdu.MerchandiseService.Domain.Contracts;
 
-namespace OzonEdu.MerchandiseService.Domain.Repo
+namespace OzonEdu.MerchandiseService.Infrastructure.Repo
 {
     public interface IStockRepository: IRepository<MerchItem>
     {
