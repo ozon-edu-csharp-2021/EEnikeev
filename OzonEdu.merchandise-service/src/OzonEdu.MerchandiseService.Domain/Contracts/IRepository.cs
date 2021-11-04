@@ -1,4 +1,4 @@
-﻿using OzonEdu.MerchandiseService.Domain.Models;
+﻿
 
 namespace OzonEdu.MerchandiseService.Domain.Contracts
 {

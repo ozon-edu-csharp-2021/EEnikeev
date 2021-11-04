@@ -6,7 +6,6 @@ using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
 using OzonEdu.MerchandiseService.Domain.Factory;
-using OzonEdu.MerchandiseService.Domain.Models;
 using OzonEdu.MerchandiseService.Domain.Repo;
 using OzonEdu.MerchandiseService.Infrastructure.Commands.GiveOutMerchItem;
 
@@ -72,7 +71,9 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
             
             await _employeeRepository.UpdateAsync(employee, cancellationToken);
             
-            await _employeeRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
+            // пока делаем временную заглушку
+            if (_employeeRepository.UnitOfWork != null)
+                await _employeeRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 
             return Unit.Value;
 

@@ -4,7 +4,6 @@ using MediatR;
 using OzonEdu.MerchandiseService.Grpc;
 using OzonEdu.MerchandiseService.Infrastructure.Commands.GetMerchIsIssued;
 using OzonEdu.MerchandiseService.Infrastructure.Commands.GiveOutMerchItem;
-using OzonEdu.MerchandiseService.Services.Interfaces;
 
 namespace OzonEdu.MerchandiseService.GrpcServices
 {
