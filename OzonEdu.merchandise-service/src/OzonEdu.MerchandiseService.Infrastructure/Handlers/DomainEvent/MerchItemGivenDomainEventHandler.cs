@@ -14,7 +14,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers.DomainEvent
 
         async Task SendEmail()
         {
-            
+            // отправка сотруднику емэйла
         }
         
     }

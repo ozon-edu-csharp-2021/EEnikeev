@@ -8,6 +8,7 @@ using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
 using OzonEdu.MerchandiseService.Domain.Factory;
 using OzonEdu.MerchandiseService.Domain.Repo;
 using OzonEdu.MerchandiseService.Infrastructure.Commands.GiveOutMerchItem;
+using OzonEdu.MerchandiseService.Infrastructure.DomainServices;
 
 namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
 {
@@ -24,12 +25,9 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
         
         public async Task<Unit> Handle(GiveMerchItemCommand request, CancellationToken cancellationToken)
         {
-            var employee = await _employeeRepository.FindByIdAsync(request.EmployeeId, cancellationToken);
-            
-            if (employee == null)
-            {
-                throw new ArgumentException($"Employee with id={request.EmployeeId} did not found");
-            }
+            var employee =
+                await EmployeeMerchDomainService.GetEmployeeByIdAsync(request.EmployeeId, _employeeRepository,
+                    cancellationToken);
             
             // если такой мерч уже был выдан сотруднику
             if (employee.IsGiven(request.MerchId))
@@ -49,24 +47,17 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
             }
             
             MerchPack pack = MerchPackFactory.GetPack(type, ClothingSize.GetById(request.SizeId));
-
-            bool isInStock = false;
-            // запрашиваем позиции на складе
-            foreach (var item in pack.MerchItems.Items)
-            {
-                isInStock = await _stockRepository.CheckInStockBySkuAsync(item.Sku.Value, cancellationToken);
-                // если какой-то позиции нет, то выходим
-                if (isInStock == false) break;
-            }
-
+            
+            bool isInStock = await EmployeeMerchDomainService.RequestMerchInStockBySku(pack, _stockRepository, cancellationToken);
+            
+            // если не было нужной позиции, помещаем в ожидание, иначе выдаем
+            employee.GiveMerch(pack, isInStock);
+            
             //если все в наличии, резервируем
             foreach (var item in pack.MerchItems.Items)
             {
                 await _stockRepository.ReserveAsync(item, cancellationToken);
             }
-            
-            // если не было нужной позиции, помещаем в ожидание, иначе выдаем
-            employee.GiveMerch(pack, isInStock);
             
             
             await _employeeRepository.UpdateAsync(employee, cancellationToken);

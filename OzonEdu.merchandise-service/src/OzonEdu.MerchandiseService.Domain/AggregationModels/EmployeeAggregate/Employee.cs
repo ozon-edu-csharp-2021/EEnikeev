@@ -6,7 +6,7 @@ using OzonEdu.MerchandiseService.Domain.Models;
 namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
 {
     /// <summary> Сотрудник </summary>
-    public sealed class Employee : Entity
+    public sealed class Employee : Entity, IAggregateRoot
     {
         #region Properties
 

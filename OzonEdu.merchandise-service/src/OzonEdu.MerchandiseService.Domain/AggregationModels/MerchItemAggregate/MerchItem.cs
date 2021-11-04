@@ -6,7 +6,7 @@ using OzonEdu.MerchandiseService.Domain.Models;
 namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
 {
     /// <summary> Мерч </summary>
-    public class MerchItem : Entity
+    public class MerchItem : Entity, IAggregateRoot
     {
         #region Properties
 

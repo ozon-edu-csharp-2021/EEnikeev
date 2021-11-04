@@ -3,7 +3,7 @@ using OzonEdu.MerchandiseService.Domain.Models;
 
 namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate
 {
-    public sealed class MerchPack : Entity
+    public sealed class MerchPack : Entity, IAggregateRoot
     {
         #region Properties
         
