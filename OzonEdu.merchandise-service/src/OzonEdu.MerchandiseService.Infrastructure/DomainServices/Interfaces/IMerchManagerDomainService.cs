@@ -11,5 +11,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.DomainServices.Interfaces
         Task<Employee> GiveMerchAsync(GiveMerchItemCommand request, CancellationToken token);
 
         Task<bool> GetMerchIsIssuedAsync(GetMerchIsIssuedCommand request, CancellationToken token);
+
+        Task ReorderMerchAsync(CancellationToken token);
     }
 }

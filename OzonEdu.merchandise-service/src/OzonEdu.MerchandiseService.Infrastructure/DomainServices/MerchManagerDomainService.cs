@@ -42,7 +42,6 @@ namespace OzonEdu.MerchandiseService.Infrastructure.DomainServices
             return employee.IsGiven(request.MerchId);
         }
         
-        
         public async Task<Employee> GiveMerchAsync(GiveMerchItemCommand request, CancellationToken token)
         {
             var employee =
@@ -77,6 +76,14 @@ namespace OzonEdu.MerchandiseService.Infrastructure.DomainServices
                 await _employeeRepository.UnitOfWork.SaveEntitiesAsync(token);
 
             return employee;
+
+        }
+
+        
+        // этот метод можно будет использовать, когда придет событие о пополнении мерча
+        public async Task ReorderMerchAsync(CancellationToken token)
+        {
+            var employeesWaitingForMerch = await _employeeRepository.GetWaitingMerchEmployeesAsync(token);
 
         }
 

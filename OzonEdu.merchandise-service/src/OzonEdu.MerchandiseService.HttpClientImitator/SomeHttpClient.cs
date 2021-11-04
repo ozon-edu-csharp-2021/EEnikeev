@@ -49,14 +49,6 @@ namespace OzonEdu.MerchandiseService.HttpClientImitator
                     Console.WriteLine();
                 }
 
-                /*for (int i = 0; i < 5; i++)
-                {
-                    var item = client.GetMerchById(i, CancellationToken.None).Result;
-                    var isIssued = client.GetMerchIsIssuedById(i, CancellationToken.None).Result;
-                    string s = isIssued == false ? "не " : "";
-                    Console.WriteLine($"{item.Id}: {item.Name} - {s}выдан");
-                }*/
-
             }
             catch (Exception e)
             {
