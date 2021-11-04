@@ -6,6 +6,7 @@ using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.MerchPackAggregate;
 using OzonEdu.MerchandiseService.Domain.Factory;
+using OzonEdu.MerchandiseService.Domain.Models;
 using OzonEdu.MerchandiseService.Domain.Repo;
 using OzonEdu.MerchandiseService.Infrastructure.Commands.GiveOutMerchItem;
 
@@ -35,18 +36,19 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
             if (employee.IsGiven(request.MerchId))
                 throw new ArgumentException(
                     $"Merch with id={request.MerchId} is already given to employee with id={request.EmployeeId}");
+
             
             // выбираем мерч
             EMerchType type;
-            try
+            if (Enum.IsDefined(typeof(EMerchType), request.MerchId))
             {
                 type = (EMerchType)request.MerchId;
             }
-            catch (InvalidCastException e)
+            else
             {
-                throw new ArgumentException($"Unknown merch type requested: id={request.MerchId}");
+                throw new ArgumentException($"Unknown merch type requested with id={request.MerchId}");
             }
-
+            
             MerchPack pack = MerchPackFactory.GetPack(type, ClothingSize.GetById(request.SizeId));
 
             bool isInStock = false;
@@ -69,7 +71,8 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
             
             
             await _employeeRepository.UpdateAsync(employee, cancellationToken);
-            //await _employeeRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
+            
+            await _employeeRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 
             return Unit.Value;
 

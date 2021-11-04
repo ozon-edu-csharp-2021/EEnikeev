@@ -10,13 +10,11 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
     {
         #region Properties
 
-        //public EmployeeId EId { get; }
+        
         public EmployeeName FirstName { get; }
         public EmployeeName LastName { get; }
         public PositionEntity Position { get; }
         public EmployeeEmail Email { get; }
-        
-        //public EmployeeClothingSize ClothingSize { get; }
         public EmployeeMerchPack Merch { get; private set; }
         public MerchIssued MerchIsGiven { get; private set; }
         
@@ -27,20 +25,16 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
             EmployeeName lastName, 
             PositionEntity position, 
             EmployeeEmail email, 
-            //EmployeeClothingSize clothingSize,
             EmployeeMerchPack merch, 
             MerchIssued merchIsGiven)
         {
             
-            //EId = ValidateId(id);
             Id = id;
             FirstName = ValidateName(firstName);
             LastName = ValidateName(lastName);
             Position = ValidatePosition(position);
             Email = ValidateEmail(email);
-            //ClothingSize = ValidateClothingSize(clothingSize);
             Merch = ValidateMerch(merch);
-            //RequestedMerch = requestedMerch;
             MerchIsGiven = ValidateIssued(merchIsGiven);
         }
         
@@ -53,7 +47,7 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
             this.Merch = new EmployeeMerchPack(pack);
             this.MerchIsGiven = new MerchIssued(isInStock);
             //если мерч выдан, кидаем оповещение
-            if (MerchIsGiven.Value) MerchGiven( pack);
+            if (MerchIsGiven.Value) MerchGiven(pack);
         }
         
         public bool IsGiven(int merchId)
@@ -97,11 +91,6 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
             return email;
         }
 
-        EmployeeClothingSize ValidateClothingSize(EmployeeClothingSize clothingSize)
-        {
-            if (clothingSize is null) throw new ArgumentNullException("Clothing size cannot be null");
-            return clothingSize;
-        }
         
         EmployeeMerchPack ValidateMerch(EmployeeMerchPack merch)
         {

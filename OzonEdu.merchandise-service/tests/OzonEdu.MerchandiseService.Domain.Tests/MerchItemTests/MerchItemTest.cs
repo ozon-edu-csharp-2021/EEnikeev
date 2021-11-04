@@ -14,7 +14,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
         {
             Assert.Throws<ArgumentNullException>(() => new MerchItem(
                 null,
-                new Name("name"),
+                new MerchItemName("name"),
                 new ItemEntity(ItemType.Bag),
                 ClothingSize.L,
                 new Quantity(10),
@@ -40,7 +40,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
         {
             Assert.Throws<ArgumentNullException>(() => new MerchItem(
                 new Sku(100500),
-                new Name(null),
+                new MerchItemName(null),
                 new ItemEntity(ItemType.Bag),
                 ClothingSize.L,
                 new Quantity(10),
@@ -53,7 +53,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
         {
             Assert.Throws<ArgumentException>(() => new MerchItem(
                 new Sku(100500),
-                new Name(""),
+                new MerchItemName(""),
                 new ItemEntity(ItemType.Bag),
                 ClothingSize.L,
                 new Quantity(10),
@@ -66,7 +66,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
         {
             Assert.Throws<ArgumentNullException>(() => new MerchItem(
                 new Sku(100500),
-                new Name("some name"),
+                new MerchItemName("some name"),
                 null,
                 ClothingSize.L,
                 new Quantity(10),
@@ -79,7 +79,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
         {
             Assert.Throws<ArgumentNullException>(() => new MerchItem(
                 new Sku(100500),
-                new Name("some name"),
+                new MerchItemName("some name"),
                 new ItemEntity(null),
                 ClothingSize.L,
                 new Quantity(10),
@@ -92,7 +92,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
         {
             Assert.Throws<ArgumentNullException>(() => new MerchItem(
                 new Sku(100500),
-                new Name("some tshirt"),
+                new MerchItemName("some tshirt"),
                 new ItemEntity(ItemType.TShirt),
                 ClothingSize.L,
                 null,
@@ -105,7 +105,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
         {
             Assert.Throws<NegativeQuantityException>(() => new MerchItem(
                 new Sku(100500),
-                new Name("some tshirt"),
+                new MerchItemName("some tshirt"),
                 new ItemEntity(ItemType.TShirt),
                 ClothingSize.L,
                 new Quantity(-10),
@@ -118,7 +118,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
         {
             Assert.Throws<NegativeQuantityException>(() => new MerchItem(
                 new Sku(100500),
-                new Name("some tshirt"),
+                new MerchItemName("some tshirt"),
                 new ItemEntity(ItemType.TShirt),
                 ClothingSize.L,
                 new Quantity(10),
@@ -134,7 +134,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
             
             var item = new MerchItem(
                 new Sku(100500),
-                new Name("some tshirt"),
+                new MerchItemName("some tshirt"),
                 new ItemEntity(ItemType.TShirt),
                 ClothingSize.L,
                 new Quantity(quantity),
@@ -158,7 +158,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
             
             var item = new MerchItem(
                 new Sku(100500),
-                new Name("some tshirt"),
+                new MerchItemName("some tshirt"),
                 new ItemEntity(ItemType.TShirt),
                 ClothingSize.L,
                 new Quantity(quantity),
@@ -181,7 +181,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
             
             var item = new MerchItem(
                 new Sku(100500),
-                new Name("some tshirt"),
+                new MerchItemName("some tshirt"),
                 new ItemEntity(ItemType.TShirt),
                 ClothingSize.L,
                 new Quantity(quantity),
@@ -204,7 +204,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
             
             var item = new MerchItem(
                 new Sku(100500),
-                new Name("some tshirt"),
+                new MerchItemName("some tshirt"),
                 new ItemEntity(ItemType.TShirt),
                 ClothingSize.L,
                 new Quantity(quantity),
@@ -227,7 +227,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
             
             var item = new MerchItem(
                 new Sku(100500),
-                new Name("some tshirt"),
+                new MerchItemName("some tshirt"),
                 new ItemEntity(ItemType.TShirt),
                 ClothingSize.L,
                 new Quantity(quantity),
@@ -248,7 +248,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
         {
            Assert.Throws<ClothingSizeException>(() => new MerchItem(
                 new Sku(100500),
-                new Name("some tshirt"),
+                new MerchItemName("some tshirt"),
                 new ItemEntity(ItemType.TShirt),
                 null,
                 new Quantity(10),
@@ -262,7 +262,7 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
         {
             Assert.Throws<ClothingSizeException>(() => new MerchItem(
                 new Sku(100500),
-                new Name("some bag"),
+                new MerchItemName("some bag"),
                 new ItemEntity(ItemType.Bag),
                 ClothingSize.M, 
                 new Quantity(10),

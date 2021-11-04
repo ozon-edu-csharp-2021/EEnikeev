@@ -11,7 +11,7 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
         #region Properties
 
         public Sku Sku { get; }
-        public Name Name { get; }
+        public MerchItemName Name { get; }
         public ItemEntity Type { get; }
         public ClothingSize ClothingSize { get; }
         public Quantity Quantity { get; private set; }
@@ -21,7 +21,7 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
         #endregion
 
         public MerchItem(Sku sku, 
-            Name name, 
+            MerchItemName name, 
             ItemEntity type, 
             ClothingSize clothingSize, 
             Quantity quantity, 
@@ -82,7 +82,7 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
             return sku;
         }
 
-        Name ValidateName(Name name)
+        MerchItemName ValidateName(MerchItemName name)
         {
             if (name == null || name.Value is null) throw new ArgumentNullException(
                 "Name cannot be null");

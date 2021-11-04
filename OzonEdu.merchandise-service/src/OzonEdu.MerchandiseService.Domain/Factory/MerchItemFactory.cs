@@ -10,7 +10,7 @@ namespace OzonEdu.MerchandiseService.Domain.Factory
         {
             return new MerchItem(
                 new Sku(10),
-                new Name("Some tshirt"),
+                new MerchItemName("Some tshirt"),
                 new ItemEntity(ItemType.TShirt),
                 size, 
                 new Quantity(count),
@@ -37,7 +37,7 @@ namespace OzonEdu.MerchandiseService.Domain.Factory
         {
             return new MerchItem(
                 new Sku(20),
-                new Name("Some sweatshirt"),
+                new MerchItemName("Some sweatshirt"),
                 new ItemEntity(ItemType.Sweatshirt),
                 size, 
                 new Quantity(count),
@@ -64,7 +64,7 @@ namespace OzonEdu.MerchandiseService.Domain.Factory
         {
             return new MerchItem(
                 new Sku(30),
-                new Name("Some notepad"),
+                new MerchItemName("Some notepad"),
                 new ItemEntity(ItemType.Notepad),
                 null, 
                 new Quantity(count),
@@ -91,7 +91,7 @@ namespace OzonEdu.MerchandiseService.Domain.Factory
         {
             return new MerchItem(
                 new Sku(40),
-                new Name("Some bag"),
+                new MerchItemName("Some bag"),
                 new ItemEntity(ItemType.Bag),
                 null, 
                 new Quantity(count),
@@ -118,7 +118,7 @@ namespace OzonEdu.MerchandiseService.Domain.Factory
         {
             return new MerchItem(
                 new Sku(50),
-                new Name("Some pen"),
+                new MerchItemName("Some pen"),
                 new ItemEntity(ItemType.Pen),
                 null, 
                 new Quantity(count),
@@ -145,7 +145,7 @@ namespace OzonEdu.MerchandiseService.Domain.Factory
         {
             return new MerchItem(
                 new Sku(60),
-                new Name("Some socks"),
+                new MerchItemName("Some socks"),
                 new ItemEntity(ItemType.Socks),
                 null, 
                 new Quantity(count),
