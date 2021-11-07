@@ -23,11 +23,12 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Factory
             return new Employee(_id++,
                 new EmployeeName(firstName),
                 new EmployeeName(lastName),
-                new PositionEntity(Position.Manager),
+                new EmployeeDateTime(DateTime.Now),
                 new EmployeeEmail(firstName + lastName + "@ozon.ru"),
                 //EmployeeClothingSize.M, 
                 null,
-                new MerchIssued(false)
+                new MerchIssued(false),
+                null
             );
         }
         
