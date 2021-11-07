@@ -19,7 +19,6 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
         public EmployeeEmail Email { get; }
         public EmployeeMerchPack Merch { get; private set; }
         public MerchIssued MerchIsGiven { get; private set; }
-        
         public EmployeeDateTime MerchGivenDate { get; private set; }
         
         #endregion
@@ -37,7 +36,6 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
             Id = id;
             FirstName = ValidateName(firstName);
             LastName = ValidateName(lastName);
-            //Position = ValidatePosition(position);
             HiringDate = ValidateHiringDate(hiringDate);
             Email = ValidateEmail(email);
             Merch = ValidateMerch(merch);
@@ -104,11 +102,6 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
             return name;
         }
 
-        PositionEntity ValidatePosition(PositionEntity position)
-        {
-            if (position is null || position.Position is null) throw new ArgumentNullException("Employee position cannot be null");
-            return position;
-        }
         
         EmployeeDateTime ValidateHiringDate(EmployeeDateTime hiringDate)
         {

@@ -94,32 +94,6 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.EmployeeTests
                 null));
         }
         
-        /*[Fact]
-        public void CreateEmployeeWithNullPosition()
-        {
-            Assert.Throws<ArgumentNullException>(() => new Employee(
-                100500,
-                new EmployeeName("first"),
-                new EmployeeName("last"),
-                null,
-                new EmployeeEmail("employee@ozon.ru"),
-                null,
-                new MerchIssued(false)));
-        }
-        
-        [Fact]
-        public void CreateEmployeeWithNullPositionType()
-        {
-            Assert.Throws<ArgumentNullException>(() => new Employee(
-                100500,
-                new EmployeeName("first"),
-                new EmployeeName("last"),
-                new PositionEntity(null),
-                new EmployeeEmail("employee@ozon.ru"),
-                null,
-                new MerchIssued(false)));
-        }*/
-        
         [Fact]
         public void CreateEmployeeWithNullEmail()
         {
