@@ -6,7 +6,7 @@ COPY ["src/OzonEdu.MerchandiseService/OzonEdu.MerchandiseService.csproj","src/Oz
 
 RUN dotnet restore "src/OzonEdu.MerchandiseService/OzonEdu.MerchandiseService.csproj"
 
-Copy . . \
+Copy . . 
     
 WORKDIR "/src/src/OzonEdu.MerchandiseService"
 
