@@ -7,12 +7,18 @@ namespace OzonEdu.MerchandiseService.Migrator.Migrations
     {
         public override void Up()
         {
-            throw new System.NotImplementedException();
+            Execute.Sql(@"
+                CREATE TABLE if not exists skus(
+                    id BIGSERIAL PRIMARY KEY,
+                    name TEXT NOT NULL,
+                    item_type_id INT NOT NULL,
+                    clothing_size INT);"
+            );
         }
 
         public override void Down()
         {
-            throw new System.NotImplementedException();
+            Execute.Sql("DROP TABLE if exists skus;");
         }
     }
 }
