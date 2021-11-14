@@ -1,8 +1,9 @@
-﻿using System;
+﻿using System.Linq;
 using System.IO;
 using FluentMigrator.Runner;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Npgsql;
 
 namespace OzonEdu.MerchandiseService.Migrator
 {
@@ -27,13 +28,23 @@ namespace OzonEdu.MerchandiseService.Migrator
                         .ScanIn(typeof(Program).Assembly)
                         .For.Migrations());
 
-            var serviceProvider = services.BuildServiceProvider();
+            var serviceProvider = services.BuildServiceProvider(false);
 
             using (serviceProvider.CreateScope())
             {
                 var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
-                runner.MigrateUp();
+                if (args.Contains("--dryrun"))
+                {
+                    runner.ListMigrations();
+                }
+                else
+                {
+                    runner.MigrateUp();
+                }
 
+                using var connection = new NpgsqlConnection(connectionString);
+                connection.Open();
+                connection.ReloadTypes();
             }
         }
     }

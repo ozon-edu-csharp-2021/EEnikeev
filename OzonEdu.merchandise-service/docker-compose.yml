@@ -13,11 +13,15 @@ services:
     build: 
       context: .
       dockerfile: ./Dockerfile
+    hostname: merchandise-service
     ports:
-      - "8080:80"
+      - "5070:5000"
+      - "5072:5002"
     environment:
       DatabaseConnectionOptions__ConnectionString: "Host=host.docker.internal;Port=5426;Database=merchandise-service;Username=postgres;Password=merchPassword"
     #restart: always
+    depends_on:
+      - merchandise-service-db
 
   merchandise-service-db:
     image: postgres:latest
@@ -26,7 +30,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: merchPassword
-      POSTGRES_DB: merch-service
+      POSTGRES_DB: merchandise-service
     command: "-c log_statement=all"
       
 #  emailing-service:
