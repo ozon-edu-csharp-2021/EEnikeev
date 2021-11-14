@@ -2,7 +2,7 @@ using FluentMigrator;
 
 namespace OzonEdu.MerchandiseService.Migrator.Migrations
 {
-    [Migration(4)]
+    [Migration(7)]
     public class FillDictionaries:ForwardOnlyMigration
     {
         public override void Up()

@@ -8,7 +8,7 @@ namespace OzonEdu.MerchandiseService.Migrator.Migrations
         public override void Up()
         {
             Execute.Sql(@"
-                CREATE TABLE if not exists skus(
+                CREATE TABLE skus(
                     id BIGSERIAL PRIMARY KEY,
                     name TEXT NOT NULL,
                     item_type_id INT NOT NULL,
