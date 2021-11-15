@@ -10,10 +10,16 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate
         public IUnitOfWork UnitOfWork { get; }
         
         Task<int> CreateAsync(Employee employee, CancellationToken cancellationToken = default);
+        
         Task<Employee> UpdateAsync(Employee employee, CancellationToken cancellationToken = default);
+        
         Task<Employee> FindByIdAsync(int id, CancellationToken cancellationToken = default);
+        
         Task DeleteAsync(int id, CancellationToken token = default);
+        
         Task<IEnumerable<Employee>> GetWaitingMerchEmployeesAsync(CancellationToken token = default);
+
+        Task<IReadOnlyList<Employee>> GetAllAsync(CancellationToken token = default);
 
     }
 }

@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
+using OzonEdu.MerchandiseService.Infrastructure.Configuration;
 using OzonEdu.MerchandiseService.Infrastructure.DomainServices;
 using OzonEdu.MerchandiseService.Infrastructure.DomainServices.Interfaces;
 using OzonEdu.MerchandiseService.Infrastructure.Handlers;
@@ -10,13 +11,14 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection service)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-            service.AddMediatR(typeof(GiveOutMerchItemCommandHandler).Assembly);
-            service.AddSingleton<IEmployeeRepository, EmployeeRepositoryMock>();
-            service.AddScoped<IStockRepository, StockRepositoryMock>();
-            service.AddTransient<IMerchManagerDomainService, MerchManagerDomainService>();
-            return service;
+            services.AddMediatR(typeof(GiveOutMerchItemCommandHandler).Assembly);
+            
+            services.AddSingleton<IEmployeeRepository, EmployeeRepositoryMock>();
+            services.AddScoped<IStockRepository, StockRepositoryMock>();
+            services.AddTransient<IMerchManagerDomainService, MerchManagerDomainService>();
+            return services;
         }
     }
 
