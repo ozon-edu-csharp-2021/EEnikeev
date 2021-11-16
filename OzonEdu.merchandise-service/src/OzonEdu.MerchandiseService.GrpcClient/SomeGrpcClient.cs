@@ -16,21 +16,42 @@ namespace OzonEdu.MerchandiseService.GrpcClient
 
             try
             {
-                // запрашиваем все товары и информацию о выдаче
-                for (int i = 0; i < 5; i++)
+                for (int i = 4; i < 7; i++)
                 {
-                    var item = await client.GetMerchByIdAsync(new GetMerchItemByIdRequest { ItemId = i },
+                    var result = await client.GetMerchIsIssuedAsync(
+                        new GetMerchItemIsGivenRequest() { EmployeeId = i, MerchId = 10 }, 
                         cancellationToken: CancellationToken.None);
-                    if (item.ItemName == null) continue;
-
-                    var result = await client.GetMerchIsIssuedByIdAsync(new GetMerchItemByIdRequest { ItemId = i },
+                    
+                    Console.WriteLine($"Проверка, выдан ли мерч сотруднику id={i}...");
+                    
+                    if (result.IsIssued)
+                    {
+                        Console.WriteLine("Мерч выдан, выдача не требуется.");
+                        Console.WriteLine();
+                        continue;
+                    }
+                    
+                    Console.WriteLine("Мерч не выдан, мерч выдается...");
+                    
+                    await client.GiveMerchToEmployeeAsync(
+                        new GiveMerchItemRequest() { EmployeeId = i, MerchId = 10, ClothingSizeId = 2 }, 
                         cancellationToken: CancellationToken.None);
-                    if (result.IsIssued == null) continue;
-
-                    Console.WriteLine($"Мерч {item.ItemId}: {item.ItemName}");
-                    Console.WriteLine($"Выдан: {result.IsIssued}");
+                    
+                    result = await client.GetMerchIsIssuedAsync(
+                        new GetMerchItemIsGivenRequest() { EmployeeId = i, MerchId = 10 }, 
+                        cancellationToken: CancellationToken.None);
+                    
+                    if (result.IsIssued)
+                    {
+                        Console.WriteLine("Мерч успешно выдан!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Не удалось выдать мерч");
+                    }
                     Console.WriteLine();
                 }
+
 
             }
             catch (RpcException e)

@@ -1,8 +1,10 @@
 using System.Threading;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OzonEdu.MerchandiseService.HttpModels;
-using OzonEdu.MerchandiseService.Services.Interfaces;
+using OzonEdu.MerchandiseService.Infrastructure.Commands.GetMerchIsIssued;
+using OzonEdu.MerchandiseService.Infrastructure.Commands.GiveOutMerchItem;
 
 namespace OzonEdu.MerchandiseService.Controllers
 {
@@ -11,55 +13,43 @@ namespace OzonEdu.MerchandiseService.Controllers
     [Produces("application/json")]
     public class MerchController : ControllerBase
     {
-        private readonly IMerchandiseService _merchService;
-
-        public MerchController(IMerchandiseService merchService)
+        
+        private readonly IMediator _mediator;
+        
+        public MerchController(IMediator mediator)
         {
-            _merchService = merchService;
+            _mediator = mediator;
         }
 
-        /// <summary> Возвращает мерч по указанному идентификатору</summary>
-        [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
-        [HttpGet]
-        [Route("GetMerch/{id:long}")]
-        public async Task<ActionResult<MerchItemResponse>> GetMerchById(long id, CancellationToken token)
+
+        
+        /// <summary> Выдает мерч сотруднику </summary>
+
+        [HttpPost]
+        [Route("GiveMerchToEmployee")]
+        public async Task GiveMerchToEmployee(GiveMerchItemRequest request,
+            CancellationToken token)
         {
-            var merchItem = await _merchService.GetMerchById(id, token);
+            var command = new GiveMerchItemCommand(request.employeeId, request.merchId, request.sizeId);
+            await _mediator.Send(command);
 
-            if (merchItem is null)
-            {
-                return NotFound();
-            }
-
-            var response = new MerchItemResponse()
-            {
-                Id = merchItem.Id,
-                Name = merchItem.Name
-            };
-
-            return Ok(response);
-
+            return;
         }
         
-        /// <summary> Возвращает информацию о выдаче мерча с указанным Id  </summary>
-        [ProducesResponseType(200)]
-        [ProducesResponseType(404)]
-        [HttpGet]
-        [Route("GetMerchIsIssued/{id:long}")]
-        public async Task<ActionResult<MerchItemResponse>> GetMerchIsIssuedById(long id, CancellationToken token)
+        /// <summary> Вызвращает информацию о том, был ли выдан мерч </summary>
+        [HttpPost]
+        [Route("GetMerchIsIssued")]
+        public async Task<bool> GetMerchIsIssued(GetMerchItemIsGivenRequest request,
+            CancellationToken token)
         {
-            var isIssued = await _merchService.GetMerchIsIssuedById(id, token);
+            var command = new GetMerchIsIssuedCommand(request.EmployeeId, request.MerchId);
+            var isIssued = await _mediator.Send(command);
 
-            if (isIssued is null)
-            {
-                return NotFound();
-            }
-
-            return Ok(isIssued);
+            return isIssued;
         }
-        
-        
-        
+
+
+
+
     }
 }

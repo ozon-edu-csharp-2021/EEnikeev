@@ -1,4 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,18 +20,22 @@ namespace OzonEdu.MerchandiseService.HttpClient
             _httpClient = httpClient;
         }
 
-        public async Task<MerchItemResponse> GetMerchById(long id, CancellationToken token)
+        public async Task GiveMerchToEmployee(GiveMerchItemRequest request, CancellationToken token)
         {
-            using var response = await _httpClient.GetAsync($"v1/api/merch/GetMerch/{id}", token);
-            var body = await response.Content.ReadAsStringAsync(token);
-            return JsonSerializer.Deserialize<MerchItemResponse>(body, 
-                new JsonSerializerOptions { PropertyNameCaseInsensitive = true});
+            var content = JsonSerializer.Serialize(request);
+            var stringcontent = new StringContent(content, Encoding.UTF8, "application/json");
             
+            var response = await _httpClient.PostAsync("v1/api/merch/GiveMerchToEmployee", stringcontent, token);
+
+
         }
         
-        public async Task<bool> GetMerchIsIssuedById(long id, CancellationToken token)
+        public async Task<bool> GetMerchIsIssued(GetMerchItemIsGivenRequest request, CancellationToken token)
         {
-            using var response = await _httpClient.GetAsync($"v1/api/merch/GetMerchIsIssued/{id}", token);
+            var content = JsonSerializer.Serialize(request);
+            var stringcontent = new StringContent(content, Encoding.UTF8, "application/json");
+            
+            using var response = await _httpClient.PostAsync("v1/api/merch/GetMerchIsIssued", stringcontent, token);
             var body = await response.Content.ReadAsStringAsync(token);
             return Boolean.Parse(body);
         }
