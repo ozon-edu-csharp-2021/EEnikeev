@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -48,7 +49,8 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Repositories.Implementation
 
         public async Task<IReadOnlyList<Employee>> GetAllAsync(CancellationToken token = default)
         {
-            const string sql = @"
+            throw new NotImplementedException();
+            /*const string sql = @"
                 SELECT employees.id, employees.firstname, employees.lastname
                 FROM employees";
             
@@ -56,7 +58,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Repositories.Implementation
 
             var result = await connection.QueryAsync<DtoModels.Employee>(sql);
 
-            return Task.FromResult(null);
+            return Task.FromResult(null);*/
         }
     }
 }

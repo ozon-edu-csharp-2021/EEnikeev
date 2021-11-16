@@ -14,7 +14,6 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Factory
                 new ItemEntity(ItemType.TShirt),
                 size, 
                 new Quantity(count),
-                new MinimalQuantity(0),
                 new Tag("tshirts"));
         }
         
@@ -41,7 +40,6 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Factory
                 new ItemEntity(ItemType.Sweatshirt),
                 size, 
                 new Quantity(count),
-                new MinimalQuantity(0),
                 new Tag("sweatshirts"));
         }
         
@@ -68,7 +66,6 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Factory
                 new ItemEntity(ItemType.Notepad),
                 null, 
                 new Quantity(count),
-                new MinimalQuantity(0),
                 new Tag("notepads"));
         }
         
@@ -95,7 +92,6 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Factory
                 new ItemEntity(ItemType.Bag),
                 null, 
                 new Quantity(count),
-                new MinimalQuantity(0),
                 new Tag("bags"));
         }
         
@@ -122,7 +118,6 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Factory
                 new ItemEntity(ItemType.Pen),
                 null, 
                 new Quantity(count),
-                new MinimalQuantity(0),
                 new Tag("pens"));
         }
         
@@ -149,10 +144,10 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Factory
                 new ItemEntity(ItemType.Socks),
                 null, 
                 new Quantity(count),
-                new MinimalQuantity(0),
                 new Tag("socks"));
         }
 
         #endregion
+        
     }
 }
