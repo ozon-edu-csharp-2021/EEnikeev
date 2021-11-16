@@ -6,7 +6,9 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Repositories.DtoModels
         
         public long SkuId { get; set; }
         
-        public int Quantity { get; set; }
+        public string Name { get; set; }
+        
+        public int ClothingSizeId { get; set; }
 
     }
 }

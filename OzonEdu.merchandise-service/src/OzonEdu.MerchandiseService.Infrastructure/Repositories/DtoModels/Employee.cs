@@ -4,7 +4,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Repositories.DtoModels
 {
     public class Employee
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         
         public string FirstName { get; set; }
         
@@ -12,6 +12,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Repositories.DtoModels
         
         public DateTime HiringDate { get; set; }
         
-        public bool IsGiven { get; set; }
+        public string Email { get; set; }
+
     }
 }

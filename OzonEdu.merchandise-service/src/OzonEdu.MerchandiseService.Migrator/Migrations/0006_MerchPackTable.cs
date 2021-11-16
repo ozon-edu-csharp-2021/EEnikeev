@@ -3,7 +3,7 @@ using FluentMigrator;
 namespace OzonEdu.MerchandiseService.Migrator.Migrations
 {
     [Migration(6)]
-    public class MerchPackTable:Migration
+    public class MerchPackTable : Migration
     {
         public override void Up()
         {

@@ -9,10 +9,7 @@ namespace OzonEdu.MerchandiseService.Migrator.Migrations
         {
             Execute.Sql(@"
                 CREATE TABLE skus(
-                    id BIGSERIAL PRIMARY KEY,
-                    name TEXT NOT NULL,
-                    item_type_id INT NOT NULL,
-                    clothing_size INT);"
+                    id BIGSERIAL PRIMARY KEY);"
             );
         }
 

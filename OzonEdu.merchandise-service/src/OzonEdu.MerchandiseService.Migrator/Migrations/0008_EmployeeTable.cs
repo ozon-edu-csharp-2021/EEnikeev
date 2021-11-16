@@ -2,7 +2,7 @@ using FluentMigrator;
 
 namespace OzonEdu.MerchandiseService.Migrator.Migrations
 {
-    [Migration(9)]
+    [Migration(8)]
     public class EmployeeTable : Migration 
     {
         public override void Up()
