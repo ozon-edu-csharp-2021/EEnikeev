@@ -8,6 +8,7 @@ namespace OzonEdu.MerchandiseService.Migrator.Migrations
         public override void Up()
         {
             Create.Table("employee")
+                .WithColumn("id").AsInt64().Identity().PrimaryKey()
                 .WithColumn("firstname").AsString().NotNullable()
                 .WithColumn("lastname").AsString().NotNullable()
                 .WithColumn("hiring_date").AsDateTime().NotNullable()

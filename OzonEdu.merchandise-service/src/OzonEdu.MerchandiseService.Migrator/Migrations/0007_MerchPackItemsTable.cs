@@ -7,12 +7,16 @@ namespace OzonEdu.MerchandiseService.Migrator.Migrations
     {
         public override void Up()
         {
-            throw new System.NotImplementedException();
+            Create.Table("merch_pack_items")
+                .WithColumn("id").AsInt32().Identity().PrimaryKey()
+                .WithColumn("pack_id").AsInt32()
+                .WithColumn("merch_item_id").AsInt64()
+                .WithColumn("quantity").AsInt32();
         }
 
         public override void Down()
         {
-            throw new System.NotImplementedException();
+            Delete.Table("merch_pack_items");
         }
     }
 }

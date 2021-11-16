@@ -13,7 +13,7 @@ namespace OzonEdu.MerchandiseService.Migrator.Migrations
                             name TEXT NOT NULL);");*/
 
             Create.Table("merch_packs")
-                .WithColumn("id").AsInt64().Identity().PrimaryKey()
+                .WithColumn("id").AsInt32().Identity().PrimaryKey()
                 .WithColumn("Name").AsString().NotNullable();
         }
 

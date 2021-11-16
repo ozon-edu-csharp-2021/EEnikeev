@@ -10,7 +10,7 @@ namespace OzonEdu.MerchandiseService.Migrator.Migrations
             Create.Table("merch_pack_order")
                 .WithColumn("id").AsInt64().Identity().PrimaryKey()
                 .WithColumn("employee_id").AsInt64()
-                .WithColumn("merch_pack_id").AsInt64()
+                .WithColumn("merch_pack_id").AsInt32()
                 .WithColumn("is_given").AsBoolean()
                 .WithColumn("giving_date").AsDateTime();
         }
