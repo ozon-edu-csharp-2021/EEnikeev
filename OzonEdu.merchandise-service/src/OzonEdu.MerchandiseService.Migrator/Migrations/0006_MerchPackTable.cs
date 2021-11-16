@@ -2,7 +2,7 @@ using FluentMigrator;
 
 namespace OzonEdu.MerchandiseService.Migrator.Migrations
 {
-    [Migration(5)]
+    [Migration(6)]
     public class MerchPackTable:Migration
     {
         public override void Up()
@@ -14,8 +14,7 @@ namespace OzonEdu.MerchandiseService.Migrator.Migrations
 
             Create.Table("merch_packs")
                 .WithColumn("id").AsInt64().Identity().PrimaryKey()
-                .WithColumn("Name").AsString().NotNullable()
-                .WithColumn("merch_items").AsInt64();
+                .WithColumn("Name").AsString().NotNullable();
         }
 
         public override void Down()
