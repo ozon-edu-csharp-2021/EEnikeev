@@ -19,7 +19,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Repositories.Implementation
         }
 
         private const int Timeout = 5;
-        
+
         public async Task<bool> GetMerchIsGiven(GetMerchIsIssuedCommand request, CancellationToken token)
         {
             string sql = @"
@@ -44,8 +44,11 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Repositories.Implementation
             var connection = await _dbConnectionFactory.CreateConnection(token);
 
             var result = await connection.QueryAsync<bool>(commandDefinition);
-
-            return result.First();
+            
+            var enumerable = result as bool[] ?? result.ToArray();
+            if (!enumerable.Any()) return false;
+            else
+                return enumerable.First();
 
         }
 
