@@ -14,7 +14,7 @@ namespace OzonEdu.MerchandiseService.Migrator.Migrations
 
             Create.Table("merch_packs")
                 .WithColumn("id").AsInt32().Identity().PrimaryKey()
-                .WithColumn("Name").AsString().NotNullable();
+                .WithColumn("name").AsString().NotNullable();
         }
 
         public override void Down()

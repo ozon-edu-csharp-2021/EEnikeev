@@ -7,7 +7,7 @@ namespace OzonEdu.MerchandiseService.Migrator.Migrations
     {
         public override void Up()
         {
-            Create.Table("merch_pack_order")
+            Create.Table("merch_pack_orders")
                 .WithColumn("id").AsInt64().Identity().PrimaryKey()
                 .WithColumn("employee_id").AsInt64().NotNullable()
                 .WithColumn("merch_pack_id").AsInt32().NotNullable()
@@ -17,7 +17,7 @@ namespace OzonEdu.MerchandiseService.Migrator.Migrations
 
         public override void Down()
         {
-            Delete.Table("merch_pack_order");
+            Delete.Table("merch_pack_orders");
         }
     }
 }

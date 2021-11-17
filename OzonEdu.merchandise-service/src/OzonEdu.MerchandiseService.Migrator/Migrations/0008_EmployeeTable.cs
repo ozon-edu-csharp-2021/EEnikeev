@@ -7,7 +7,7 @@ namespace OzonEdu.MerchandiseService.Migrator.Migrations
     {
         public override void Up()
         {
-            Create.Table("employee")
+            Create.Table("employees")
                 .WithColumn("id").AsInt64().Identity().PrimaryKey()
                 .WithColumn("firstname").AsString().NotNullable()
                 .WithColumn("lastname").AsString().NotNullable()
@@ -17,7 +17,7 @@ namespace OzonEdu.MerchandiseService.Migrator.Migrations
 
         public override void Down()
         {
-            Delete.Table("employee");
+            Delete.Table("employees");
         }
     }
 }
