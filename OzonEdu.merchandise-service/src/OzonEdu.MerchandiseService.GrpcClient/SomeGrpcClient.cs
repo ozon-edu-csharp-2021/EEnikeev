@@ -52,9 +52,22 @@ namespace OzonEdu.MerchandiseService.GrpcClient
                     Console.WriteLine();
                 }*/
 
-                var result = await client.GetMerchIsIssuedAsync(
+                /*var result = await client.GetMerchIsIssuedAsync(
                     new GetMerchItemIsGivenRequest() { EmployeeId = 1, MerchId = 10 }, 
-                    cancellationToken: CancellationToken.None);
+                    cancellationToken: CancellationToken.None);*/
+
+                int merchId = 10;
+                Console.WriteLine();
+                for (int i = 1; i < 6; i++)
+                {
+                    Console.WriteLine($"Проверка выдачи мерча id={merchId} сотруднику id={i}" );
+                    var result = await client.GetMerchIsIssuedAsync(
+                        new GetMerchItemIsGivenRequest() { EmployeeId = i, MerchId = merchId }, 
+                        cancellationToken: CancellationToken.None);
+                    Console.WriteLine($"Проверка завершена: мерч id={merchId} сотруднику id={i} {(result.IsIssued?"":"НЕ ")}выдавался");
+                    Console.WriteLine();
+                }
+                Console.WriteLine();
             }
             catch (RpcException e)
             {
