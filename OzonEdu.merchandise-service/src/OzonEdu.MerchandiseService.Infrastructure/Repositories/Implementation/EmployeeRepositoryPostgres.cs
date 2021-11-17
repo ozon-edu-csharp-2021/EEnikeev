@@ -27,6 +27,9 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Repositories.Implementation
         public Task<int> CreateAsync(Employee employee, CancellationToken cancellationToken = default)
         {
             throw new System.NotImplementedException();
+            string sql = @"
+                        INSERT INTO employees
+                        (id, firstname, lastname, hiring_date, email)";
         }
 
         public Task<Employee> UpdateAsync(Employee employee, CancellationToken cancellationToken = default)

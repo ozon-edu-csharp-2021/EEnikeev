@@ -12,7 +12,7 @@ namespace OzonEdu.MerchandiseService.Migrator.Migrations
                 .WithColumn("id").AsInt64().Identity().PrimaryKey()
                 .WithColumn("sku_id").AsInt64().NotNullable()
                 .WithColumn("item_type_id").AsInt32().NotNullable()
-                .WithColumn("clothing_size_id").AsInt32();
+                .WithColumn("clothing_size_id").AsInt32().Nullable();
         }
 
         public override void Down()

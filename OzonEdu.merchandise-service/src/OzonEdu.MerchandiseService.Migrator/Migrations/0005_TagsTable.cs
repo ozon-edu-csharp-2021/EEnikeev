@@ -10,7 +10,7 @@ namespace OzonEdu.MerchandiseService.Migrator.Migrations
             Create.Table("tags")
                 .WithColumn("id").AsInt64().Identity().PrimaryKey()
                 .WithColumn("merch_item_id").AsInt64().NotNullable()
-                .WithColumn("tag").AsString();
+                .WithColumn("tag").AsString().Nullable();
         }
 
         public override void Down()
