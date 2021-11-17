@@ -38,8 +38,11 @@ namespace OzonEdu.MerchandiseService.Infrastructure.DomainServices
 
         public async Task<bool> GetMerchIsIssuedAsync(GetMerchIsIssuedCommand request, CancellationToken token)
         {
-            var employee = await GetEmployeeByIdAsync(request.EmployeeId, token);
-            return employee.IsGiven(request.MerchId);
+            var result = _employeeRepository.GetAllAsync(token);
+            return result.IsCompleted;
+
+            //var employee = await GetEmployeeByIdAsync(request.EmployeeId, token);
+            //return employee.IsGiven(request.MerchId);
         }
         
         public async Task<Employee> GiveMerchAsync(GiveMerchItemCommand request, CancellationToken token)

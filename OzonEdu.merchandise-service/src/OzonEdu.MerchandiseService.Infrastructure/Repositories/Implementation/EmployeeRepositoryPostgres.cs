@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Dapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Npgsql;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
@@ -11,11 +13,11 @@ using OzonEdu.MerchandiseService.Infrastructure.Repositories.Infrastructure.Inte
 
 namespace OzonEdu.MerchandiseService.Infrastructure.Repositories.Implementation
 {
-    public class EmployeeRepository : IEmployeeRepository
+    public class EmployeeRepositoryPostgres : IEmployeeRepository
     {
         private readonly IDbConnectionFactory<NpgsqlConnection> _dbConnectionFactory;
         
-        public EmployeeRepository(IDbConnectionFactory<NpgsqlConnection> dbConnectionFactory)
+        public EmployeeRepositoryPostgres(IDbConnectionFactory<NpgsqlConnection> dbConnectionFactory)
         {
             _dbConnectionFactory = dbConnectionFactory;
         }
@@ -49,16 +51,15 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Repositories.Implementation
 
         public async Task<IReadOnlyList<Employee>> GetAllAsync(CancellationToken token = default)
         {
-            throw new NotImplementedException();
-            /*const string sql = @"
-                SELECT employees.id, employees.firstname, employees.lastname
+            const string sql = @"
+                SELECT employees.id, employees.firstname, employees.lastname, employees.hiring_date, employees.email
                 FROM employees";
             
             var connection = await _dbConnectionFactory.CreateConnection(token);
 
             var result = await connection.QueryAsync<DtoModels.Employee>(sql);
 
-            return Task.FromResult(null);*/
+            throw new Exception();
         }
     }
 }

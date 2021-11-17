@@ -16,10 +16,9 @@ services:
     hostname: merchandise-service
     ports:
       - "5070:5000"
-      - "5072:5002"
+      - "5071:5001"
     environment:
       DatabaseConnectionOptions__ConnectionString: "Host=host.docker.internal;Port=5426;Database=merchandise-service;Username=postgres;Password=merchPassword"
-    #restart: always
     depends_on:
       - merchandise-service-db
 

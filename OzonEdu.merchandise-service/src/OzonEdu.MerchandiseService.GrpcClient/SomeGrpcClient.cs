@@ -16,7 +16,7 @@ namespace OzonEdu.MerchandiseService.GrpcClient
 
             try
             {
-                for (int i = 4; i < 7; i++)
+                /*for (int i = 4; i < 7; i++)
                 {
                     var result = await client.GetMerchIsIssuedAsync(
                         new GetMerchItemIsGivenRequest() { EmployeeId = i, MerchId = 10 }, 
@@ -50,9 +50,11 @@ namespace OzonEdu.MerchandiseService.GrpcClient
                         Console.WriteLine("Не удалось выдать мерч");
                     }
                     Console.WriteLine();
-                }
+                }*/
 
-
+                var result = await client.GetMerchIsIssuedAsync(
+                    new GetMerchItemIsGivenRequest() { EmployeeId = 1, MerchId = 10 }, 
+                    cancellationToken: CancellationToken.None);
             }
             catch (RpcException e)
             {

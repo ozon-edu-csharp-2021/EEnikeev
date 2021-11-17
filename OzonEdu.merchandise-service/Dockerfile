@@ -21,7 +21,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS runtime
 WORKDIR /app
 
 EXPOSE 5000
-EXPOSE 5002
+EXPOSE 5001
 
 FROM runtime AS final
 
