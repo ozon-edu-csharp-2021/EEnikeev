@@ -10,9 +10,9 @@ namespace OzonEdu.MerchandiseService.Migrator.Migrations
             Create.Table("merch_pack_orders")
                 .WithColumn("id").AsInt64().Identity().PrimaryKey()
                 .WithColumn("employee_id").AsInt64().NotNullable()
-                .WithColumn("merch_pack_id").AsInt32().NotNullable()
+                .WithColumn("merch_pack_id").AsInt32()
                 .WithColumn("is_given").AsBoolean().NotNullable()
-                .WithColumn("giving_date").AsDateTime();
+                .WithColumn("giving_date").AsString();
         }
 
         public override void Down()

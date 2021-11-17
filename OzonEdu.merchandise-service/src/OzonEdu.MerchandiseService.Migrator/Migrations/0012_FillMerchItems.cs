@@ -10,7 +10,7 @@ namespace OzonEdu.MerchandiseService.Migrator.Migrations
             // заполняем все типы мерчей
             Execute.Sql(@"
                 INSERT INTO merch_items
-                (id, sku_id, name, clothing_size_id)
+                (id, sku_id, item_type_id, clothing_size_id)
                 VALUES
                 
                 (1,1,1,1),
