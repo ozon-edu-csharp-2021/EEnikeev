@@ -21,12 +21,12 @@ namespace OzonEdu.MerchandiseService.Infrastructure.DomainServices
 
         public async Task GiveMerchAsync(GiveMerchItemCommand request, CancellationToken token)
         {
-            await _repository.GiveMerch(request, token);
+            await _repository.GiveMerchAsync(request, token);
         }
 
         public async Task<bool> GetMerchIsIssuedAsync(GetMerchIsIssuedCommand request, CancellationToken token)
         {
-            var result = await _repository.GetMerchIsGiven(request, token);
+            var result = await _repository.GetMerchIsGivenAsync(request, token);
             return result;
         }
 

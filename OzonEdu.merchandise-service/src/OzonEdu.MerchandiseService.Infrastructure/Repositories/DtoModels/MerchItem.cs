@@ -8,7 +8,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Repositories.DtoModels
         
         public string Name { get; set; }
         
-        public int ClothingSizeId { get; set; }
+        public int ItemTypeId { get; set; }
 
     }
 }

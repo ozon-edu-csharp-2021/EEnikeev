@@ -7,8 +7,8 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Repositories
 {
     public interface IRepository
     {
-        public Task<bool> GetMerchIsGiven(GetMerchIsIssuedCommand request, CancellationToken token);
+        public Task<bool> GetMerchIsGivenAsync(GetMerchIsIssuedCommand request, CancellationToken token);
 
-        public Task GiveMerch(GiveMerchItemCommand request, CancellationToken token);
+        public Task<bool> GiveMerchAsync(GiveMerchItemCommand request, CancellationToken token);
     }
 }
