@@ -16,7 +16,24 @@ namespace OzonEdu.MerchandiseService.GrpcClient
 
             try
             {
-                /*for (int i = 4; i < 7; i++)
+                await GiveMerchesToAll(client);
+            }
+            catch (RpcException e)
+            {
+                Console.WriteLine("ОШИБКА " + e.StatusCode);
+                Console.WriteLine(e.Message);
+            }
+            
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+        }
+
+        static async Task GiveMerches(MerchServiceGrpc.MerchServiceGrpcClient client)
+        {
+            for (int i = 4; i < 7; i++)
                 {
                     var result = await client.GetMerchIsIssuedAsync(
                         new GetMerchItemIsGivenRequest() { EmployeeId = i, MerchId = 10 }, 
@@ -50,36 +67,66 @@ namespace OzonEdu.MerchandiseService.GrpcClient
                         Console.WriteLine("Не удалось выдать мерч");
                     }
                     Console.WriteLine();
-                }*/
-
-                /*var result = await client.GetMerchIsIssuedAsync(
-                    new GetMerchItemIsGivenRequest() { EmployeeId = 1, MerchId = 10 }, 
-                    cancellationToken: CancellationToken.None);*/
-
-                int merchId = 10;
-                Console.WriteLine();
-                for (int i = 1; i < 6; i++)
-                {
-                    Console.WriteLine($"Проверка выдачи мерча id={merchId} сотруднику id={i}" );
-                    var result = await client.GetMerchIsIssuedAsync(
-                        new GetMerchItemIsGivenRequest() { EmployeeId = i, MerchId = merchId }, 
-                        cancellationToken: CancellationToken.None);
-                    Console.WriteLine($"Проверка завершена: мерч id={merchId} сотруднику id={i} {(result.IsIssued?"":"НЕ ")}выдавался");
-                    Console.WriteLine();
                 }
+        }
+
+        static async Task GetMerchIsIssued(MerchServiceGrpc.MerchServiceGrpcClient client, int employeeId = 1, int merchId = 10)
+        {
+            var result = await client.GetMerchIsIssuedAsync(
+                    new GetMerchItemIsGivenRequest() { EmployeeId = employeeId, MerchId = merchId }, 
+                    cancellationToken: CancellationToken.None);
+        }
+
+        static async Task GetMerchIsIssuedAll(MerchServiceGrpc.MerchServiceGrpcClient client, int merchId = 10)
+        {
+            Console.WriteLine();
+            for (int i = 1; i < 6; i++)
+            {
+                Console.WriteLine($"Проверка выдачи мерча id={merchId} сотруднику id={i}" );
+                var result = await client.GetMerchIsIssuedAsync(
+                    new GetMerchItemIsGivenRequest() { EmployeeId = i, MerchId = merchId }, 
+                    cancellationToken: CancellationToken.None);
+                Console.WriteLine($"Проверка завершена: мерч id={merchId} сотруднику id={i} {(result.IsIssued?"":"НЕ ")}выдавался");
                 Console.WriteLine();
             }
-            catch (RpcException e)
+            Console.WriteLine();
+        }
+        
+        static async Task GiveMerchesToAll(MerchServiceGrpc.MerchServiceGrpcClient client, int merchId = 10)
+        {
+            Console.WriteLine();
+            for (int i = 1; i < 6; i++)
             {
-                Console.WriteLine("ОШИБКА " + e.StatusCode);
-                Console.WriteLine(e.Message);
+                Console.WriteLine($"Проверка выдачи мерча id={merchId} сотруднику id={i}" );
+                var result = await client.GetMerchIsIssuedAsync(
+                    
+                    new GetMerchItemIsGivenRequest() { EmployeeId = i, MerchId = merchId }, 
+                    cancellationToken: CancellationToken.None);
+                
+                Console.WriteLine($"Проверка завершена: мерч id={merchId} сотруднику id={i} {(result.IsIssued?"":"НЕ ")}выдавался");
+                
+                Console.WriteLine("Все равно пытаемся вручить мерч...");
+                    
+                await client.GiveMerchToEmployeeAsync(
+                    new GiveMerchItemRequest() { EmployeeId = i, MerchId = merchId, ClothingSizeId = 3 }, 
+                    cancellationToken: CancellationToken.None);
+                    
+                result = await client.GetMerchIsIssuedAsync(
+                    new GetMerchItemIsGivenRequest() { EmployeeId = i, MerchId = merchId }, 
+                    cancellationToken: CancellationToken.None);
+                    
+                if (result.IsIssued)
+                {
+                    Console.WriteLine("Мерч успешно выдан!");
+                }
+                else
+                {
+                    Console.WriteLine("Не удалось выдать мерч");
+                }
+                
+                Console.WriteLine();
             }
-            
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
+            Console.WriteLine();
         }
     }
 }
