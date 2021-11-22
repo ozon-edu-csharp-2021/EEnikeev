@@ -15,7 +15,6 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
         public ItemEntity Type { get; }
         public ClothingSize ClothingSize { get; }
         public Quantity Quantity { get; private set; }
-        public MinimalQuantity MinimalQuantity { get; }
         public Tag Tag { get; }
 
         #endregion
@@ -25,7 +24,6 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
             ItemEntity type, 
             ClothingSize clothingSize, 
             Quantity quantity, 
-            MinimalQuantity minimalQuantity, 
             Tag tag)
         {
             Sku = ValidateSku(sku);
@@ -33,7 +31,6 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
             Type = ValidateItemType(type);
             ClothingSize = ValidateClothingSize(clothingSize);
             Quantity = ValidateQuantity(quantity);
-            MinimalQuantity = ValidateMinimalQuantity(minimalQuantity);
             Tag = ValidateTag(tag);
         }
 
@@ -61,15 +58,16 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
             
             Quantity = new Quantity(this.Quantity.Value - quantityToGiveOut);
 
-            if (MinimalQuantity != null && Quantity.Value <= MinimalQuantity.Value)
-                AddReachedMinimumQuantityDomainEvent(Sku);
+            /*if (MinimalQuantity != null && Quantity.Value <= MinimalQuantity.Value)
+                AddReachedMinimumQuantityDomainEvent(Sku);*/
         }
 
+        /*
         void AddReachedMinimumQuantityDomainEvent(Sku sku)
         {
             var orderStartedDomainEvent = new ReachedMinimumMerchItemQuantityDomainEvent(sku);
             this.AddDomainEvent(orderStartedDomainEvent); 
-        }
+        }*/
         
         
 
@@ -118,13 +116,6 @@ namespace OzonEdu.MerchandiseService.Domain.AggregationModels.MerchItemAggregate
             if (quantity.Value < 0) throw new ArgumentException(
                 "Quantity cannot be less than zero");
             return quantity;
-        }
-
-        MinimalQuantity ValidateMinimalQuantity(MinimalQuantity minimalQuantity)
-        {
-            if (minimalQuantity.Value < 0) throw new ArgumentException(
-                $"Quantity cannot be less than zero: {minimalQuantity}");
-            return minimalQuantity;
         }
 
         Tag ValidateTag(Tag tag)

@@ -8,7 +8,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.DomainServices.Interfaces
 {
     public interface IMerchManagerDomainService
     {
-        Task<Employee> GiveMerchAsync(GiveMerchItemCommand request, CancellationToken token);
+        Task GiveMerchAsync(GiveMerchItemCommand request, CancellationToken token);
 
         Task<bool> GetMerchIsIssuedAsync(GetMerchIsIssuedCommand request, CancellationToken token);
 

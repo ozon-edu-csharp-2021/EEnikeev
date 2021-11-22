@@ -17,7 +17,6 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
                 new ItemEntity(ItemType.Bag),
                 ClothingSize.L,
                 new Quantity(10),
-                new MinimalQuantity(5),
                 new Tag("some tag")));
         }
         
@@ -30,7 +29,6 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
                 new ItemEntity(ItemType.Bag),
                 ClothingSize.L,
                 new Quantity(10),
-                new MinimalQuantity(5),
                 new Tag("some tag")));
         }
         
@@ -43,7 +41,6 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
                 new ItemEntity(ItemType.Bag),
                 ClothingSize.L,
                 new Quantity(10),
-                new MinimalQuantity(5),
                 new Tag("some tag")));
         }
         
@@ -56,7 +53,6 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
                 new ItemEntity(ItemType.Bag),
                 ClothingSize.L,
                 new Quantity(10),
-                new MinimalQuantity(5),
                 new Tag("some tag")));
         }
         
@@ -69,7 +65,6 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
                 null,
                 ClothingSize.L,
                 new Quantity(10),
-                new MinimalQuantity(5),
                 new Tag("some tag")));
         }
         
@@ -82,7 +77,6 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
                 new ItemEntity(null),
                 ClothingSize.L,
                 new Quantity(10),
-                new MinimalQuantity(5),
                 new Tag("some tag")));
         }
         
@@ -95,7 +89,6 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
                 new ItemEntity(ItemType.TShirt),
                 ClothingSize.L,
                 null,
-                new MinimalQuantity(5),
                 new Tag("some tag")));
         }
         
@@ -108,22 +101,9 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
                 new ItemEntity(ItemType.TShirt),
                 ClothingSize.L,
                 new Quantity(-10),
-                new MinimalQuantity(5),
                 new Tag("some tag")));
         }
-        
-        [Fact]
-        public void CreateMerchItemWithNegativeMinimalQuantity()
-        {
-            Assert.Throws<ArgumentException>(() => new MerchItem(
-                new Sku(100500),
-                new MerchItemName("some tshirt"),
-                new ItemEntity(ItemType.TShirt),
-                ClothingSize.L,
-                new Quantity(10),
-                new MinimalQuantity(-5),
-                new Tag("some tag")));
-        }
+       
 
         [Fact]
         public void IncreaseMerchItemQuantitySuccess()
@@ -137,7 +117,6 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
                 new ItemEntity(ItemType.TShirt),
                 ClothingSize.L,
                 new Quantity(quantity),
-                new MinimalQuantity(5),
                 new Tag("some tag"));
             
             // Act
@@ -161,7 +140,6 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
                 new ItemEntity(ItemType.TShirt),
                 ClothingSize.L,
                 new Quantity(quantity),
-                new MinimalQuantity(5),
                 new Tag("some tag"));
             
             // Act
@@ -184,7 +162,6 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
                 new ItemEntity(ItemType.TShirt),
                 ClothingSize.L,
                 new Quantity(quantity),
-                new MinimalQuantity(5),
                 new Tag("some tag"));
             
             // Act
@@ -207,7 +184,6 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
                 new ItemEntity(ItemType.TShirt),
                 ClothingSize.L,
                 new Quantity(quantity),
-                new MinimalQuantity(5),
                 new Tag("some tag"));
             
             // Act
@@ -230,7 +206,6 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
                 new ItemEntity(ItemType.TShirt),
                 ClothingSize.L,
                 new Quantity(quantity),
-                new MinimalQuantity(5),
                 new Tag("some tag"));
             
             // Act
@@ -251,7 +226,6 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
                 new ItemEntity(ItemType.TShirt),
                 null,
                 new Quantity(10),
-                new MinimalQuantity(5),
                 new Tag("some tag")));
 
         }
@@ -265,7 +239,6 @@ namespace OzonEdu.MerchandiseService.Domain.Tests.MerchItemTests
                 new ItemEntity(ItemType.Bag),
                 ClothingSize.M, 
                 new Quantity(10),
-                new MinimalQuantity(5),
                 new Tag("some tag")));
         }
 

@@ -1,17 +1,32 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Npgsql;
 using OzonEdu.MerchandiseService.GrpcServices;
+using OzonEdu.MerchandiseService.Infrastructure.Configuration;
 using OzonEdu.MerchandiseService.Infrastructure.Extensions;
+using OzonEdu.MerchandiseService.Infrastructure.Repositories.Infrastructure;
+using OzonEdu.MerchandiseService.Infrastructure.Repositories.Infrastructure.Interfaces;
 using OzonEdu.MerchandiseService.Services.Interfaces;
 
 namespace OzonEdu.MerchandiseService
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+        
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<DatabaseConnectionOptions>(Configuration.GetSection(nameof(DatabaseConnectionOptions)));
+            services.AddScoped<IDbConnectionFactory<NpgsqlConnection>, NpgsqlConnectionFactory>();
+            
             services.AddSingleton<IMerchandiseService,Services.MerchandiseService>();
             services.AddInfrastructure();
             services.AddGrpc();

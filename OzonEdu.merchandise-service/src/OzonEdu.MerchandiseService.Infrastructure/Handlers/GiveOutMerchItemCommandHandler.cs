@@ -21,8 +21,8 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers
         
         public async Task<Unit> Handle(GiveMerchItemCommand request, CancellationToken cancellationToken)
         {
-            var employee = await _merchManagerDomainService.GiveMerchAsync(request, cancellationToken);
-
+            //var employee = await _merchManagerDomainService.GiveMerchAsync(request, cancellationToken);
+            await _merchManagerDomainService.GiveMerchAsync(request, cancellationToken);
             return Unit.Value;
 
         }
