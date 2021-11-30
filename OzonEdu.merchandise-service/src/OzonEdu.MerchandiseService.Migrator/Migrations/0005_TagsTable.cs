@@ -7,10 +7,17 @@ namespace OzonEdu.MerchandiseService.Migrator.Migrations
     {
         public override void Up()
         {
-            Create.Table("tags")
-                .WithColumn("id").AsInt64().Identity().PrimaryKey()
-                .WithColumn("merch_item_id").AsInt64().NotNullable()
-                .WithColumn("tag").AsString().Nullable();
+            Execute.Sql(@"
+                        CREATE TABLE tags(
+                            id BIGSERIAL PRIMARY KEY,
+                            merch_item_id BIGINT NOT NULL,
+                            tag VARCHAR NULL
+                        );");
+            
+            // Create.Table("tags")
+            //     .WithColumn("id").AsInt64().Identity().PrimaryKey()
+            //     .WithColumn("merch_item_id").AsInt64().NotNullable()
+            //     .WithColumn("tag").AsString().Nullable();
         }
 
         public override void Down()

@@ -59,6 +59,8 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Repositories.Implementation
 
         public async Task<bool> GiveMerchAsync(GiveMerchItemCommand request, CancellationToken token)
         {
+            //todo убрать логику из репозитория
+            
             // проверяем, выдавался ли мерч сотруднику
             var merchPackOrder = await this.GetMerchPackOrder(request, token);
             

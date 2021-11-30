@@ -11,12 +11,11 @@ namespace OzonEdu.MerchandiseService.Migrator.Migrations
             Execute.Sql(@"
             INSERT INTO merch_pack_orders
             (employee_id, clothing_size_id, merch_pack_id, is_given, giving_date)
-            VALUES
-            
+            VALUES            
             (2, 3, 10,    false,  NULL ),
-            (3, 3, 20,    true,   '2020-12-17 01:10:54.000000'),
-            (4, 3, 10,    true ,  '2018-12-17 01:10:54.000000'),
-            (5, 3, 10,    true,   '2019-12-17 01:10:54.000000')
+            (3, 3, 20,    true,   '2020-12-17'),
+            (4, 3, 10,    true ,  '2018-12-17'),
+            (5, 3, 10,    true,   '2019-12-17')
             ON CONFLICT DO NOTHING            
             ");
         }

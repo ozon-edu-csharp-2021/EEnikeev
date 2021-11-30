@@ -7,10 +7,16 @@ namespace OzonEdu.MerchandiseService.Migrator.Migrations
     {
         public override void Up()
         {
-            Create
-                .Table("item_types")
-                .WithColumn("id").AsInt32().PrimaryKey()
-                .WithColumn("name").AsString().NotNullable();
+            Execute.Sql(@"
+                        CREATE TABLE item_types(
+                            id SERIAL PRIMARY KEY,
+                            name VARCHAR(30) NOT NULL
+                        );");
+            
+            // Create
+            //     .Table("item_types")
+            //     .WithColumn("id").AsInt32().PrimaryKey()
+            //     .WithColumn("name").AsString().NotNullable();
         }
 
         public override void Down()
