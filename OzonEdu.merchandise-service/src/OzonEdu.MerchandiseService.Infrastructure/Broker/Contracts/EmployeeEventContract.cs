@@ -1,6 +1,6 @@
-namespace OzonEdu.MerchandiseService.Infrastructure.KafkaContracts
+namespace OzonEdu.MerchandiseService.Infrastructure.Broker.Contracts
 {
-    public class SendEmailContract
+    public class EmployeeEventContract
     {
         public string EmployeeEmail { get; }
         
@@ -11,7 +11,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.KafkaContracts
         public PayloadContract Payload { get; }
         
 
-        public SendEmailContract(string employeeEmail, string employeeName, int eventType, PayloadContract payload)
+        public EmployeeEventContract(string employeeEmail, string employeeName, int eventType, PayloadContract payload)
         {
             EmployeeEmail = employeeEmail;
             EmployeeName = employeeName;

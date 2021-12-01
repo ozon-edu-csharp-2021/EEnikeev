@@ -1,6 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
+using OzonEdu.MerchandiseService.Infrastructure.Broker.Producers;
 using OzonEdu.MerchandiseService.Infrastructure.Commands.GetMerchIsIssued;
 using OzonEdu.MerchandiseService.Infrastructure.Commands.GiveOutMerchItem;
 using OzonEdu.MerchandiseService.Infrastructure.DomainServices.Interfaces;
@@ -13,10 +14,12 @@ namespace OzonEdu.MerchandiseService.Infrastructure.DomainServices
     {
         private IStockRepository _stockRepository;
         private IRepository _repository;
+        private IMerchProducer _merchProducer;
 
-        public MerchManagerDomainService(IRepository repository)
+        public MerchManagerDomainService(IRepository repository, IMerchProducer merchProducer)
         {
             _repository = repository;
+            _merchProducer = merchProducer;
         }
 
         public async Task GiveMerchAsync(GiveMerchItemCommand request, CancellationToken token)

@@ -1,4 +1,4 @@
-namespace OzonEdu.MerchandiseService.Infrastructure.KafkaContracts
+namespace OzonEdu.MerchandiseService.Infrastructure.Broker.Contracts
 {
     public class PayloadContract
     {

@@ -19,6 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Broker" />
       <Folder Include="Queries" />
     </ItemGroup>    
 

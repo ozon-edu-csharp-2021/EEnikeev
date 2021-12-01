@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using CSharpCourse.Core.Lib.Enums;
 using MediatR;
 using OzonEdu.MerchandiseService.Domain.Events;
-using OzonEdu.MerchandiseService.Infrastructure.KafkaContracts;
-using OzonEdu.MerchandiseService.Infrastructure.Producers;
+using OzonEdu.MerchandiseService.Infrastructure.Broker.Contracts;
+using OzonEdu.MerchandiseService.Infrastructure.Broker.Producers;
 
 namespace OzonEdu.MerchandiseService.Infrastructure.Handlers.DomainEvent
 {
@@ -25,7 +25,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Handlers.DomainEvent
         async Task SendEmail(MerchItemGivenDomainEvent notification)
         {
             // отправка сотруднику емэйла
-            var contract = new SendEmailContract(
+            var contract = new EmployeeEventContract(
                 notification.EmployeeEmail,
                 notification.EmployeeName,
                 (int)EmployeeEventType.MerchDelivery,

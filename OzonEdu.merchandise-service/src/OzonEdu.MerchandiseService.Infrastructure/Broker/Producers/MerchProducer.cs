@@ -1,23 +1,23 @@
 using Confluent.Kafka;
-using OzonEdu.MerchandiseService.Infrastructure.KafkaContracts;
+using OzonEdu.MerchandiseService.Infrastructure.Broker.Contracts;
 
-namespace OzonEdu.MerchandiseService.Infrastructure.Producers
+namespace OzonEdu.MerchandiseService.Infrastructure.Broker.Producers
 {
     public class MerchProducer : IMerchProducer
     {
         private static int _index = 0;
         
-        private readonly IProducer<int, SendEmailContract> _producer;
+        private readonly IProducer<int, EmployeeEventContract> _producer;
         
-        public MerchProducer(IProducer<int, SendEmailContract> producer)
+        public MerchProducer(IProducer<int, EmployeeEventContract> producer)
         {
             _producer = producer;
         }
         
-        public void SendEmail(SendEmailContract contract)
+        public void SendEmail(EmployeeEventContract contract)
         {
             
-            var message = new Message<int, SendEmailContract>()
+            var message = new Message<int, EmployeeEventContract>()
             {
                 Key = _index++,
                 Value = contract

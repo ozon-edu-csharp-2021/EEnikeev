@@ -2,12 +2,14 @@ using Confluent.Kafka;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
+using OzonEdu.MerchandiseService.Infrastructure.Broker.Consumers;
+using OzonEdu.MerchandiseService.Infrastructure.Broker.Contracts;
+using OzonEdu.MerchandiseService.Infrastructure.Broker.Producers;
+using OzonEdu.MerchandiseService.Infrastructure.Broker.Serializers;
 using OzonEdu.MerchandiseService.Infrastructure.Configuration;
 using OzonEdu.MerchandiseService.Infrastructure.DomainServices;
 using OzonEdu.MerchandiseService.Infrastructure.DomainServices.Interfaces;
 using OzonEdu.MerchandiseService.Infrastructure.Handlers;
-using OzonEdu.MerchandiseService.Infrastructure.KafkaContracts;
-using OzonEdu.MerchandiseService.Infrastructure.Producers;
 using OzonEdu.MerchandiseService.Infrastructure.Repo;
 using OzonEdu.MerchandiseService.Infrastructure.Repositories;
 using OzonEdu.MerchandiseService.Infrastructure.Repositories.Implementation;
@@ -18,17 +20,34 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Extensions
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-            //services.AddMediatR(typeof(GiveOutMerchItemCommandHandler).Assembly);
+            
+            services.AddHostedService<ConsumerHostedService>();
+            
             services.AddMediatR(typeof(GiveOutMerchItemCommandHandler), typeof(DatabaseConnectionOptions));
 
-            services.AddSingleton<IProducer<int, SendEmailContract>>(producer =>
+            services.AddSingleton<IProducer<int, EmployeeEventContract>>(producer =>
             {
                 var config = new ProducerConfig()
                 {
                     BootstrapServers = "localhost:9092"
                 };
-                var builder = new ProducerBuilder<int, SendEmailContract>(config);
-                builder.SetValueSerializer(new ProducerJsonSerializer<SendEmailContract>());
+                var builder = new ProducerBuilder<int, EmployeeEventContract>(config);
+                builder.SetValueSerializer(new ProducerJsonSerializer<EmployeeEventContract>());
+                
+                return builder.Build();
+            });
+            
+            services.AddSingleton<IConsumer<int, EmployeeEventContract>>(producer =>
+            {
+                var config = new ConsumerConfig()
+                {
+                    BootstrapServers = "localhost:9092",
+                    GroupId = "EmployeeEventConsumerGroup",
+                    AutoOffsetReset = AutoOffsetReset.Earliest,
+                    EnableAutoCommit = false 
+                };
+                var builder = new ConsumerBuilder<int, EmployeeEventContract>(config);
+                builder.SetValueDeserializer(new ProducerJsonSerializer<EmployeeEventContract>());
                 
                 return builder.Build();
             });
