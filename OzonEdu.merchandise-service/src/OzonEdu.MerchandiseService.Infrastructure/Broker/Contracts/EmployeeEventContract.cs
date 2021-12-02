@@ -18,5 +18,10 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Broker.Contracts
             EventType = eventType;
             Payload = payload;
         }
+
+        public override string ToString()
+        {
+            return $@"Employee: {EmployeeName}, Email: {EmployeeEmail}, Event: {EventType}, Payload: {(Payload is null ? "none" : Payload.ToString())}";
+        }
     }
 }

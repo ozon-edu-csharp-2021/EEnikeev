@@ -42,8 +42,11 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Extensions
                 services.AddControllers(options => options.Filters.Add<GlobalExceptionFilter>());
                 services.AddGrpc(options => options.Interceptors.Add<LoggingInterceptor>());
                 
-                services.AddHostedService<ConsumerHostedService>();
-            
+                #region broker
+                
+                services.AddHostedService<EmployeeEventConsumerHostedService>();
+                services.AddHostedService<StockReplenishedEventConsumerHostedService>();
+                
                 services.AddSingleton<IProducer<int, EmployeeEventContract>>(producer =>
                 {
                     var config = new ProducerConfig()
@@ -70,8 +73,25 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Extensions
                 
                     return builder.Build();
                 });
+                
+                services.AddSingleton<IConsumer<int, StockReplenishedEventContract>>(producer =>
+                {
+                    var config = new ConsumerConfig()
+                    {
+                        BootstrapServers = "localhost:9092",
+                        GroupId = "StockEventConsumerGroup",
+                        AutoOffsetReset = AutoOffsetReset.Earliest,
+                        EnableAutoCommit = false 
+                    };
+                    var builder = new ConsumerBuilder<int, StockReplenishedEventContract>(config);
+                    builder.SetValueDeserializer(new ProducerJsonSerializer<StockReplenishedEventContract>());
+                
+                    return builder.Build();
+                });
             
                 services.AddScoped<IMerchProducer, MerchProducer>();
+                
+                #endregion
             });
             return builder;
         }

@@ -8,36 +8,30 @@ using OzonEdu.MerchandiseService.Infrastructure.Broker.Contracts;
 
 namespace OzonEdu.MerchandiseService.Infrastructure.Broker.Consumers
 {
-    public class ConsumerHostedService : BackgroundService
+    public class EmployeeEventConsumerHostedService : BackgroundService
     {
         private readonly IConsumer<int, EmployeeEventContract> _consumer;
-        private readonly ILogger<ConsumerHostedService> _logger;
+        private readonly ILogger<EmployeeEventConsumerHostedService> _logger;
 
-        public ConsumerHostedService(IConsumer<int, EmployeeEventContract> consumer, ILogger<ConsumerHostedService> logger)
+        public EmployeeEventConsumerHostedService(IConsumer<int, EmployeeEventContract> consumer, ILogger<EmployeeEventConsumerHostedService> logger)
         {
             _consumer = consumer;
             _logger = logger;
         }
-
-        // public Task StartAsync(CancellationToken cancellationToken)
-        // {
-        //     return Task.CompletedTask;
-        // }
-        //
-        // public Task StopAsync(CancellationToken cancellationToken)
-        // {
-        //     return Task.CompletedTask;
-        // }
-        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            await Task.Yield();
             _consumer.Subscribe("employee_notification_event");
+            
             while (!stoppingToken.IsCancellationRequested)
             {
                 var message = _consumer.Consume(stoppingToken);
                 _logger.LogInformation("MessageId = {Id}, Value = {Value}", message.Message.Key, message.Message.Value);
+                _consumer.Commit();
             }
             _consumer.Unsubscribe();
-            return Task.CompletedTask;
+            //return Task.CompletedTask;
         }
     }
 }

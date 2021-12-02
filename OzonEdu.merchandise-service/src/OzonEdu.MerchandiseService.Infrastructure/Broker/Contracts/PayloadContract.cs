@@ -8,5 +8,10 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Broker.Contracts
         {
             MerchType = merchType;
         }
+
+        public override string ToString()
+        {
+            return $"MerchType: {MerchType}";
+        }
     }
 }

@@ -30,6 +30,11 @@ namespace OzonEdu.MerchandiseService
             services.AddSingleton<IMerchandiseService,Services.MerchandiseService>();
             services.AddInfrastructure();
             services.AddGrpc();
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.InstanceName = "MerchService";
+                options.Configuration = "localhost"; 
+            });
             //services.AddKafka();
         }
 

@@ -41,43 +41,6 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Extensions
 
         }
 
-        public static IServiceCollection AddKafka(this IServiceCollection services)
-        {
-            services.AddHostedService<ConsumerHostedService>();
-            
-            services.AddSingleton<IProducer<int, EmployeeEventContract>>(producer =>
-            {
-                var config = new ProducerConfig()
-                {
-                    BootstrapServers = "localhost:9092"
-                };
-                var builder = new ProducerBuilder<int, EmployeeEventContract>(config);
-                builder.SetValueSerializer(new ProducerJsonSerializer<EmployeeEventContract>());
-                
-                return builder.Build();
-            });
-            
-            services.AddSingleton<IConsumer<int, EmployeeEventContract>>(producer =>
-            {
-                var config = new ConsumerConfig()
-                {
-                    BootstrapServers = "localhost:9092",
-                    GroupId = "EmployeeEventConsumerGroup",
-                    AutoOffsetReset = AutoOffsetReset.Earliest,
-                    EnableAutoCommit = false 
-                };
-                var builder = new ConsumerBuilder<int, EmployeeEventContract>(config);
-                builder.SetValueDeserializer(new ProducerJsonSerializer<EmployeeEventContract>());
-                
-                return builder.Build();
-            });
-            
-            services.AddScoped<IMerchProducer, MerchProducer>();
-
-            return services;
-        }
-
-
     }
 
 }
