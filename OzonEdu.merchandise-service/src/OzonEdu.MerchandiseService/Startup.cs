@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Npgsql;
+using OpenTelemetry;
+using OpenTelemetry.Trace;
 using OzonEdu.MerchandiseService.GrpcServices;
 using OzonEdu.MerchandiseService.Infrastructure.Configuration;
 using OzonEdu.MerchandiseService.Infrastructure.Extensions;
@@ -35,7 +37,20 @@ namespace OzonEdu.MerchandiseService
                 options.InstanceName = "MerchService";
                 options.Configuration = "localhost"; 
             });
-            //services.AddKafka();
+
+            // services.AddOpenTelemetryTracing(
+            //     builder => builder
+            //         .AddHttpClientInstrumentation()
+            //         .AddAspNetCoreInstrumentation()
+            //         .AddConsoleExporter()
+            //         .AddJaegerExporter(
+            //             options =>
+            //             {
+            //                 options.AgentHost = "localhost";
+            //                 options.AgentPort = 6831;
+            //                 options.ExportProcessorType = ExportProcessorType.Simple;
+            //             })
+            // ); 
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
