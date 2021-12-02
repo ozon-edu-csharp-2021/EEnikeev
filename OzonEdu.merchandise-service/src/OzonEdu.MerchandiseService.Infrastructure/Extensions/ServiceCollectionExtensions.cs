@@ -21,10 +21,30 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Extensions
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
             
-            services.AddHostedService<ConsumerHostedService>();
-            
             services.AddMediatR(typeof(GiveOutMerchItemCommandHandler), typeof(DatabaseConnectionOptions));
 
+            //services.AddSingleton<IEmployeeRepository, EmployeeRepositoryMock>();
+            
+            Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+            
+            services.AddScoped<IEmployeeRepository, EmployeeRepositoryPostgres>();
+            
+            services.AddScoped<IStockRepository, StockRepositoryMock>();
+            
+            services.AddScoped<IRepository, PostgRepository>();
+            
+            //services.AddTransient<IMerchManagerDomainService, MerchManagerDomainServiceMock>();
+            
+            services.AddTransient<IMerchManagerDomainService, MerchManagerDomainService>();
+            
+            return services;
+
+        }
+
+        public static IServiceCollection AddKafka(this IServiceCollection services)
+        {
+            services.AddHostedService<ConsumerHostedService>();
+            
             services.AddSingleton<IProducer<int, EmployeeEventContract>>(producer =>
             {
                 var config = new ProducerConfig()
@@ -52,24 +72,12 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Extensions
                 return builder.Build();
             });
             
-            //services.AddSingleton<IEmployeeRepository, EmployeeRepositoryMock>();
-            
-            Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
-            
-            services.AddScoped<IEmployeeRepository, EmployeeRepositoryPostgres>();
-            
-            services.AddScoped<IStockRepository, StockRepositoryMock>();
-            
-            services.AddScoped<IRepository, PostgRepository>();
-            
-            //services.AddTransient<IMerchManagerDomainService, MerchManagerDomainServiceMock>();
-            
-            services.AddTransient<IMerchManagerDomainService, MerchManagerDomainService>();
-            
             services.AddScoped<IMerchProducer, MerchProducer>();
-            
+
             return services;
         }
+
+
     }
 
 }

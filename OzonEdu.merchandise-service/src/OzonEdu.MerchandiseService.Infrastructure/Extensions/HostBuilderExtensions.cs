@@ -1,10 +1,15 @@
 using System;
 using System.IO;
 using System.Reflection;
+using Confluent.Kafka;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using OzonEdu.MerchandiseService.Infrastructure.Broker.Consumers;
+using OzonEdu.MerchandiseService.Infrastructure.Broker.Contracts;
+using OzonEdu.MerchandiseService.Infrastructure.Broker.Producers;
+using OzonEdu.MerchandiseService.Infrastructure.Broker.Serializers;
 using OzonEdu.MerchandiseService.Infrastructure.Filters;
 using OzonEdu.MerchandiseService.Infrastructure.Interceptors;
 using OzonEdu.MerchandiseService.Infrastructure.StartupFilters;
@@ -36,6 +41,37 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Extensions
                 
                 services.AddControllers(options => options.Filters.Add<GlobalExceptionFilter>());
                 services.AddGrpc(options => options.Interceptors.Add<LoggingInterceptor>());
+                
+                services.AddHostedService<ConsumerHostedService>();
+            
+                services.AddSingleton<IProducer<int, EmployeeEventContract>>(producer =>
+                {
+                    var config = new ProducerConfig()
+                    {
+                        BootstrapServers = "localhost:9092"
+                    };
+                    var builder = new ProducerBuilder<int, EmployeeEventContract>(config);
+                    builder.SetValueSerializer(new ProducerJsonSerializer<EmployeeEventContract>());
+                
+                    return builder.Build();
+                });
+            
+                services.AddSingleton<IConsumer<int, EmployeeEventContract>>(producer =>
+                {
+                    var config = new ConsumerConfig()
+                    {
+                        BootstrapServers = "localhost:9092",
+                        GroupId = "EmployeeEventConsumerGroup",
+                        AutoOffsetReset = AutoOffsetReset.Earliest,
+                        EnableAutoCommit = false 
+                    };
+                    var builder = new ConsumerBuilder<int, EmployeeEventContract>(config);
+                    builder.SetValueDeserializer(new ProducerJsonSerializer<EmployeeEventContract>());
+                
+                    return builder.Build();
+                });
+            
+                services.AddScoped<IMerchProducer, MerchProducer>();
             });
             return builder;
         }

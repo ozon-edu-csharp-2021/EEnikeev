@@ -30,6 +30,7 @@ namespace OzonEdu.MerchandiseService
             services.AddSingleton<IMerchandiseService,Services.MerchandiseService>();
             services.AddInfrastructure();
             services.AddGrpc();
+            //services.AddKafka();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
