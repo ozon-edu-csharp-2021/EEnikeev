@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -46,6 +47,11 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Repo
         public Task<IEnumerable<Employee>> GetWaitingMerchEmployeesAsync(CancellationToken token = default)
         {
             return Task.FromResult(_employees.Where(e => e.Merch != null && !e.IsGiven()));
+        }
+
+        public Task<IReadOnlyList<Employee>> GetAllAsync(CancellationToken token = default)
+        {
+            throw new NotImplementedException();
         }
     }
 }

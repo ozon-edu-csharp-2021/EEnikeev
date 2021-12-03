@@ -7,10 +7,18 @@
         <Version>1.1.0</Version>
     </PropertyGroup>
 
-    <ItemGroup>
+    <ItemGroup>        
       <ProjectReference Include="..\OzonEdu.MerchandiseService.Grpc\OzonEdu.MerchandiseService.Grpc.csproj" />
       <ProjectReference Include="..\OzonEdu.MerchandiseService.HttpModels\OzonEdu.MerchandiseService.HttpModels.csproj" />
       <ProjectReference Include="..\OzonEdu.MerchandiseService.Infrastructure\OzonEdu.MerchandiseService.Infrastructure.csproj" />
+      <ProjectReference Include="..\OzonEdu.MerchandiseService.Migrator\OzonEdu.MerchandiseService.Migrator.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="5.0.0" />    
+      <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
+      <PackageReference Include="Serilog.Settings.Configuration" Version="3.3.0" />
+      <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
     </ItemGroup>
    
 </Project>

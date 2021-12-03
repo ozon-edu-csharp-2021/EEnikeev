@@ -7,6 +7,8 @@ ProjectSection(SolutionItems) = preProject
 	.gitignore = .gitignore
 	readme.md = readme.md
 	Dockerfile = Dockerfile
+	docker-compose.yml = docker-compose.yml
+	entrypoint.sh = entrypoint.sh
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{17DFC49C-F9EA-4196-B481-A00E45EF6B56}"
@@ -29,6 +31,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService.Domain.Tests", "tests\OzonEdu.MerchandiseService.Domain.Tests\OzonEdu.MerchandiseService.Domain.Tests.csproj", "{CAE03F92-0DE3-4DA0-B64A-B31BCA190B2B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService.Migrator", "src\OzonEdu.MerchandiseService.Migrator\OzonEdu.MerchandiseService.Migrator.csproj", "{B6882636-EEB7-46CE-96D9-F14597FFBC44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OzonEdu.MerchandiseService.ExternalServices", "src\OzonEdu.MerchandiseService.ExternalServices\OzonEdu.MerchandiseService.ExternalServices.csproj", "{960C0E2E-D606-47F1-AEE2-44E57FEF65D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +50,8 @@ Global
 		{E918CED3-BB8C-4F53-9820-99956DFA730E} = {17DFC49C-F9EA-4196-B481-A00E45EF6B56}
 		{C43E1B98-A4F1-453E-BA85-B8D70B46D99B} = {17DFC49C-F9EA-4196-B481-A00E45EF6B56}
 		{CAE03F92-0DE3-4DA0-B64A-B31BCA190B2B} = {E4F44219-CA92-406D-9889-169B01F1D634}
+		{B6882636-EEB7-46CE-96D9-F14597FFBC44} = {17DFC49C-F9EA-4196-B481-A00E45EF6B56}
+		{960C0E2E-D606-47F1-AEE2-44E57FEF65D6} = {17DFC49C-F9EA-4196-B481-A00E45EF6B56}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{3BF34573-2790-4221-9EDF-3081C5CB90FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -82,5 +90,13 @@ Global
 		{CAE03F92-0DE3-4DA0-B64A-B31BCA190B2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAE03F92-0DE3-4DA0-B64A-B31BCA190B2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAE03F92-0DE3-4DA0-B64A-B31BCA190B2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6882636-EEB7-46CE-96D9-F14597FFBC44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6882636-EEB7-46CE-96D9-F14597FFBC44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6882636-EEB7-46CE-96D9-F14597FFBC44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6882636-EEB7-46CE-96D9-F14597FFBC44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{960C0E2E-D606-47F1-AEE2-44E57FEF65D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{960C0E2E-D606-47F1-AEE2-44E57FEF65D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{960C0E2E-D606-47F1-AEE2-44E57FEF65D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{960C0E2E-D606-47F1-AEE2-44E57FEF65D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

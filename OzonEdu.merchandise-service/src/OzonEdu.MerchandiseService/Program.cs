@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using OzonEdu.MerchandiseService.Infrastructure.Extensions;
+using Serilog;
 
 namespace OzonEdu.MerchandiseService
 {
@@ -13,10 +14,15 @@ namespace OzonEdu.MerchandiseService
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                }).AddInfrastructure();
+                .UseSerilog(
+                    (context, config) =>
+                    {
+                        config
+                            .ReadFrom.Configuration(context.Configuration)
+                            .WriteTo.Console();
+                    }
+                )
+                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); }).AddInfrastructure().AddKafka();
 
     }
 }

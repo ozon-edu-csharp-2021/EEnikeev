@@ -21,8 +21,6 @@ namespace OzonEdu.MerchandiseService.Controllers
             _mediator = mediator;
         }
 
-
-        
         /// <summary> Выдает мерч сотруднику </summary>
 
         [HttpPost]

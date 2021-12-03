@@ -5,17 +5,24 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Confluent.Kafka" Version="1.8.2" />
       <PackageReference Include="CSharpCourse.Core.Lib" Version="1.4.0" />
+      <PackageReference Include="Dapper" Version="2.0.123" />
       <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
+      <PackageReference Include="Jaeger" Version="1.0.3" />
       <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+      <PackageReference Include="Npgsql" Version="6.0.0" />
+      <PackageReference Include="OpenTracing" Version="0.12.1" />
       <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\OzonEdu.MerchandiseService.Domain\OzonEdu.MerchandiseService.Domain.csproj" />
+      <ProjectReference Include="..\OzonEdu.MerchandiseService.ExternalServices\OzonEdu.MerchandiseService.ExternalServices.csproj" />
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Broker" />
       <Folder Include="Queries" />
     </ItemGroup>    
 
