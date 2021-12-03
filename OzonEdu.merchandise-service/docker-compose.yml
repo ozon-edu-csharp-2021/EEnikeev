@@ -11,8 +11,6 @@ services:
     ports:
       - "5060:5000"
       - "5061:5001"
-    networks:
-      - ozon-network
     environment:
       DatabaseConnectionOptions__ConnectionString: "Host=host.docker.internal;Port=5420;Database=merchandise-service;Username=postgres;Password=merchPassword"
       BootstrapServers: "broker:29092"   
@@ -103,6 +101,10 @@ services:
       POSTGRES_PASSWORD: merchPassword
       POSTGRES_DB: merchandise-service
     command: "-c log_statement=all"
+    networks:
+      - ozon-network
+    volumes:
+      - merchandise-service-db:/var/lib/postgresql/data
   
 # STOCK API DB
   stock-api-db:
@@ -209,6 +211,8 @@ volumes:
   employees-service:
     driver: local
   emailing-service:
+    driver: local
+  merchandise-service-db:
     driver: local
   stock-api-db:
     driver: local

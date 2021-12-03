@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Npgsql;
+using OzonEdu.MerchandiseService.ExternalServices;
 using OzonEdu.MerchandiseService.GrpcServices;
 using OzonEdu.MerchandiseService.Infrastructure.Configuration;
 using OzonEdu.MerchandiseService.Infrastructure.Extensions;
@@ -30,6 +31,7 @@ namespace OzonEdu.MerchandiseService
             services.AddSingleton<IMerchandiseService,Services.MerchandiseService>();
             services.AddInfrastructure();
             services.AddGrpc();
+            services.AddStockGrpcServiceClient(Configuration);
             services.AddStackExchangeRedisCache(options =>
             {
                 options.InstanceName = "MerchService";

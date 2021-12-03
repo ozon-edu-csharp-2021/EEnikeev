@@ -53,10 +53,11 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Extensions
             //services.AddTransient<IMerchManagerDomainService, MerchManagerDomainServiceMock>();
             
             services.AddTransient<IMerchManagerDomainService, MerchManagerDomainService>();
-            
+
             return services;
 
         }
+
 
     }
 
