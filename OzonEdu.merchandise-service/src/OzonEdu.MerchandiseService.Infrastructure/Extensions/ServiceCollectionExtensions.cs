@@ -1,11 +1,12 @@
-using Confluent.Kafka;
+using Jaeger;
+using Jaeger.Samplers;
+using Jaeger.Senders;
+using Jaeger.Senders.Thrift;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using OpenTracing;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
-using OzonEdu.MerchandiseService.Infrastructure.Broker.Consumers;
-using OzonEdu.MerchandiseService.Infrastructure.Broker.Contracts;
-using OzonEdu.MerchandiseService.Infrastructure.Broker.Producers;
-using OzonEdu.MerchandiseService.Infrastructure.Broker.Serializers;
 using OzonEdu.MerchandiseService.Infrastructure.Configuration;
 using OzonEdu.MerchandiseService.Infrastructure.DomainServices;
 using OzonEdu.MerchandiseService.Infrastructure.DomainServices.Interfaces;
@@ -24,6 +25,22 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Extensions
             services.AddMediatR(typeof(GiveOutMerchItemCommandHandler), typeof(DatabaseConnectionOptions));
 
             //services.AddSingleton<IEmployeeRepository, EmployeeRepositoryMock>();
+
+            services.AddSingleton<ITracer>(sd =>
+            {
+                var loggerFactory = sd.GetService<ILoggerFactory>();
+
+                Jaeger.Configuration.SenderConfiguration.DefaultSenderResolver = new SenderResolver(loggerFactory)
+                    .RegisterSenderFactory<ThriftSenderFactory>();
+
+                var sampler = new ConstSampler(true);
+
+                var tracer = new Tracer.Builder("MerchService")
+                    .WithLoggerFactory(loggerFactory)
+                    .WithSampler(sampler);
+                
+                return tracer.Build();
+            });
             
             Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
             

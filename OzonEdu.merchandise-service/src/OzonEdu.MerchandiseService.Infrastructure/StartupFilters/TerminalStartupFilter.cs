@@ -2,6 +2,7 @@ using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using OzonEdu.MerchandiseService.Infrastructure.Middlewares;
+using OzonEdu.MerchandiseService.Infrastructure.Middlewares.MiddlewareData;
 
 namespace OzonEdu.MerchandiseService.Infrastructure.StartupFilters
 {
@@ -12,6 +13,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.StartupFilters
         {
             return app =>
             {
+                app.UseMiddleware<SpanMiddleware>();
                 app.UseMiddleware<RequestLoggingMiddleware>();
                 app.UseMiddleware<ResponseLoggingMiddleware>();
                 

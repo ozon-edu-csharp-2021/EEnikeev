@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using OpenTracing;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
 using OzonEdu.MerchandiseService.Infrastructure.Broker.Contracts;
 using OzonEdu.MerchandiseService.Infrastructure.Broker.Producers;
@@ -25,6 +26,8 @@ namespace OzonEdu.MerchandiseService.Infrastructure.DomainServices
 
         public async Task GiveMerchAsync(GiveMerchItemCommand request, CancellationToken token)
         {
+            
+                
             _merchProducer.SendEmail(new EmployeeEventContract("SomeEmail@mail", "Вася Пупкин", 400, new PayloadContract(40)));
             await _repository.GiveMerchAsync(request, token);
         }
