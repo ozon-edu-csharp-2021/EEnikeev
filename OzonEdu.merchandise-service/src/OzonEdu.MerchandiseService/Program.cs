@@ -22,8 +22,7 @@ namespace OzonEdu.MerchandiseService
                             .WriteTo.Console();
                     }
                 )
-
-                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); }).AddInfrastructure();
+                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); }).AddInfrastructure().AddKafka();
 
     }
 }

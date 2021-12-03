@@ -3,10 +3,12 @@ using Jaeger.Samplers;
 using Jaeger.Senders;
 using Jaeger.Senders.Thrift;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using OpenTracing;
 using OzonEdu.MerchandiseService.Domain.AggregationModels.EmployeeAggregate;
+using OzonEdu.MerchandiseService.ExternalServices;
 using OzonEdu.MerchandiseService.Infrastructure.Configuration;
 using OzonEdu.MerchandiseService.Infrastructure.DomainServices;
 using OzonEdu.MerchandiseService.Infrastructure.DomainServices.Interfaces;
@@ -57,6 +59,15 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Extensions
             return services;
 
         }
+
+        public static IServiceCollection AddExternalServices(this IServiceCollection services,
+            IConfiguration configuration)
+        {
+            services.AddStockGrpcServiceClient(configuration);
+            
+            return services;
+        }
+        
 
 
     }

@@ -31,7 +31,7 @@ namespace OzonEdu.MerchandiseService
             services.AddSingleton<IMerchandiseService,Services.MerchandiseService>();
             services.AddInfrastructure();
             services.AddGrpc();
-            services.AddStockGrpcServiceClient(Configuration);
+            services.AddExternalServices(Configuration);
             services.AddStackExchangeRedisCache(options =>
             {
                 options.InstanceName = "MerchService";

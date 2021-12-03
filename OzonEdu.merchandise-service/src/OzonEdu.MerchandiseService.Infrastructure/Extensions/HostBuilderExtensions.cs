@@ -42,11 +42,18 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Extensions
                 services.AddControllers(options => options.Filters.Add<GlobalExceptionFilter>());
                 services.AddGrpc(options => options.Interceptors.Add<LoggingInterceptor>());
                 
-                #region broker
                 
+            });
+            return builder;
+        }
+
+        public static IHostBuilder AddKafka(this IHostBuilder builder)
+        {
+            builder.ConfigureServices(services =>
+            {
                 services.AddHostedService<EmployeeEventConsumerHostedService>();
                 services.AddHostedService<StockReplenishedEventConsumerHostedService>();
-                
+
                 services.AddSingleton<IProducer<int, EmployeeEventContract>>(producer =>
                 {
                     var config = new ProducerConfig()
@@ -55,10 +62,10 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Extensions
                     };
                     var builder = new ProducerBuilder<int, EmployeeEventContract>(config);
                     builder.SetValueSerializer(new ProducerJsonSerializer<EmployeeEventContract>());
-                
+
                     return builder.Build();
                 });
-            
+
                 services.AddSingleton<IConsumer<int, EmployeeEventContract>>(producer =>
                 {
                     var config = new ConsumerConfig()
@@ -66,14 +73,14 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Extensions
                         BootstrapServers = "localhost:9092",
                         GroupId = "EmployeeEventConsumerGroup",
                         AutoOffsetReset = AutoOffsetReset.Earliest,
-                        EnableAutoCommit = false 
+                        EnableAutoCommit = false
                     };
                     var builder = new ConsumerBuilder<int, EmployeeEventContract>(config);
                     builder.SetValueDeserializer(new ProducerJsonSerializer<EmployeeEventContract>());
-                
+
                     return builder.Build();
                 });
-                
+
                 services.AddSingleton<IConsumer<int, StockReplenishedEventContract>>(producer =>
                 {
                     var config = new ConsumerConfig()
@@ -81,17 +88,16 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Extensions
                         BootstrapServers = "localhost:9092",
                         GroupId = "StockEventConsumerGroup",
                         AutoOffsetReset = AutoOffsetReset.Earliest,
-                        EnableAutoCommit = false 
+                        EnableAutoCommit = false
                     };
                     var builder = new ConsumerBuilder<int, StockReplenishedEventContract>(config);
                     builder.SetValueDeserializer(new ProducerJsonSerializer<StockReplenishedEventContract>());
-                
+
                     return builder.Build();
                 });
-            
+
                 services.AddScoped<IMerchProducer, MerchProducer>();
-                
-                #endregion
+
             });
             return builder;
         }
