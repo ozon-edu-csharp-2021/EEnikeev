@@ -2,20 +2,98 @@ version: '3.8'
 
 services:
   
-# MERCH SERVICE ---------------------------------------------------------------
+# MERCH SERVICE 
   merchandise-service:
-    build: 
+    build:
       context: .
       dockerfile: ./Dockerfile
     hostname: merchandise-service
     ports:
-      - "5070:5000"
-      - "5071:5001"
+      - "5060:5000"
+      - "5061:5001"
+    networks:
+      - ozon-network
     environment:
       DatabaseConnectionOptions__ConnectionString: "Host=host.docker.internal;Port=5420;Database=merchandise-service;Username=postgres;Password=merchPassword"
+      BootstrapServers: "broker:29092"   
     depends_on:
       - merchandise-service-db
+      - redis
+      - stock-api
+      - zookeeper
+      - broker
 
+# STOCK API
+  stock-api:
+    image: ghcr.io/ozon-edu-csharp-2021/stock-api:main
+    ports:
+      - "5070:80"
+      - "5072:82"
+    networks:
+      - ozon-network
+    environment:
+      DatabaseConnectionOptions__ConnectionString: "Host=stock-api-db;Port=5432;Database=stock-api;Username=postgres;Password=stockApiPassword"
+      BootstrapServers: "broker:29092"
+      topic: "stock_replenished_event"
+      groupId: "stock-api-service"
+      SupplyApiGrpcServiceConfiguration__ServerAddress: "http://supply-service-api:5082"
+    depends_on:
+      - stock-api-db
+      - redis
+      - supply-service-api
+      - zookeeper
+      - broker
+
+# SUPPLY SERVICE
+  supply-service-api:
+    image: ghcr.io/ozon-edu-csharp-2021/supply-service:main
+    ports:
+      - "5080:5080"
+      - "5082:5082"
+    environment:
+      DbConfiguration__ConnectionString: "Host=supply-service-db;Port=5432;Database=supply-service;Username=postgres;Password=supplyServicePassword"
+      KafkaConfiguration__BootstrapServers: "broker:29092"
+    networks:
+      - ozon-network
+    depends_on:
+      - supply-service-db
+      - zookeeper
+      - broker
+
+# EMPLOYEES SERVICE
+  employees-service:
+    image: ghcr.io/ozon-edu-csharp-2021/employees-service:main
+    ports:
+      - "8443:80"
+    environment:
+      ConnectionString: "Host=employees-service-postgres-db;Port=5432;Database=employees-service;Username=postgres;Password=employeeServicePassword;"
+      BootstrapServers: "broker:29092"
+      Topic: "employee_notification_event"
+    networks:
+      - ozon-network
+    depends_on:
+      - employees-service-postgres-db
+      - zookeeper
+      - broker
+    volumes:
+      - employees-service:/src"
+
+# EMAILING SERVICE
+  emailing-service:
+    image: ghcr.io/ozon-edu-csharp-2021/emailing-service:main
+    ports:
+      - "8555:80"
+    environment:
+      KafkaTopics__EmployeeNotificationEventTopic: "employee_notification_event"
+    depends_on:
+      - zookeeper
+      - broker
+    volumes:
+      - emailing-service:/src
+    networks:
+      - ozon-network  
+        
+# MERCH SERVICE DB
   merchandise-service-db:
     image: postgres:latest
     ports:
@@ -25,67 +103,51 @@ services:
       POSTGRES_PASSWORD: merchPassword
       POSTGRES_DB: merchandise-service
     command: "-c log_statement=all"
+  
+# STOCK API DB
+  stock-api-db:
+    image: postgres:latest
+    ports:
+      - "5426:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: stockApiPassword
+      POSTGRES_DB: stock-api
+    command: "-c log_statement=all"
+    networks:
+      - ozon-network
+    volumes:
+      - stock-api-db:/var/lib/postgresql/data
 
-# STOCK-API ---------------------------------------------------------------  
-#  stock-api:
-#    image: ghcr.io/ozon-edu-csharp-2021/stock-api:main
-#    hostname: stock-api
-#    environment:
-#      DatabaseConnectionOptions__ConnectionString: "Host=host.docker.internal;Port=5427;Database=stock-api;Username=postgres;Password=stockApiPassword"
-#    depends_on:
-#      - stock-api-db
-#        
-#  stock-api-db:
-#    image: postgres:latest
-#    ports:
-#      - "5427:5432"
-#    environment:
-#      POSTGRES_USER: postgres
-#      POSTGRES_PASSWORD: stockApiPassword
-#      POSTGRES_DB: stock-api
-      
-# SUPPLY SERVICE ---------------------------------------------------------------  
-#  supply-service:
-#    image: ghcr.io/ozon-edu-csharp-2021/supply-service:main
-#    environment:
-#      DbConfiguration__ConnectionString: "Host=host.docker.internal;Port=5426;Database=supply-service;Username=postgres;Password=supplyServicePassword"
-#    hostname: supply-service
-#    depends_on:
-#      - supply-service-db
-#
-#  supply-service-db:
-#    image: postgres:latest
-#    ports:
-#      - "5426:5432"
-#    environment:
-#      POSTGRES_USER: postgres
-#      POSTGRES_PASSWORD: supplyServicePassword
-#      POSTGRES_DB: supply-service
+# SUPPLY SERVICE DB
+  supply-service-db:
+    image: postgres:latest
+    ports:
+      - "5427:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: supplyServicePassword
+      POSTGRES_DB: supply-service
+    command: "-c log_statement=all"
+    networks:
+      - ozon-network
+    volumes:
+      - supply-service-db:/var/lib/postgresql/data
 
-# EMAIL SERVICE ---------------------------------------------------------------  
-#  emailing-service:
-#    image: ghcr.io/ozon-edu-csharp-2021/emailing-service:main
-#    hostname: emailing-service
-
-# EMPLOYEES SERVICE -----------------------------------------------------------  
-#  employees-service:
-#    image: ghcr.io/ozon-edu-csharp-2021/employees-service:main
-#    hostname: employees-service
-#    depends_on:
-#      - employees-service-postgres-db
-#    volumes:
-#      - ./src:/src
-#        
-#  employees-service-db:
-#    image: postgres:latest
-#    ports:
-#      - "5425:5432"
-#    environment:
-#      POSTGRES_USER: postgres
-#      POSTGRES_PASSWORD: postgres
-#      POSTGRES_DB: employees-service
-#    volumes:
-#      - ./db/employees-service-postgres-db/dbdata:/var/lib/postgresql/data"
+# EMPLOYEES SERVICE DB
+  employees-service-postgres-db:
+    image: postgres:latest
+    ports:
+      - "5425:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: employeeServicePassword
+      POSTGRES_DB: employees-service
+    volumes:
+      - employees-service-postgres-db:/var/lib/postgresql/data"
+    command: "-c log_statement=all"
+    networks:
+      - ozon-network
 
 # ZOOKEEPER
   zookeeper:
@@ -139,3 +201,18 @@ services:
 networks:
   ozon-network:
     driver: bridge
+    
+# VOLUMES
+volumes:
+  ozon-volume:
+    driver: local
+  employees-service:
+    driver: local
+  emailing-service:
+    driver: local
+  stock-api-db:
+    driver: local
+  supply-service-db:
+    driver: local
+  employees-service-postgres-db:
+    driver: local

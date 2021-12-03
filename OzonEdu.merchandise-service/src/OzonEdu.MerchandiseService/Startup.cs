@@ -35,20 +35,6 @@ namespace OzonEdu.MerchandiseService
                 options.InstanceName = "MerchService";
                 options.Configuration = "localhost"; 
             });
-
-            // services.AddOpenTelemetryTracing(
-            //     builder => builder
-            //         .AddHttpClientInstrumentation()
-            //         .AddAspNetCoreInstrumentation()
-            //         .AddConsoleExporter()
-            //         .AddJaegerExporter(
-            //             options =>
-            //             {
-            //                 options.AgentHost = "localhost";
-            //                 options.AgentPort = 6831;
-            //                 options.ExportProcessorType = ExportProcessorType.Simple;
-            //             })
-            // ); 
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using OpenTracing;
 
-namespace OzonEdu.MerchandiseService.Infrastructure.Middlewares.MiddlewareData
+namespace OzonEdu.MerchandiseService.Infrastructure.Middlewares
 {
     public class SpanMiddleware
     {
@@ -17,7 +17,7 @@ namespace OzonEdu.MerchandiseService.Infrastructure.Middlewares.MiddlewareData
         
         public async Task InvokeAsync(HttpContext context)
         {
-            using var span = _tracer.BuildSpan("RequestMiddleware.InvokeAsync").StartActive();
+            using var span = _tracer.BuildSpan("SpanMiddleware.InvokeAsync").StartActive();
             await _next(context);
         }
     }
